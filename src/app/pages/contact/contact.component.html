@@ -1,0 +1,123 @@
+<div class="container-fluid">
+    <div class="row d-flex justify-content-center align-items-end"
+        style="background-image: url(/assets/images/contact.webp); background-repeat: no-repeat; background-size: cover; background-position: center;">
+
+        <div
+            class="header-page d-flex justify-content-center align-items-center ">
+            <h1 class="title font-weight-bold secondary"> Contact Us
+            </h1>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="container ">
+
+    <div class="row mb-4">
+        <nav aria-label="breadcrumb" class="w-100">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink>Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Contact
+                    us</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="row no-gutters">
+        <div class="col-md-6 d-flex align-items-stretch">
+            <div class="contact-wrap w-100 p-md-5 p-4 py-5">
+                <h3 class="mb-4 font-weight-bold">Write us</h3>
+                <div id="form-message-warning" class="mb-4"></div>
+                <div id="form-message-success" class="mb-4">
+                    Your message was sent, thank you!
+                </div>
+                <form method="POST" id="contactForm" name="contactForm"
+                    class="contactForm" novalidate="novalidate">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control"
+                                    name="name" id="name" placeholder="Name">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="email" class="form-control"
+                                    name="email" id="email" placeholder="Email">
+                                <div data-lastpass-icon-root
+                                    style="position: relative !important; height: 0px !important; width: 0px !important; float: left !important;"></div></div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control"
+                                    name="subject" id="subject"
+                                    placeholder="Subject">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <textarea name="message" class="form-control"
+                                    id="message" cols="30" rows="6"
+                                    placeholder="Message"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="submit" value="Send Message"
+                                    class="btn d-bg-primary white">
+                                <div class="submitting"></div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6 d-flex align-items-stretch">
+            <div class="info-wrap w-100 p-md-5 p-4 py-5 img">
+                <h3>Contact information</h3>
+                <p class="mb-4">We're open for any suggestion or just to have a
+                    chat</p>
+                <div class="dbox w-100 d-flex align-items-start">
+                    <div
+                        class="icon d-flex align-items-center justify-content-center">
+                        <span class="fa fa-map-marker"></span>
+                    </div>
+                    <div class="text pl-3">
+                        <p><span class="mr-1">Address : </span> 198 West 21th Street, Suite 721
+                            New York NY 10016</p>
+                    </div>
+                </div>
+                <div class="dbox w-100 d-flex align-items-center">
+                    <div
+                        class="icon d-flex align-items-center justify-content-center">
+                        <span class="fa fa-phone"></span>
+                    </div>
+                    <div class="text pl-3">
+                        <p><span class="mr-1">Phone : </span> <a href="tel://1234567920">+216 11 111 111</a></p>
+                    </div>
+                 </div>
+                <div class="dbox w-100 d-flex align-items-center">
+                    <div
+                        class="icon d-flex align-items-center justify-content-center">
+                        <span class="fa fa-paper-plane"></span>
+                    </div>
+                    <div class="text pl-3">
+                        <p><span class="mr-1">Email : </span> <a
+                                href="mailto:info@yoursite.com">info&#64;adventure.com</a></p>
+                    </div>
+                </div>
+                <div class="dbox w-100 d-flex align-items-center">
+                    <div
+                        class="icon d-flex align-items-center justify-content-center">
+                        <span class="fa fa-globe"></span>
+                    </div>
+                    <div class="text pl-3">
+                        <p><span class="mr-1">Website : </span> <a href="#">dd-adventure    .com</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

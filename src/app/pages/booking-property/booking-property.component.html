@@ -1,0 +1,33 @@
+<div class="container-fluid dashboard-owner d-bg-light-gray">
+    <div class="row d-flex justify-content-between">
+      <div class="col-md-2 user_tab_menu ml-3 mb-5" id="user_tab_menu_container">
+        <mat-drawer mode="side" opened>
+          <div class="sidebar-content text-cente ">
+            <div class="owner text-center">
+              <img id="profile-image-menu" src="/assets/images/avatar.png" alt="User Avatar" class="avatar">
+              <h3 class="text-dark font-weight-bold">Hello, {{ authService.getUser().username ? authService.getUser().username :"test"}}</h3>
+            </div>
+            <div class="user_dashboard_links ">
+              <ul>
+               
+                <li><a class="" routerLink="my-profile" routerLinkActive="active"
+                    [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-user"></i> My Profile</a></li>
+                <li><a class="" routerLink="favorites" routerLinkActive="active"><i class="fa fa-heart"></i> Favorites</a> </li>
+  
+                <li><a class="" routerLink="my-reservations" routerLinkActive="active"><i class="fa fa-folder-open"></i> My Reservations</a></li>
+                <li><a class="" routerLink="my-inbox" routerLinkActive="active"><i class="fa fa-inbox"></i> My Inbox</a></li>
+
+  
+                <li><a class="" routerLink="/logout" routerLinkActive="active"><i class="fa fa-sign-out"></i> Log Out</a></li>
+              </ul>
+  
+            </div>
+  
+          </div>
+        </mat-drawer>
+      </div>
+      <div class="col-md-9 property-owner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>

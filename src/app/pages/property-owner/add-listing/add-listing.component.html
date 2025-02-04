@@ -1,0 +1,1495 @@
+<div class="dashboard">
+  <div class="dashboard-header d-flex justify-content-between mb-2">
+
+
+
+  </div>
+  <div class="card-body h-100">
+    <div class="row h-100">
+      <div class="col-md-12 h-100 text-center d-flex flex-column   d-flex justify-content-center align-items-center">
+
+
+
+
+        <div class="row  h-100">
+
+
+          <div class="col-md-12 h-100">
+            <div class="w-100 h-100">
+              <mat-stepper linear #stepper class="h-100">
+
+
+
+               <mat-step [stepControl]="firstFormGroup"
+                  class="h-100 d-flex justify-content-center align-content-center">
+
+
+
+                  <div class="h-100 step-container">
+
+                    <div class="step-header row justify-content-between align-items-center">
+                      <div class="logo">
+                        <a class="navbar-brand" routerLink="">
+                          <img src="/assets/images/LOGO.png" width="100" alt="Logo">
+                        </a>
+
+                      </div>
+                      <div class="exit-button">
+                        <div class="elements-buttons">
+                          <button class="exit-button btn btn-outline-secondary" (click)="closeModal()">Exit</button> 
+                        </div>
+
+
+                      </div>
+
+                    </div>
+
+                    <div class="row step-body">
+                      <div class="col-lg-6 d-flex align-items-center">
+                        <div>
+                          <h1 class="title-form">It's easy to get started on DD Adventure</h1>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-6">
+                        <div class="row step d-flex justify-content-between">
+                          <div class="block-step col-sm-12 col-md-10">
+
+                            <h2 class="step-number">1</h2>
+                            <div class="step-description">
+                              <h2>Tell us about your place</h2>
+                              <h3>Share some basic info, like where it is and how many guests can stay.</h3>
+                            </div>
+
+                          </div>
+
+                          <img src="/assets/images/owner-property-images/place.webp" width="100" alt="Step 1"
+                            class="step-image col-sm-4 col-md-2 text-center justify-content-sm-center">
+                        </div>
+                        <hr>
+
+                        <div class="step d-flex justify-content-between">
+                          <div class="block-step ">
+                            <h2 class="step-number">2</h2>
+                            <div class="step-description">
+                              <h2>Make it stand out</h2>
+                              <p>Add 5 or more photos plus a title and description—we’ll help you out.</p>
+                            </div>
+                          </div>
+                          <img src="/assets/images/owner-property-images/photos.webp" width="100" alt="Step 1"
+                            class="step-image">
+                        </div>
+                        <hr>
+
+                        <div class="step d-flex justify-content-between">
+                          <div class="block-step ">
+                            <h2 class="step-number">3</h2>
+                            <div class="step-description">
+                              <h2>Finish up and publish</h2>
+                              <p>Choose a starting price, verify a few details, then publish your listing.</p>
+                            </div>
+                          </div>
+                          <img src="/assets/images/owner-property-images/door.webp" width="100" alt="Step 1"
+                            class="step-image">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="step-footer block-steps">
+
+                      <div class="elements-buttons">
+                        <button mat-button matStepperNext class="steps-button">Next</button>
+
+                      </div>
+                    </div>
+
+
+                  </div>
+
+
+
+                </mat-step> 
+
+
+                 <mat-step [stepControl]="secondFormGroup"
+                  class="h-100 d-flex justify-content-center align-content-center">
+
+
+
+                  <div class="h-100 step-container">
+
+                    <div class="step-header row justify-content-between align-items-center">
+                      <div class="logo">
+                        <a class="navbar-brand" routerLink="">
+                          <img src="/assets/images/LOGO.png" width="100" alt="Logo">
+                        </a>
+
+                      </div>
+                      <div class="exit-button">
+                        <div class="elements-buttons">
+                          <button class="exit-button btn btn-outline-secondary" (click)="closeModal()">Exit</button> 
+                        </div>
+
+
+                      </div>
+
+                    </div>
+
+                    <div class="row step-body justify-content-between">
+                      <div class="col-md-6 d-flex align-items-center">
+                        <div class="text-left ">
+                          <h2 class="text-left">Step 1 </h2>
+                          <h1 class="title-form text-left">Tell us about your place
+                          </h1>
+                          <h3 class="text-left">
+                            In this step, we'll ask you which type of property you have and if guests will book the
+                            entire place or just a room.
+                            Then let us know the location and how many guests can stay.
+                          </h3>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+
+                        <div class="step d-flex justify-content-between">
+
+                          <img src="/assets/images/owner-property-images/about.png" alt="Step 1" class="step-image">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="step-footer block-steps">
+
+                      <div class="elements-buttons w-100 d-flex justify-content-between">
+                        <button mat-button matStepperPrevious>Back</button>
+                        <button mat-button matStepperNext class="steps-button">Next</button>
+
+
+                      </div>
+                    </div>
+
+
+                  </div>
+
+                </mat-step>   
+
+
+
+                  <mat-step [stepControl]="thirdFormGroup" label="Images">
+                  <form [formGroup]="thirdFormGroup" class="mt-2">
+
+
+
+                    <div class="h-100 step-container">
+
+                      <div class="step-header row justify-content-between align-items-center">
+                        <div class="logo">
+                          <a class="navbar-brand" routerLink="">
+                            <img src="/assets/images/LOGO.png" width="100" alt="Logo">
+                          </a>
+
+                        </div>
+                        <div class="exit-button">
+                          <div class="elements-buttons">
+                            <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                          </div>
+
+
+                        </div>
+
+                      </div>
+
+                      <div class="row step-body">
+                        <div class="col-6 col-md-4" *ngFor="let option of placeOptions">
+                          <div class="card mb-3" 
+                               [ngClass]="{ 'border-selected': option.isSelected }" 
+                               (click)="selectPlace(option.name, option)"> 
+                            <div class="card-body text-center">
+                              <input type="radio" 
+                                     [(ngModel)]="listingSelected.place"
+                                     formControlName="place"  
+                                     [value]="option.name" 
+                                     id="{{option.name}}" 
+                                     class="form-check-input" 
+                                     (change)="selectPlace(option.name, option)" />
+                              <label class="form-check-label" for="{{option.name}}">
+                                <i [ngClass]="[option.icon, 'fa-2x']"></i>
+                                <p>{{ option.name }}</p>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                     
+
+
+                      <div class="step-footer block-steps">
+
+                        <div class="elements-buttons w-100 d-flex justify-content-between">
+                          <button mat-button matStepperPrevious>Back</button>
+                          <button mat-button matStepperNext class="steps-button"
+                            [disabled]="!thirdFormGroup.valid">Next</button>
+
+
+
+                        </div>
+                      </div>
+
+
+                    </div>
+
+                  </form>
+
+
+
+                </mat-step>  
+
+
+                 <mat-step [stepControl]="fourFormGroup" label="Details">
+                  <form [formGroup]="fourFormGroup" class="mt-2">
+                    <div class="h-100 step-container">
+                      <div class="step-header row justify-content-between align-items-center">
+                        <div class="logo">
+                          <a class="navbar-brand" routerLink="">
+                            <img src="/assets/images/LOGO.png" width="100" alt="Logo">
+                          </a>
+                        </div>
+                        <div class="exit-button">
+                          <div class="elements-buttons">
+                            <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row justify-content-center my-5 " style="
+                      height: 60vh;
+                  ">
+
+                        <div class="col-12 my-5">
+                          <h2>
+                            What type of place will guests have?
+                          </h2>
+                        </div>
+                        <div class="row w-50 mb-5">
+                          <div class="col-12" *ngFor="let option of placeTypes">
+                            <div class="card mb-3"
+                              [ngClass]="{'border-primary': fourFormGroup.get('placeType')?.value === option.value, 'border': true}"
+                              (click)="selectPlaceType(option.value)">
+                              <div class="card-body d-flex justify-content-between align-items-center">
+                                <div class="text-left">
+                                  <h3 class="mb-0">{{ option.name }}</h3>
+                                  <p class="text-muted mb-0">{{ option.description }}</p>
+                                </div>
+                                <div>
+                                  <input type="radio" 
+                                  formControlName="placeType" 
+                                  [(ngModel)]="listingSelected.placeType"
+                                  
+                                  
+                                  [value]="option.value"
+                                    id="{{option.value}}" class="form-check-input" style="pointer-events: none;" />
+                                </div>
+                                <div class="icon">
+                                  <i [class]="option.icon" style="font-size: 24px;"></i>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+
+
+
+
+
+                      </div>
+
+                      <div class="step-footer block-steps">
+                        <div class="elements-buttons w-100 d-flex justify-content-between">
+                          <button mat-button matStepperPrevious>Back</button>
+                          <button mat-button matStepperNext class="steps-button"
+                            [disabled]="!fourFormGroup.valid">Next</button>
+
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </mat-step>  
+
+
+
+                 <!-- <mat-step [stepControl]="fiveFormGroup" label="Details">
+                  <form [formGroup]="fiveFormGroup" class="mt-2">
+                    <div class="h-100 step-container">
+                      <div class="step-header row justify-content-between align-items-center">
+                        <div class="logo">
+                          <a class="navbar-brand" routerLink="">
+                            <img src="/assets/images/LOGO.png" width="100" alt="Logo">
+                          </a>
+                        </div>
+                        <div class="exit-button">
+                          <div class="elements-buttons">
+                            <button class="exit-button btn btn-outline-secondary" (click)="closeModal()">Exit</button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row justify-content-center my-5 w-100 ">
+
+
+                        <div class="col-12">
+                          <h2>Where's your place located?</h2>
+                          <p>Your address is only shared with guests after they've made a reservation.</p>
+                          <div class="search-container">
+                            <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <input type="text" formControlName="address" placeholder="Enter your address" readonly>
+                          </div>
+                          <div class="map-container">
+                            <div #map id="map" style="height: 400px;"></div>
+                          </div>
+                        </div>
+
+
+
+
+
+                      </div>
+
+                      <div class="step-footer block-steps">
+                        <div class="elements-buttons w-100 d-flex justify-content-between">
+                          <button mat-button matStepperPrevious>Back</button>
+                          <button mat-button matStepperNext class="steps-button"
+                            [disabled]="!fiveFormGroup.valid">Next</button>
+
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </mat-step>   -->
+
+
+
+
+
+               <mat-step [stepControl]="sevenFormGroup" label="Details" class="w-100">
+                  <form [formGroup]="sevenFormGroup" class="mt-2 h-100">
+                    <div class="h-100 step-container h-100">
+                      <div class="step-header row justify-content-between">
+                        <div class="logo">
+                          <a class="navbar-brand" routerLink="">
+                            <img src="/assets/images/LOGO.png" width="100" alt="Logo">
+                          </a>
+                        </div>
+                        <div class="exit-button">
+                          <div class="elements-buttons">
+                          <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row justify-content-center my-5 w-100 step-body ">
+                        <div class="body-content justify-content-center w-100">
+                          <h2 class="title-form-2">Confirm your address</h2>
+                          <p class="desc-form-2 mb-5">Your address is only shared with guests after they've made a
+                            reservation.</p>
+
+                          <div class="form-conent w-50 justify-content-center d-flex flex-column">
+
+
+
+                            <mat-form-field appearance="fill">
+                              <mat-label>Country / Region</mat-label>
+                              <mat-select formControlName="country" [(ngModel)]="listingSelected.country">
+                                <mat-option *ngFor="let country of countriesService.getCountries()"
+                                  [value]="country.key">
+                                  {{ country.value }}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill">
+                              <mat-label>Street address</mat-label>
+                              <input matInput formControlName="streetAddress"
+                                [(ngModel)]="listingSelected.streetAddress" placeholder="Street address">
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill">
+                              <mat-label>Apt, floor, bldg (if applicable)</mat-label>
+                              <input matInput formControlName="aptFloorBldg" [(ngModel)]="listingSelected.aptFloorBldg"
+                                placeholder="Apt, floor, bldg">
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill">
+                              <mat-label>City / town / village</mat-label>
+                              <input matInput formControlName="city" [(ngModel)]="listingSelected.city"
+                                placeholder="City, town or village">
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill">
+                              <mat-label>Province / State / Territory (if applicable)</mat-label>
+                              <input matInput formControlName="provinceState"
+                                [(ngModel)]="listingSelected.provinceState" placeholder="Province, State or Territory">
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill">
+                              <mat-label>Postal Code (if applicable)</mat-label>
+                              <input matInput formControlName="postalCode" [(ngModel)]="listingSelected.postalCode"
+                                placeholder="Postal Code">
+                            </mat-form-field>
+                          </div>
+
+                        </div>
+
+                      </div>
+
+                      <div class="step-footer block-steps">
+                        <div class="elements-buttons w-100 d-flex justify-content-between">
+                          <button mat-button matStepperPrevious>Back</button>
+                          <button mat-button matStepperNext class="steps-button"
+                            [disabled]="!sevenFormGroup.valid">Next</button>
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </mat-step>  
+
+
+                 <mat-step [stepControl]="eightFormGroup" label="Details" class="w-100">
+                  <form [formGroup]="eightFormGroup" class="mt-2 h-100">
+                    <div class="h-100 step-container h-100">
+                      <div class="step-header row justify-content-between">
+                        <div class="logo">
+                          <a class="navbar-brand" routerLink="">
+                            <img src="/assets/images/LOGO.png" width="100" alt="Logo">
+                          </a>
+                        </div>
+                        <div class="exit-button">
+                          <div class="elements-buttons">
+                          <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row justify-content-center my-5 w-100 step-body ">
+                        <div class="body-content justify-content-center w-100">
+                          <h2 class="title-form-2">Confirm your address</h2>
+                          <p class="desc-form-2 mb-5">Your address is only shared with guests after they've made a
+                            reservation.</p>
+
+                          <div class="form-conent w-50 justify-content-center d-flex flex-column">
+
+
+
+                            <div class="item mb-2">
+                              <span>Guests</span>
+                              <div class="btn-group">
+                                <button type="button" (click)="decrement('guests', eightFormGroup)">-</button>
+                                <span>{{ eightFormGroup.get('guests')?.value }}</span>
+                                <button type="button" (click)="increment('guests', eightFormGroup)">+</button>
+                              </div>
+                            </div>
+
+                            <div class="item mb-2">
+                              <span>Bedrooms</span>
+                              <div class="btn-group">
+                                <button type="button" (click)="decrement('bedrooms', eightFormGroup)">-</button>
+                                <span>{{ eightFormGroup.get('bedrooms')?.value }}</span>
+                                <button type="button" (click)="increment('bedrooms', eightFormGroup)">+</button>
+                              </div>
+                            </div>
+
+                            <div class="item mb-2">
+                              <span>Beds</span>
+                              <div class="btn-group">
+                                <button type="button" (click)="decrement('beds', eightFormGroup)">-</button>
+                                <span>{{ eightFormGroup.get('beds')?.value }}</span>
+                                <button type="button" (click)="increment('beds', eightFormGroup)">+</button>
+                              </div>
+                            </div>
+
+                            <div class="item mb-2">
+                              <span>Bathrooms</span>
+                              <div class="btn-group">
+                                <button type="button" (click)="decrement('bathrooms', eightFormGroup)">-</button>
+                                <span>{{ eightFormGroup.get('bathrooms')?.value }}</span>
+                                <button type="button" (click)="increment('bathrooms', eightFormGroup)">+</button>
+                              </div>
+                            </div>
+
+
+
+                          </div>
+
+                        </div>
+
+                      </div>
+
+                      <div class="step-footer block-steps">
+                        <div class="elements-buttons w-100 d-flex justify-content-between">
+                          <button mat-button matStepperPrevious>Back</button>
+                          <button mat-button matStepperNext class="steps-button"
+                            [disabled]="!eightFormGroup.valid">Next</button>
+
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </mat-step>  
+                
+                
+
+
+                 <mat-step [stepControl]="mineFormGroup"
+                  class="h-100 d-flex justify-content-center align-content-center">
+
+
+
+                  <div class="h-100 step-container">
+
+                    <div class="step-header row justify-content-between align-items-center">
+                      <div class="logo">
+                        <a class="navbar-brand" routerLink="">
+                          <img src="/assets/images/LOGO.png" width="100" alt="Logo">
+                        </a>
+
+                      </div>
+                      <div class="exit-button">
+                        <div class="elements-buttons">
+                          <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                        </div>
+
+
+                      </div>
+
+                    </div>
+
+                    <div class="row step-body justify-content-between">
+                      <div class="col-md-6 d-flex align-items-center">
+                        <div class="text-left ">
+                          <h2 class="text-left">Step 2 </h2>
+                          <h1 class="title-form text-left">Make your place stand out
+
+                          </h1>
+                          <h3 class="text-left">
+                            In this step, you’ll add some of the amenities your place<br> offers,
+                            plus 5 or more photos. Then, you’ll create a title and description.
+
+                          </h3>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+
+                        <div class="step d-flex justify-content-between">
+
+                          <img src="/assets/images/owner-property-images/about.png" alt="Step 1" class="step-image">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="step-footer block-steps">
+
+                      <div class="elements-buttons w-100 d-flex justify-content-between">
+                        <button mat-button matStepperPrevious>Back</button>
+                        <button mat-button matStepperNext class="steps-button">Next</button>
+
+
+                      </div>
+                    </div>
+
+
+                  </div>
+
+                </mat-step>  
+
+
+
+
+                 <mat-step [stepControl]="tenFormGroup" label="Details" class="w-100">
+                  <form [formGroup]="tenFormGroup" class="mt-2 h-100">
+                    <div class="h-100 step-container h-100">
+                      <div class="step-header row justify-content-between">
+                        <div class="logo">
+                          <a class="navbar-brand" routerLink="">
+                            <img src="/assets/images/LOGO.png" width="100" alt="Logo">
+                          </a>
+                        </div>
+                        <div class="exit-button">
+                          <div class="elements-buttons">
+                            <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row justify-content-center my-5 w-100 step-body overflow-autorun">
+
+
+                        <div class="col-sm-12 justify-content-center d-flex flex-column">
+
+
+
+                          <h2 class="text-center">Tell guests what your place has to offer</h2>
+                          <p class="text-center desc-form-2">You can add more amenities after you publish your listing.</p>
+                          <br>
+                          <h3 class="mt-4 desc-form-2">What about these guest favorites?</h3>
+
+                        </div>
+                        <div class="row w-75 mb-5">
+                          <div class="col-md-6 col-lg-4" *ngFor="let favorite of guestfavorites">
+                            <div class="card mb-3"
+                              [ngClass]="{'border-primary': tenFormGroup.get(favorite.controlName)?.value, 'border': true}"
+                              (click)="toggleAmenity(favorite.controlName)">
+                              <div class="card-body d-flex justify-content-between align-items-center">
+                                <div class="text-left">
+                                  <h5 class="mb-0">{{ favorite.label }}</h5>
+                                </div>
+                                <div class="icon">
+                                  <i class="bi bi-{{ favorite.icon }}" style="font-size: 24px;"></i>
+                                </div>
+                                <input type="checkbox" formControlName="{{ favorite.controlName }}"
+                                  class="form-check-input" style="display: none;" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+
+
+                        <div class="col-sm-12 justify-content-center d-flex flex-column">
+
+
+
+ 
+                          <h3 class="mt-4 desc-form-2">Do you have any standout amenities?
+
+                          </h3>
+
+                        </div>
+                        <div class="row w-75 mb-5">
+                          <div class="col-md-6 col-lg-4" *ngFor="let amenity of standoutAmenities">
+                            <div class="card mb-3"
+                              [ngClass]="{'border-primary': tenFormGroup.get(amenity.controlName)?.value, 'border': true}"
+                              (click)="toggleAmenity(amenity.controlName)">
+                              <div class="card-body d-flex justify-content-between align-items-center">
+                                <div class="text-left">
+                                  <h5 class="mb-0">{{ amenity.label }}</h5>
+                                </div>
+                                <div class="icon">
+                                  <i class="bi bi-{{ amenity.icon }}" style="font-size: 24px;"></i>
+                                </div>
+                                <input type="checkbox" [formControlName]="amenity.controlName" class="form-check-input"
+                                  style="display: none;" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+
+                        <div class="col-sm-12 justify-content-center d-flex flex-column">
+
+
+
+
+                          <h3 class="mt-4 desc-form-2">Do you have any of these safety items?</h3>
+
+                        </div>
+
+
+                        <div class="row w-75 mb-5">
+                          <div class="col-md-6 col-lg-4" *ngFor="let feature of safetyFeatures">
+                            <div class="card mb-3"
+                              [ngClass]="{'border-selected': tenFormGroup.get(feature.controlName)?.value, 'border': true}"
+                              (click)="toggleAmenity(feature.controlName)">
+                              <div class="card-body d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">{{ feature.label }}</h5>
+                                <div class="icon">
+                                  <i class="bi bi-{{ feature.icon }}" style="font-size: 24px;"></i>
+                                </div>
+                                <input type="checkbox" [formControlName]="feature.controlName" class="form-check-input"
+                                  style="display: none;" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+
+
+
+
+
+                      </div>
+
+                      <div class="step-footer block-steps">
+                        <div class="elements-buttons w-100 d-flex justify-content-between">
+                          <button mat-button matStepperPrevious>Back</button>
+                          <button mat-button matStepperNext class="steps-button"
+                            [disabled]="!eightFormGroup.valid">Next</button>
+
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </mat-step>    
+
+
+
+                <mat-step [stepControl]="elevenFormGroup" label="Details" class="w-100">
+                  <form [formGroup]="elevenFormGroup" class="mt-2 h-100">
+                    <div class="h-100 step-container h-100">
+                      <div class="step-header row justify-content-between">
+                        <div class="logo">
+                          <a class="navbar-brand" routerLink="">
+                            <img src="/assets/images/LOGO.png" width="100" alt="Logo">
+                          </a>
+                        </div>
+                        <div class="exit-button">
+                          <div class="elements-buttons">
+                            <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                          </div>
+                        </div>
+                      </div>
+
+
+
+
+                      <div class="row justify-content-center my-5 w-100 step-body overflow-autorun">
+
+                        <div class="body-content justify-content-center w-100">
+
+                          <h2 class="title-form-2">Add Photos</h2>
+                          <p class="desc-form-2 mb-5">You'll need 5 photos to get started. You can add more or make
+                            changes later.</p>
+
+                          <div class="form-content w-50 justify-content-center d-flex flex-column">
+                            <div class="drop-zone" (dragover)="onDragOver($event)" (drop)="onDrop($event)"
+                              (click)="fileInput.click()">
+                              <input type="file" accept="image/*" multiple (change)="onFileSelected($event)"
+                                formControlName="images" hidden #fileInput />
+                              <p>Drag and drop files here or click to select</p>
+                            </div>
+                            <div class="preview-container">
+                              <img *ngFor="let image of images" [src]="image.imageUrl" alt="Preview Image"
+                                class="preview-image" (click)="removeImage(image)">
+                            </div>
+                            <div *ngIf="images.length < 5" class="error-message">
+                              <p>You’ll need 5 photos to get started. You can add more or make changes later.</p>
+                            </div>
+                          </div>
+
+
+
+                        </div>
+
+                      </div>
+
+
+
+                      <div class="step-footer block-steps">
+                        <div class="elements-buttons w-100 d-flex justify-content-between">
+                          <button mat-button matStepperPrevious>Back</button>
+                          <button mat-button matStepperNext class="steps-button"
+                            [disabled]="images.length < 5">Next</button>
+
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </mat-step>   
+
+
+
+
+                 <mat-step [stepControl]="twelveFormGroup" label="Details" class="w-100">
+                  <form [formGroup]="twelveFormGroup" class="mt-2 h-100">
+                    <div class="h-100 step-container h-100">
+                      <div class="step-header row justify-content-between">
+                        <div class="logo">
+                          <a class="navbar-brand" routerLink="">
+                            <img src="/assets/images/LOGO.png" width="100" alt="Logo">
+                          </a>
+                        </div>
+                        <div class="exit-button">
+                          <div class="elements-buttons">
+                            <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                          </div>
+                        </div>
+                      </div>
+
+
+
+
+                      <div class="row justify-content-center my-5 w-100 step-body overflow-autorun">
+
+                        <div class="body-content justify-content-center w-100">
+
+                          <h2 class="title-form-2">Now, let's give your cabin a title</h2>
+                          <p class="desc-form-2 mb-5">Short titles work best. Have fun with it—you can always change it
+                            later.</p>
+                          <mat-form-field appearance="outline" class="w-50 h-50">
+                            <mat-label>Title</mat-label>
+                            <textarea matInput formControlName="title" 
+                            [(ngModel)]="listingSelected.title"
+                            placeholder="Ex: Cozy Cabin in the Woods"
+                              (input)="updateCharacterCount()" rows="5"></textarea>
+                            <mat-hint align="end">
+                              {{ characterCount }}/32
+                            </mat-hint>
+                          </mat-form-field>
+
+
+
+                        </div>
+
+                      </div>
+
+
+
+                      <div class="step-footer block-steps">
+                        <div class="elements-buttons w-100 d-flex justify-content-between">
+                          <button mat-button matStepperPrevious>Back</button>
+                          <button mat-button matStepperNext class="steps-button"
+                            [disabled]="!twelveFormGroup.valid">Next</button>
+
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </mat-step>  
+
+
+
+                <mat-step [stepControl]="thirteenFormGroup" label="Details" class="w-100">
+                  <form [formGroup]="thirteenFormGroup" class="mt-2 h-100">
+                    <div class="h-100 step-container h-100">
+                      <div class="step-header row justify-content-between">
+                        <div class="logo">
+                          <a class="navbar-brand" routerLink="">
+                            <img src="/assets/images/LOGO.png" width="100" alt="Logo">
+                          </a>
+                        </div>
+                        <div class="exit-button">
+                          <div class="elements-buttons">
+                            <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                          </div>
+                        </div>
+                      </div>
+
+
+
+                      <div class="row justify-content-center my-5 w-100 step-body overflow-auto">
+                        <div class="body-content justify-content-center w-100">
+                          <h2 class="title-form-2">Next, let's describe your cabin</h2>
+                          <p class="desc-form-2 mb-5">
+                            Choose up to 2 highlights. We'll use these to get your description started.
+                          </p>
+                          <div class="highlight-options row">
+                            <div class="card mb-3 col-md-4" *ngFor="let option of highlightOptions" [ngClass]="{
+                                'selected': getControlValue(option.controlName),
+                                'border-primary': getControlValue(option.controlName),
+                                'border': true
+                              }" (click)="toggleHighlight(option.controlName)" style="cursor: pointer;">
+                              <div class="card-body d-flex justify-content-between align-items-center">
+
+
+                                <div class="text-left">
+                                  <h5 class="mb-0">{{ option.label }}</h5>
+                                </div>
+                                <div class="icon text-right">
+                                  <i class="bi bi-{{ option.icon }}" style="font-size: 24px;"></i>
+                                </div>
+
+
+
+
+
+                              </div>
+                            </div>
+                          </div>
+
+                          <div *ngIf="maxSelectedError" class="error-message">
+                            <p>You can select a maximum of two highlights.</p>
+                          </div>
+                        </div>
+                      </div>
+
+
+
+
+
+
+                      <div class="step-footer block-steps">
+                        <div class="elements-buttons w-100 d-flex justify-content-between">
+                          <button mat-button matStepperPrevious>Back</button>
+                          <button mat-button matStepperNext class="steps-button">Next</button>
+
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </mat-step>   
+
+
+                <mat-step [stepControl]="fourteenFormGroup" label="Details" class="w-100">
+                  <form [formGroup]="fourteenFormGroup" class="mt-2 h-100">
+                    <div class="h-100 step-container h-100">
+                      <div class="step-header row justify-content-between">
+                        <div class="logo">
+                          <a class="navbar-brand" routerLink="">
+                            <img src="/assets/images/LOGO.png" width="100" alt="Logo">
+                          </a>
+                        </div>
+                        <div class="exit-button">
+                          <div class="elements-buttons">
+                            <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                          </div>
+                        </div>
+                      </div>
+
+
+
+
+                      <div class="row justify-content-center my-5 w-100 step-body overflow-autorun">
+
+                        <div class="body-content justify-content-center w-100">
+
+                          <h2 class="title-form-2">Create your description </h2>
+                          <p class="desc-form-2 mb-5">Share what makes your place special.
+                          </p>
+                          <mat-form-field appearance="outline" class="w-50 h-50">
+                            <mat-label>description</mat-label>
+                            <textarea matInput formControlName="description"
+                              placeholder="You'll have a great time at this comfortable place to stay."
+                              [(ngModel)]="listingSelected.description" (input)="updateCharacterCountDesc()"
+                              rows="5"></textarea>
+                            <mat-hint align="end">
+                              {{ characterCount }}/500
+                            </mat-hint>
+                          </mat-form-field>
+
+
+
+                        </div>
+
+                      </div>
+
+
+
+                      <div class="step-footer block-steps">
+                        <div class="elements-buttons w-100 d-flex justify-content-between">
+                          <button mat-button matStepperPrevious>Back</button>
+                          <button mat-button matStepperNext class="steps-button"
+                            [disabled]="!fourteenFormGroup.valid">Next</button>
+
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </mat-step>   
+
+
+               <mat-step [stepControl]="fiveteenFormGroup"
+                  class="h-100 d-flex justify-content-center align-content-center">
+
+
+
+                  <div class="h-100 step-container">
+
+                    <div class="step-header row justify-content-between align-items-center">
+                      <div class="logo">
+                        <a class="navbar-brand" routerLink="">
+                          <img src="/assets/images/LOGO.png" width="100" alt="Logo">
+                        </a>
+
+                      </div>
+                      <div class="exit-button">
+                        <div class="elements-buttons">
+                          <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                        </div>
+
+
+                      </div>
+
+                    </div>
+
+                    <div class="row step-body justify-content-between">
+                      <div class="col-md-6 d-flex align-items-center">
+                        <div class="text-left ">
+                          <h2 class="text-left">Step 3 </h2>
+                          <h1 class="title-form text-left" style="font-size: 3vw;">Finish up and publish
+
+
+                          </h1>
+                          <h3 class="text-left">
+                            Finally, you'll choose booking settings, set up pricing, and publish your listing.
+
+
+                          </h3>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6 align-self-center">
+
+                        <div class="step d-flex justify-content-between">
+
+                          <img src="/assets/images/owner-property-images/publish.png" alt="Step 1" class="step-image">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="step-footer block-steps">
+
+                      <div class="elements-buttons w-100 d-flex justify-content-between">
+                        <button mat-button matStepperPrevious>Back</button>
+                        <button mat-button matStepperNext class="steps-button">Next</button>
+
+
+                      </div>
+                    </div>
+
+
+                  </div>
+
+                </mat-step> 
+
+
+
+                <mat-step [stepControl]="sixteenFormGroup" label="Details" class="w-100">
+                  <form [formGroup]="sixteenFormGroup" class="mt-2 h-100">
+                    <div class="h-100 step-container h-100">
+
+                       <div class="step-header row justify-content-between">
+                        <div class="logo">
+                          <a class="navbar-brand" routerLink="">
+                            <img src="/assets/images/LOGO.png" width="100" alt="Logo">
+                          </a>
+                        </div>
+                        <div class="exit-button">
+                          <div class="elements-buttons">
+                            <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                          </div>
+                        </div>
+                      </div>
+
+
+
+                      <div class="row justify-content-center my-5 w-100 step-body ">
+                        <div class="body-content justify-content-center w-100">
+                          <h2 class="title-form-2">Pick your booking settings</h2>
+                          <p class="desc-form-2 mb-5">You can change this at any time. <a href="#">Learn more</a></p>
+                          <div class="booking-options">
+                            <div *ngFor="let option of bookingOptions; let i = index" class="booking-item">
+                              <div class="card mb-3"
+                                [ngClass]="{ 'border-selected': sixteenFormGroup.get('bookingOption')?.value === option.controlName }"
+                                (click)="onBookingOptionChange(i)">
+                                <div class="card-body d-flex justify-content-between align-items-center">
+                                  <div class="option-content text-left w-50">
+                                    <h3 class="option-title font-weight-bold">{{ option.title }}</h3>
+
+                                    <span class="option-description">{{ option.description }}</span>
+                                  </div>
+                                  <span class="icon"><i class="bi bi-{{ option.icon }}"
+                                      style="font-size: 24px;"></i></span>
+                                  <input type="radio" [formControlName]="'bookingOption'" [value]="option.controlName"
+                                    class="form-check-input" style="display: none;">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="step-footer block-steps">
+                        <div class="elements-buttons w-100 d-flex justify-content-between">
+                          <button mat-button matStepperPrevious>Back</button>
+                          <button mat-button matStepperNext class="steps-button"
+                            [disabled]="!sixteenFormGroup.valid">Next</button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </mat-step>  
+
+
+
+                <mat-step [stepControl]="seventeenFormGroup" label="Details" class="w-100">
+                  <form [formGroup]="seventeenFormGroup" class="mt-2 h-100">
+                    <div class="h-100 step-container h-100">
+
+
+                      <div class="step-header row justify-content-between">
+                        <div class="logo">
+                          <a class="navbar-brand" routerLink="">
+                            <img src="/assets/images/LOGO.png" width="100" alt="Logo">
+                          </a>
+                        </div>
+                        <div class="exit-button">
+                          <div class="elements-buttons">
+                            <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                          </div>
+                        </div>
+                      </div>
+
+
+
+
+                      <div class="row justify-content-center my-5 w-100 step-body ">
+                        <div class="body-content justify-content-center w-100">
+                          <h2 class="title-form-2">Choose who to welcome for your first reservation</h2>
+                          <p class="desc-form-2 mb-5">After your first guest, anyone can book your place. <a href="#">Learn more</a></p>
+                          <div class="booking-options w-50">
+                            <div *ngFor="let option of welcomeOptions; let i = index" class="booking-item">
+                              <div class="card mb-3"
+                                [ngClass]="{ 'border-selected': seventeenFormGroup.get('welcomeOption')?.value === option.controlName }"
+                                (click)="onWelcomeOptionChange(i)">
+                                <div class="card-body d-flex justify-content-between align-items-center">
+                                  <div class="option-content text-left">
+                                    <span class="option-title">{{ option.title }}</span>
+                                    <span class="option-description">{{ option.description }}</span>
+                                  </div>
+                                  <input type="radio"
+                                         [formControlName]="'welcomeOption'"
+                                         [value]="option.controlName"
+                                         class="form-check-input" style="display: none;">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="step-footer block-steps">
+                        <div class="elements-buttons w-100 d-flex justify-content-between">
+                          <button mat-button matStepperPrevious>Back</button>
+                          <button mat-button matStepperNext class="steps-button"
+                            [disabled]="!seventeenFormGroup.valid">Next</button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </mat-step>  
+
+
+
+
+                <mat-step [stepControl]="eighteenFormGroup" label="Details" class="w-100">
+                  <form [formGroup]="eighteenFormGroup" class="mt-2 h-100">
+                    <div class="h-100 step-container h-100">
+
+
+                      <div class="step-header row justify-content-between">
+                        <div class="logo">
+                          <a class="navbar-brand" routerLink="">
+                            <img src="/assets/images/LOGO.png" width="100" alt="Logo">
+                          </a>
+                        </div>
+                        <div class="exit-button">
+                          <div class="elements-buttons">
+                            <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="row justify-content-center my-5 w-100 step-body ">
+
+                        <div class="body-content justify-content-center w-100">
+
+                          <h2 class="title-form-2">Now, set your price</h2>
+                          <p class="desc-form-2 mb-5">You can change it anytime.</p>
+
+                          <div class="price-container">
+                            <div class="mt-4" *ngIf="!isEditing">
+                              <span class="price-value " style="font-size: 90px;font-weight: bold;"
+                                [ngClass]="{ 'editing': isEditing }">
+                                ${{ price }}
+                              </span>
+                              <span class="edit-icon" (click)="toggleEdit()">
+                                <i class="bi bi-pencil" style="font-size: 25px;"></i>
+                              </span>
+                            </div>
+                            <div *ngIf="isEditing" class="d-flex ">
+                              <input type="text" formControlName="price" class="price-input" [ngModel]="price"
+                                (blur)="onPriceBlur()" />
+                            </div>
+
+                          </div>
+
+
+                          <div class="accordion col-md-4 mt-5" id="accordionExample">
+
+
+                            <div class="card">
+                              <div class="card-header" id="headingThree">
+                                <h2 class="mb-0">
+                                  <span data-toggle="collapse" data-target="#collapseThree" aria-expanded="false"
+                                    aria-controls="collapseThree">
+                                    <span class="guest-price primary">Guest price before taxes ${{ guestPrice }}</span>
+                                  </span>
+                                </h2>
+                              </div>
+                              <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                                data-parent="#accordionExample">
+                                <div class="card-body">
+                                  <div class="price-breakdown">
+                                    <div class="price-item">
+                                      <span class="price-label h6">Base price ${{ price }}</span>
+
+                                    </div>
+                                    <div class="price-item">
+                                      <span class="price-label h6">Guest service fee $5</span>
+                                    </div>
+
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+
+
+                        </div>
+
+
+
+                      </div>
+
+
+
+                      <div class="step-footer block-steps">
+                        <div class="elements-buttons w-100 d-flex justify-content-between">
+                          <button mat-button matStepperPrevious>Back</button>
+                          <button mat-button matStepperNext class="steps-button"
+                            [disabled]="!seventeenFormGroup.valid">Next</button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </mat-step> 
+
+
+
+
+                <mat-step [stepControl]="nineteenFormGroup" label="Details" class="w-100">
+                  <form [formGroup]="nineteenFormGroup" class="mt-2 h-100">
+                    <div class="h-100 step-container h-100">
+
+
+                      <div class="step-header row justify-content-between">
+                        <div class="logo">
+                          <a class="navbar-brand" routerLink="">
+                            <img src="/assets/images/LOGO.png" width="100" alt="Logo">
+                          </a>
+                        </div>
+                        <div class="exit-button">
+                          <div class="elements-buttons">
+                            <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="row justify-content-center my-5 w-100 step-body ">
+
+                        <div class="body-content justify-content-center w-100">
+
+
+
+
+                          <h2 class="title-form-2">Add discounts</h2>
+                          <p class="desc-form-2 mb-5">Help your place stand out to get booked faster and earn your first
+                            reviews.</p>
+
+                          <div class="cart border discount-option w-50">
+                            <div class="card-body discount-item d-flex justify-content-between align-items-center">
+                              <span class="discount-value">20%</span>
+
+                              <div>
+                                <span class="discount-description">New listing promotion</span><br>
+                                <span class="discount-details">Offer 20% off your first 3 bookings</span>
+
+                              </div>
+
+                              <mat-checkbox formControlName="newListing"></mat-checkbox>
+                            </div>
+                          </div>
+
+                          <div class="cart border discount-option w-50 mt-2">
+                            <div class="card-body discount-item d-flex justify-content-between align-items-center">
+
+                              <div>
+                                <input type="text" formControlName="WeeklyDiscount" class="discount-input" /> %
+                              </div>
+                              <div>
+
+                                <span class="discount-description">Weekly discount</span><br>
+                                <span class="discount-details">For stays of 7 nights or more</span>
+                              </div>
+
+
+                              <mat-checkbox formControlName="weekly"></mat-checkbox>
+
+
+                            </div>
+                          </div>
+
+                          <div class="cart border discount-option w-50">
+                            <div class="card-body discount-item d-flex justify-content-between align-items-center">
+
+                              <div>
+                                <input type="text" formControlName="MonthlyDiscount" class="discount-input" /> %
+                              </div>
+                              <div>
+
+                                <span class="discount-description">Monthly discount</span><br>
+                                <span class="discount-details">For stays of 28 nights or more</span>
+                              </div>
+
+
+
+
+                              <mat-checkbox formControlName="monthly"></mat-checkbox>
+
+
+                            </div>
+                          </div>
+
+
+                        </div>
+
+
+
+                      </div>
+
+
+
+                      <div class="step-footer block-steps">
+                        <div class="elements-buttons w-100 d-flex justify-content-between">
+                          <button mat-button matStepperPrevious>Back</button>
+                          <button mat-button matStepperNext class="steps-button"
+                            [disabled]="!seventeenFormGroup.valid">Next</button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </mat-step> 
+
+
+
+                <mat-step [stepControl]="twentyFormGroup" label="Details" class="w-100">
+                  <form [formGroup]="twentyFormGroup" class="mt-2 h-100">
+                    <div class="h-100 step-container h-100">
+
+
+                      <div class="step-header row justify-content-between">
+                        <div class="logo">
+                          <a class="navbar-brand" routerLink="">
+                            <img src="/assets/images/LOGO.png" width="100" alt="Logo">
+                          </a>
+                        </div>
+                        <div class="exit-button">
+                          <div class="elements-buttons">
+                            <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="row justify-content-center my-5 w-100 step-body ">
+
+                        <div class="body-content justify-content-center w-100">
+
+
+
+                          <h2 class="title-form-2">Just one last step!</h2>
+
+                          <div class="w-75 text-left">
+
+
+
+                            <label class="my-3 desc-form-2 ">How are you hosting on Airbnb?</label>
+
+                            <div class="hosting-options w-50 text-left">
+                              <mat-radio-group formControlName="hostingType">
+                                <mat-radio-button value="private">I'm hosting as a private individual</mat-radio-button><br>
+                                <mat-radio-button value="business">I'm hosting as a business</mat-radio-button>
+                              </mat-radio-group>
+                            </div>
+                            
+
+                          </div>
+
+
+                          <div class="w-75 text-left">
+                            <label class="my-3 desc-form-2">Does your place have any of these?</label><br>
+                            <div class="additional-options w-50 text-left">
+                              <mat-checkbox formControlName="exteriorCamera">Exterior security camera present</mat-checkbox><br>
+                              <mat-checkbox formControlName="noiseMonitor">Noise decibel monitor present</mat-checkbox><br>
+                              <mat-checkbox formControlName="weaponsPresent">Weapon(s) on the property</mat-checkbox>
+                            </div>
+                          </div>
+                          
+
+                           <hr>
+                          <div class="important-notes mt-4 text-left">
+                            <h3 class="desc-form-2">Important things to know</h3>
+                            <p>
+                              Security cameras that monitor indoor spaces are not allowed even if they're turned off.
+                              All exterior security cameras must be disclosed.
+                              <br><br>
+                              Be sure to comply with your <a href="#">local laws</a> and review Airbnb's <a
+                                href="#">anti-discrimination policy</a> and <a href="#">guest and Host fees</a>.
+                            </p>
+                          </div>
+
+
+
+                        </div>
+
+
+
+                      </div>
+
+
+
+                      <div class="step-footer block-steps">
+                        <div class="elements-buttons w-100 d-flex justify-content-between">
+                          <button mat-button matStepperPrevious>Back</button>
+                          
+
+                            <button mat-button (click)="onSubmit()"
+                            [disabled]="!twentyFormGroup.valid" class="steps-button">Save</button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </mat-step>
+
+
+
+
+
+
+
+
+              </mat-stepper>
+
+
+
+            </div>
+
+
+          </div>
+
+
+        </div>
+
+
+
+
+
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

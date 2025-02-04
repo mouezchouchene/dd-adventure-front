@@ -1,0 +1,374 @@
+
+@import '../../../shared/css/my_style.scss';
+
+.dashboard{
+  height: 100%;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+::ng-deep .mat-horizontal-stepper-header-container {
+  display: none !important;
+}
+
+::ng-deep .mat-horizontal-content-container  ,::ng-deep .mat-horizontal-stepper-content
+{
+  height: 100%;
+}
+
+
+.step-container
+{
+
+  display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: space-between;
+    height: 100% !important;
+    
+ 
+}
+
+.body-content
+{
+
+  display: flex;
+    flex-direction: column;
+    width: 1200px !important;
+    align-items: center;
+    
+ 
+}
+
+
+.block-steps{
+  
+  height: 100px;
+  position: relative;
+  display: flex;
+  justify-content: end;
+  border-top: 2px solid #cfcbcb4f;
+  align-content: center;
+  align-items: center;
+  z-index: 99999999999;
+  .elements-buttons{
+    width: 95%;
+    position: absolute;
+    bottom: 0px;
+
+    .steps-button{
+      width: 120px;
+    }
+
+  }
+}
+.wpestate_bell_note_unread {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    color: #fff;
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    top: -8px;
+    right: 0px;
+    font-size: 12px;
+    text-align: center;
+}
+
+
+::ng-deep .mat-horizontal-stepper-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.wpestate_bell_note {
+    width: 50px;
+    height: 50px;
+    position: sticky;
+    top: 57px;
+    right: 30px;
+    background-color: #fff;
+    box-shadow: 0px 3px 23px #E3E6EC;
+    border-radius: 50px;
+    line-height: 50px;
+    text-align: center;
+    transition: all 0.3s ease-out;
+}
+
+.label{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    color: var(--dark-purple);
+}
+
+
+
+
+/* upload-form.component.css */
+.upload-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .upload-area {
+    border: 2px dashed #ccc;
+    padding: 40px;
+    text-align: center;
+    position: relative;
+  }
+  
+  .upload-area mat-icon {
+    font-size: 40px;
+  }
+  
+  .upload-area button {
+    margin-top: 10px;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+
+  .btn-place-pin{
+    background-color: var(--secondary-color);
+  }
+
+
+  button[matStepperPrevious]
+  {
+
+    background-color: var(--light-purple);
+    padding: 20px;
+    color: var(--white-color);
+    margin-right: 20px;
+
+  }
+
+
+  button[matStepperNext]
+  {
+
+    background-color: var( --primary-color);
+    padding: 20px;
+    color: #FFFFFF; 
+
+  }
+
+
+  button.submit-button{
+    background-color: var(--dark-purple);
+    color: #FFFFFF; 
+    padding: 20px;
+    
+  }
+
+
+
+  ::ng-deep .mat-horizontal-stepper-header .mat-step-icon {
+    background-color:  var(--secondary-color); 
+    color: #FFFFFF; 
+  }
+
+  ::ng-deep .mat-horizontal-stepper-header .mat-step-icon-selected {
+    background-color: var(--dark-purple); 
+    color: #FFFFFF; 
+  }
+
+
+//   button:disabled {
+//     background: unset;
+//     opacity: 0.27;
+
+//     box-shadow: none;
+//     border-radius: 0px;
+// }
+
+
+.map-container {
+  height: 400px; 
+  width: 100%;
+}
+
+.title-form{
+  font-size: 4vw;
+        line-height: 4rem;
+        max-width: 550px;
+
+        
+}
+
+.step-body{
+  overflow-y: auto;
+    height: 70vh;
+
+  .step{
+    .block-step
+    {
+      .step-number{
+
+      }
+    }
+
+  }
+}
+
+
+form{
+
+  .card {
+    cursor: pointer;
+
+    .card-body input[type="radio"] {
+      display: none;
+
+
+      .form-check-input:checked + .form-check-label {
+        background-color: #e9ecef;
+        border-radius: 5px;
+      }
+      
+    }
+  }
+  
+  .card-body:hover {
+    background-color: #f0f0f0;
+  }
+
+
+}
+
+
+
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+}
+.subtitle {
+  font-size: 16px;
+  color: #777;
+  margin-bottom: 30px;
+}
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-top: 1px solid #ddd;
+}
+.item:first-child {
+  border-top: none;
+}
+.item span {
+  font-size: 18px;
+}
+.item .btn-group {
+  display: flex;
+  align-items: center;
+}
+.item .btn-group button {
+  border: 1px solid #ddd;
+  background-color: #fff;
+  color: #333;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  cursor: pointer;
+}
+.item .btn-group button:focus {
+  outline: none;
+  box-shadow: none;
+}
+.item .btn-group .value {
+  margin: 0 10px;
+  font-size: 18px;
+}
+
+.title-form-2{
+  font-size: 30px;
+}
+
+.desc-form-2{
+  font-size: 20px;
+}
+
+.border-selected {
+  border: 2px solid var(--primary-color) !important; 
+}
+
+.border-primary{
+  border: 2px solid var(--primary-color) !important; 
+}
+
+
+
+
+.drop-zone {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.drop-zone p {
+  color: #888;
+}
+
+.preview-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.preview-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+// .warning-message{
+//   color: red;
+// }
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+
+.price-input,input.price-input:focus{
+ 
+  font-size: 90px;
+  font-weight: bold; 
+  text-align:center;
+  // border: none;
+  // outline: none;
+  width: 12vw;
+}
+
+.card-header
+{
+   background-color: white;
+}
+
+.discount-input
+{
+  width: 40px;
+  padding: 10px;
+}
