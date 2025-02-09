@@ -1,0 +1,54 @@
+@import '../../../shared/css/my_style.scss';
+
+
+
+
+
+
+
+
+
+
+
+
+
+.search-group 
+{
+    .search-field{
+        width: 100%;
+    }
+
+    .icon-search{
+    
+        color: var(--secondary-color);
+        }
+
+        // .icon-search:hover{
+    
+        //     background-color: var(--secondary-color);
+        //     color: white;
+        //     }
+        
+}
+
+
+
+.mat-mdc-outlined-button.mat-mdc-button-base {
+    height: 58px;
+}
+
+
+.cdk-overlay-dark-backdrop {
+    background: rgb(94 66 31 / 85%) !important;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__surface{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+
+::ng-deep .cdk-overlay-dark-backdrop {
+    background: rgb(117 113 113 / 94%) !important;
+}

@@ -1,0 +1,122 @@
+
+// @use '@angular/material' as mat;
+// @include mat.core();
+
+// // Define your custom color palettes
+// $my-primary: mat.define-palette(
+//   #B97F24, // Primary color
+//   A200, A100, A400 // Define shades as needed
+// );
+
+// $my-accent: mat.define-palette(
+//   #591558, // Accent color
+//   A200, A100, A400 // Define shades as needed
+// );
+
+// $my-warn: mat.define-palette(
+//   #bb2445, // Warn color
+//   A200, A100, A400 // Define shades as needed
+// );
+
+// // Define your theme
+// $my-theme: mat.define-light-theme((
+//   color: (
+//     primary: $my-primary,
+//     accent: $my-accent,
+//     warn: $my-warn,
+//   ),
+//   typography: mat.define-typography-config(),
+//   density: 0,
+// ));
+
+// // Apply the theme to form fields
+// @include mat.form-field-color($my-theme);
+
+// // Apply the theme to all components
+// @include mat.all-component-themes($my-theme);
+
+
+
+
+
+
+
+
+@font-face {
+    font-family: 'Lato Regular'; 
+    src: url(assets/font/Lato/Lato-Regular.ttf) format('opentype');
+  }
+
+  @font-face {
+    font-family: 'montserrat'; 
+    src: url(assets/font/montserrat/Montserrat-Medium.otf) format('opentype');
+  }
+
+  @font-face {
+    font-family: 'Karma Regular'; 
+    src: url(assets/font/Karma/Karma-Regular.ttf) format('opentype');
+  }
+
+
+
+  body { 
+
+    margin: 0;
+    height: 100%;
+    height: 100%; 
+    font-family: 'Lato Regular', 'montserrat', 'Karma Regular', sans-serif;
+}
+
+:root {
+    --primary-color: #B97F24 ;
+    --secondary-color: #BF9553; 
+    --white-color : #cdc7d9;
+
+    --dark-purple:#591558;
+    --light-purple:#8a2b89;
+    --dark-color:#352c48;
+
+  }
+
+
+  .white{
+    color: var(--white-color)
+  }
+
+
+.primary
+{
+    color: #B97F24 ;
+}
+
+.secondary{
+  color:#591558;
+}
+
+.dark
+{
+    color: #080808;
+}
+.d-bg-primary
+{
+    background-color: #B97F24  !important;
+}
+
+.d-bg-light-gray
+{
+    background-color: #F9F9FB !important;
+}
+
+.d-bg-dark
+{
+  background-color: var(--dark-color);
+}
+
+.d-bg-white
+{
+  background-color: var(--white-color);
+}
+
+.d-bg-dark-purple{
+  background-color: var(--dark-purple);
+}

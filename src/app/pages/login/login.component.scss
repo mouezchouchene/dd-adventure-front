@@ -1,0 +1,70 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  background-image: url('/assets/images/Venice.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.login-box {
+  background-color: #ffffffdb;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  width: 400px;
+}
+
+.login-box h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.login-box .form-group {
+  margin-bottom: 15px;
+}
+
+.login-box .w-100 {
+  width: 100%;
+}
+
+.login-box .mt-3 {
+  margin-top: 30px;
+}
+
+
+.other_link:hover{
+  color: var(--dark-purple)
+}
+
+
+
+::ng-deep .mdc-notched-outline__leading {
+  border-color:var(--dark-purple) !important;
+}
+::ng-deep .mdc-notched-outline__notch {
+  border-color:var(--dark-purple) !important;
+}
+::ng-deep .mdc-notched-outline__trailing {
+  border-color:var(--dark-purple) !important;
+}
+
+.login-btn{
+  color: white !important;
+
+ 
+}
+
+
+.login-btn:hover{
+  color: white !important;
+  background-color: var(--dark-purple) !important;
+}
+
+mat-icon ,.title{
+  color: var(--dark-purple) !important;
+}
+
+
+

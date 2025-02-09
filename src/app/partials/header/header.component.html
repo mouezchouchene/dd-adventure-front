@@ -1,0 +1,106 @@
+<header role="banner" class="header">
+  <nav #navbar class="navbar navbar-expand-lg navbar-light d-bg-light dd-navbar" [ngClass]="{'sticky': isSticky}">
+    <a class="navbar-brand" routerLink="">
+      <img src="/assets/images/LOGO.png" alt=" DD Advenure Logo" class="img-responsive logo-dd-adventure">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
+      aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav ml-auto pl-lg-5 pl-0">
+        <li class="nav-item">
+          <a class="nav-link active" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+            routerLink="">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="properties">properties</a>
+        </li> 
+        <!-- <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="about-us">About</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="service">Service</a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="faq">FAQ</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="blog">Blog</a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="contact-us">Contact</a>
+        </li> -->
+        <!-- <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="listings/listing-details">listings</a>
+        </li>  -->
+        <!-- <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="booking-property">booking property</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="property-owner">property-owner</a>
+        </li> -->
+        <!-- <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="properties/property-details">property-details</a>
+        </li> -->
+        
+
+      </ul>
+      <ul class="navbar-nav ml-auto right-menu">
+        <ng-container *ngIf="authService.isLoggedIn(); else loginSignup">
+          <div class="user_menu user_loged d-flex align-items-center" id="user_menu_u" (click)="toggleDropdown()">
+            <div class="menu_user_picture mr-2" style="background-image: url('/assets/images/avatar.png');"></div>
+            <span class="menu_user_tools dropdown" id="user_menu_trigger" data-toggle="dropdown" (click)="toggleDropdown()">
+              <span class="menu_username mr-1">{{ authService.getUser().username }}</span> <i class="fa fa-caret-down" (click)="toggleDropdown()"></i>
+            </span>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="user_menu_trigger" [class.show]="isDropdownOpen">
+              <div class="row">
+                <ng-container *ngIf="authService.getUserRole() === 'property-owner'; else bookingPropertyMenu">
+                  <a class="dropdown-item" routerLink="/property-owner/dashboard"><i class="fa fa-tachometer"></i> Dashboard</a>
+                  <a class="dropdown-item" routerLink="/property-owner/my-profile"><i class="fa fa-user"></i>My Profile</a>
+                  <a class="dropdown-item" routerLink="/property-owner/my-listings"><i class="fa fa-map-marker"></i>My Listings</a>
+                  <!-- <a class="dropdown-item" routerLink="/property-owner/add-new-listing"><i class="fa fa-calendar"></i>Add New Listing</a> -->
+                  <a class="dropdown-item" routerLink="/property-owner/favorites"><i class="fa fa-heart"></i>Favorites</a>
+                  <a class="dropdown-item" routerLink="/property-owner/my-reservations"><i class="fa fa-folder-open"></i>Reservations</a>
+                  <a class="dropdown-item" routerLink="/property-owner/my-bookings"><i class="fa fa-folder-open"></i>Bookings</a>
+                  <a class="dropdown-item" routerLink="/property-owner/my-reviews"><i class="fa fa-bar-chart"></i> My Reviews</a>
+                </ng-container>
+                <ng-template #bookingPropertyMenu>
+                  <a class="dropdown-item" routerLink="/booking-property/my-profile"><i class="fa fa-user"></i>My Profile</a>
+                  <a class="dropdown-item" routerLink="/booking-property/favorites"><i class="fa fa-heart"></i>Favorites</a>
+                  <a class="dropdown-item" routerLink="/booking-property/my-reservations"><i class="fa fa-folder-open"></i>Reservations</a>
+                  <a class="dropdown-item" routerLink="/booking-property/my-inbox"><i class="fa fa-inbox"></i> My Inbox</a>
+                </ng-template>
+                <a class="dropdown-item" routerLink="/logout"><i class="fa fa-sign-out"></i>Log Out</a>
+              </div>
+             
+            </div>
+
+
+
+
+
+
+
+
+
+
+          </div>
+        </ng-container>
+  
+        <ng-template #loginSignup>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" (click)="openLoginDialog()"><i class="fa fa-sign-in primary mr-1"> </i>Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" (click)="openSingupDialog()"><i class="fa fa-plus primary mr-1"> </i> Sign Up</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn rounded-pill cta-btn" href="#">Submit Property</a>
+          </li>
+        </ng-template>
+  
+      </ul>
+    </div>
+  </nav>
+</header>

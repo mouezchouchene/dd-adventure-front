@@ -1,0 +1,253 @@
+<div class="dashboard ">
+    <div class="dashboard-header d-flex justify-content-between mb-2">
+        <h1 class="entry-title entry-title-profile">My Profile </h1>
+
+        <div class="d-flex justify-content-between back-notif">
+            <div class="back_to_home">
+
+                <a class="dark" routerLink="/">Front page</a>
+            </div>
+            <div class="wpestate_bell_note">
+                <a routerLink="#">
+                    <svg width="22" height="24" viewBox="0 0 22 24" fill="#383f5b" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M18 11V8C18 4.13401 14.866 1 11 1C7.13401 1 4 4.13401 4 8V11C4 14.3 1 15.1 1 17C1 18.7 4.9 20 11 20C17.1 20 21 18.7 21 17C21 15.1 18 14.3 18 11Z"
+                            stroke="#11142D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path
+                            d="M11 22C9.98902 22 9.03902 21.966 8.14502 21.9C8.53619 23.1478 9.69236 23.997 11 23.997C12.3077 23.997 13.4639 23.1478 13.855 21.9C12.961 21.966 12.011 22 11 22Z"
+                            fill="#1B1D21"></path>
+                    </svg>
+                    <div class="wpestate_bell_note_unread">0</div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row mt-4">
+        
+            <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+                <div class="row  justify-content-around">
+                <div class="col-sm-12 col-md-8 card ">
+    
+                    <div class="block-1 p-xl-5 m-2 m-md-0">
+                        <div class="">
+                            <h2 class="">Your details</h2>
+                        </div>
+    
+    
+    
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="w-100">
+                                    <mat-label>First Name</mat-label>
+                                    <input matInput formControlName="firstName" required>
+                                    <mat-error *ngIf="profileForm.get('firstName')?.hasError('required')">
+                                        First Name is required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="w-100">
+                                    <mat-label>Phone</mat-label>
+                                    <input matInput formControlName="phone">
+                                    <mat-error *ngIf="profileForm.get('phone')?.hasError('pattern')">
+                                        Invalid phone number
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="w-100">
+                                    <mat-label>Last Name</mat-label>
+                                    <input matInput formControlName="lastName" required>
+                                    <mat-error *ngIf="profileForm.get('lastName')?.hasError('required')">
+                                        Last Name is required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="w-100">
+                                    <mat-label>Mobile</mat-label>
+                                    <input matInput formControlName="mobile" required>
+                                    <mat-error *ngIf="profileForm.get('mobile')?.hasError('required')">
+                                        Mobile is required
+                                    </mat-error>
+                                    <mat-error *ngIf="profileForm.get('mobile')?.hasError('pattern')">
+                                        Invalid mobile number
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="w-100">
+                                    <mat-label>Email</mat-label>
+                                    <input matInput formControlName="email" required>
+                                    <mat-error *ngIf="profileForm.get('email')?.hasError('required')">
+                                        Email is required
+                                    </mat-error>
+                                    <mat-error *ngIf="profileForm.get('email')?.hasError('email')">
+                                        Invalid email
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="w-100">
+                                    <mat-label>Website</mat-label>
+                                    <input matInput formControlName="website">
+                                    <mat-error *ngIf="profileForm.get('website')?.hasError('pattern')">
+                                        Invalid website URL
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-12">
+                                <mat-form-field appearance="fill" class="w-100">
+                                    <mat-label>About Me</mat-label>
+                                    <textarea matInput formControlName="aboutMe"></textarea>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="w-100">
+                                    <mat-label>Skype</mat-label>
+                                    <input matInput formControlName="skype">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="w-100">
+                                    <mat-label>Facebook Url</mat-label>
+                                    <input matInput formControlName="facebookUrl">
+                                    <mat-error *ngIf="profileForm.get('facebookUrl')?.hasError('pattern')">
+                                        Invalid URL
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="w-100">
+                                  <mat-label>LinkedIn Url</mat-label>
+                                  <input matInput formControlName="linkedinUrl">
+                                  <mat-error *ngIf="profileForm.get('linkedinUrl')?.hasError('pattern')">
+                                    Invalid URL
+                                  </mat-error>
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="w-100">
+                                  <mat-label>Twitter Url</mat-label>
+                                  <input matInput formControlName="twitterUrl">
+                                  <mat-error *ngIf="profileForm.get('twitterUrl')?.hasError('pattern')">
+                                    Invalid URL
+                                  </mat-error>
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="w-100">
+                                  <mat-label>Instagram Url</mat-label>
+                                  <input matInput formControlName="instagramUrl">
+                                  <mat-error *ngIf="profileForm.get('instagramUrl')?.hasError('pattern')">
+                                    Invalid URL
+                                  </mat-error>
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="w-100">
+                                  <mat-label>GitHub Url</mat-label>
+                                  <input matInput formControlName="githubUrl">
+                                  <mat-error *ngIf="profileForm.get('githubUrl')?.hasError('pattern')">
+                                    Invalid URL
+                                  </mat-error>
+                                </mat-form-field>
+                              </div>
+
+
+                            <div class="col-md-12">
+                                <button  type="submit" class=" btn d-bg-dark-purple  py-3 px-5  btn-update col-sm-12 col-md-4 mb-3 mb-md-0">Update profile</button>
+                                <button   type="button" class="btn d-bg-primary  py-3 px-3  btn-view col-sm-12 col-md-3 mb-4  mb-md-0 mx-md-2">View public profile</button>
+                                <button type="button" class="btn btn-danger   py-3 px-3 btn-delete col-sm-12 col-md-3 mb-4 mb-md-0">Delete account</button>
+                            </div>
+                        </div>
+    
+     
+                    </div>
+    
+                </div>
+    
+                <div class="col-sm-12 col-md-3 p-xl-3 card">
+                    <div class="">
+                      <div class="card-body text-center">
+                        <img [src]="profileImageUrl" alt="Profile" class="img-fluid mb-3 w-100">
+                        <input type="file" accept="image/*" (change)="onImageUpload($event)" style="display: none;" #fileInput>
+                        <button mat-raised-button color="primary" class="w-100" (click)="fileInput.click()">Upload Image</button>
+                        
+                        <img [src]="idScanUrl" alt="ID Scan" class="img-fluid mb-3 w-100 mt-4">
+                        <input type="file" accept="image/*" (change)="onIdScanUpload($event)" style="display: none;" #idScanInput>
+                        <button mat-raised-button color="primary" class="mt-2 w-100" (click)="idScanInput.click()">Upload an ID Scan</button>
+                      </div>
+                    </div>
+                  </div>
+                  
+            </div>
+            </form>
+        
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 card p-xl-3 my-4">
+            <div class="card-body">
+                <h3>Change Password</h3>
+                <form [formGroup]="passwordForm" (ngSubmit)="onSubmitPassword()">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Old Password</mat-label>
+                                <input matInput [type]="hideOld ? 'password' : 'text'" formControlName="oldPassword" required>
+                                <button mat-icon-button matSuffix type="button" (click)="toggleHideOld()">
+                                    <mat-icon>{{ hideOld ? 'visibility_off' : 'visibility' }}</mat-icon>
+                                  </button>
+                                <mat-error *ngIf="passwordForm.get('oldPassword')?.hasError('required')">
+                                    Old Password is required
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>New Password</mat-label>
+                                <input matInput [type]="hideOld ? 'password' : 'text'"  formControlName="newPassword" required>
+                                <button mat-icon-button matSuffix type="button" (click)="toggleHideOld()">
+                                    <mat-icon>{{ hideOld ? 'visibility_off' : 'visibility' }}</mat-icon>
+                                  </button>
+                                <mat-error *ngIf="passwordForm.get('newPassword')?.hasError('required')">
+                                    New Password is required
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Confirm New Password</mat-label>
+                                <input matInput [type]="hideOld ? 'password' : 'text'"  formControlName="confirmNewPassword" required>
+                                <button mat-icon-button matSuffix type="button" (click)="toggleHideOld()">
+                                    <mat-icon>{{ hideOld ? 'visibility_off' : 'visibility' }}</mat-icon>
+                                  </button>
+                                <mat-error *ngIf="passwordForm.get('confirmNewPassword')?.hasError('required')">
+                                    Confirm New Password is required
+                                </mat-error>
+                                <mat-error *ngIf="passwordForm.hasError('notSame')">
+                                    Passwords do not match
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-12">
+
+                            <button  type="submit" class="btn d-bg-primary white py-3 px-5 mr-2">Reset Password</button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+</div>

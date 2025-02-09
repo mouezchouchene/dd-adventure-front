@@ -1,0 +1,19 @@
+@import '../../../shared/css/my_style.scss';
+.search-group 
+{
+    .search-field{
+        width: 100%;
+    }
+
+    .icon-search{
+    
+        color: var(--secondary-color);
+        }
+
+        // .icon-search:hover{
+    
+        //     background-color: var(--secondary-color);
+        //     color: white;
+        //     }
+        
+}

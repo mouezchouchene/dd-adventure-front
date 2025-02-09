@@ -1,0 +1,156 @@
+<div class="dashboard">
+  <div class="dashboard-header d-flex justify-content-between mb-2">
+    <h1 class="entry-title entry-title-profile">My Listings </h1>
+
+    <div class="d-flex justify-content-between back-notif">
+      <div class="back_to_home">
+
+        <a class="dark" routerLink="/">Front page</a>
+      </div>
+      <div class="wpestate_bell_note">
+        <a routerLink="#">
+          <svg width="22" height="24" viewBox="0 0 22 24" fill="#383f5b" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M18 11V8C18 4.13401 14.866 1 11 1C7.13401 1 4 4.13401 4 8V11C4 14.3 1 15.1 1 17C1 18.7 4.9 20 11 20C17.1 20 21 18.7 21 17C21 15.1 18 14.3 18 11Z"
+              stroke="#11142D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path
+              d="M11 22C9.98902 22 9.03902 21.966 8.14502 21.9C8.53619 23.1478 9.69236 23.997 11 23.997C12.3077 23.997 13.4639 23.1478 13.855 21.9C12.961 21.966 12.011 22 11 22Z"
+              fill="#1B1D21"></path>
+          </svg>
+          <div class="wpestate_bell_note_unread">0</div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+  <div class="card-body">
+    <div class="row user_dashboard_panel dashboard_property_list">
+      <div class="col-md-12 card p-4 ">
+        <div class="row  user_dashboard_panel dashboard_property_list">
+          <div class="col-md-6">
+            <div class="search-group mb-3">
+              <mat-form-field appearance="outline" class="search-field">
+                <mat-label>Search</mat-label>
+                <input matInput placeholder="Ex. Dari darek" (keyup)="applyFilter($event)" #input>
+                <mat-icon class="icon-search" matSuffix>search</mat-icon>
+              </mat-form-field>
+
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-6 text-right">
+            <button mat-stroked-button p-5 (click)="addNewListing()">
+
+              Add New Listing
+
+              <mat-icon>add</mat-icon>
+
+
+            </button>
+
+          </div>
+
+
+
+
+        </div>
+
+
+      
+      <div class="row">
+        <div class="w-100" class="table-responsive">
+          <table mat-table [dataSource]="dataSource" class="listings-table" matSort>
+
+            <!--  image -->
+            <ng-container matColumnDef="image">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> image </th>
+              <td mat-cell *matCellDef="let row">
+                <div>
+
+
+                  <img src="{{row.image ? row.image : '- - -'}} " alt="" width="200">
+                </div>
+              </td>
+            </ng-container>
+
+            <!--  Property -->
+            <ng-container matColumnDef="Property">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Property </th>
+              <td mat-cell *matCellDef="let row">
+                <div>{{row.Property ? row.Property : '- - -'}} </div>
+              </td>
+            </ng-container>
+
+            <!--  Reviews -->
+            <ng-container matColumnDef="Reviews">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Reviews </th>
+              <td mat-cell *matCellDef="let row">
+                <div>{{row.Reviews ? row.Reviews : '- - -'}} </div>
+              </td>
+            </ng-container>
+
+            <!--  Status -->
+            <ng-container matColumnDef="Status">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+              <td mat-cell *matCellDef="let row">
+                <div>{{row.Status ? row.Status : '- - -'}} </div>
+              </td>
+            </ng-container>
+
+            <!--  Price -->
+            <ng-container matColumnDef="Price">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+              <td mat-cell *matCellDef="let row">
+                <div> $ {{row.Price ? row.Price : '- - -'}}</div>
+              </td>
+            </ng-container>
+
+
+
+            <!--  action -->
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="sticky-column"> action </th>
+              <td mat-cell *matCellDef="let row" class="sticky-column">
+                <div class="d-flex flex-column bloc-btn ">
+
+                  <button class="btn-datail" data-toggle="tooltip" data-placement="left" title="show Detail"
+                    mat-mini-fab (click)="showDetail(row.id)">
+                    <mat-icon>visibility</mat-icon>
+                  </button>
+
+                  <button class="btn-update" data-toggle="tooltip" data-placement="left" title="show Detail"
+                    mat-mini-fab (click)="editListing(row.id)">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+
+                  <button class="btn-warn" data-toggle="tooltip" data-placement="left" title="stop listing" mat-mini-fab
+                    (click)="deleteListing(row)">
+                    <mat-icon>remove_circle</mat-icon>
+                  </button>
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+          </table>
+
+          <mat-paginator (page)="handlePageEvent($event)" [length]="length" [pageSize]="pageSize"
+            [showFirstLastButtons]="showFirstLastButtons" [pageSizeOptions]="pageSizeOptions" [pageIndex]="pageIndex"
+            aria-label="Select page">
+          </mat-paginator>
+        </div>
+
+
+      </div>
+
+    </div>
+
+    </div>
+
+  </div>
+</div>
