@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 
-const BASE_URL = environment.apiUrl + "/";
+const BASE_URL = environment.apiUrl ;
 
 @Injectable({
   providedIn: 'root'

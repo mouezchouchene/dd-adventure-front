@@ -63,45 +63,54 @@
 
             <!--  image -->
             <ng-container matColumnDef="image">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> image </th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Property </th>
               <td mat-cell *matCellDef="let row">
                 <div>
 
 
-                  <img src="{{row.image ? row.image : '- - -'}} " alt="" width="200">
+                  <img src="{{row.images ? row.images[0]?.imageUrl : '- - -'}} " alt="" width="200">
                 </div>
               </td>
             </ng-container>
 
-            <!--  Property -->
-            <ng-container matColumnDef="Property">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Property </th>
+            <!--  streetAddress -->
+            <ng-container matColumnDef="streetAddress">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
               <td mat-cell *matCellDef="let row">
-                <div>{{row.Property ? row.Property : '- - -'}} </div>
+                <div style="font-weight: 500;">{{row.city ? row.city : '- - -'}} </div>
+                <div>{{row.streetAddress ? row.streetAddress : '- - -'}} </div>
               </td>
             </ng-container>
 
-            <!--  Reviews -->
-            <ng-container matColumnDef="Reviews">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Reviews </th>
+            <!--  place -->
+            <ng-container matColumnDef="place">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Place </th>
               <td mat-cell *matCellDef="let row">
-                <div>{{row.Reviews ? row.Reviews : '- - -'}} </div>
+                <div>{{row.place ? row.place : '- - -'}} </div>
               </td>
             </ng-container>
 
-            <!--  Status -->
-            <ng-container matColumnDef="Status">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+            <!--  placeType -->
+            <ng-container matColumnDef="placeType">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> place Type </th>
               <td mat-cell *matCellDef="let row">
-                <div>{{row.Status ? row.Status : '- - -'}} </div>
+                <div>{{row.placeType ? row.placeType : '- - -'}} </div>
+              </td>
+            </ng-container>
+
+            <!--  country -->
+            <ng-container matColumnDef="country">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Country </th>
+              <td mat-cell *matCellDef="let row">
+                <div>{{row.country ? row.country : '- - -'}} </div>
               </td>
             </ng-container>
 
             <!--  Price -->
-            <ng-container matColumnDef="Price">
+            <ng-container matColumnDef="price">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
               <td mat-cell *matCellDef="let row">
-                <div> $ {{row.Price ? row.Price : '- - -'}}</div>
+                <div> $ {{row.price ? row.price : '- - -'}}</div>
               </td>
             </ng-container>
 

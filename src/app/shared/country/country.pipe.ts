@@ -5,14 +5,10 @@ import { CountriesServiceService } from 'src/app/services/countries/countries-se
   name: 'country'
 })
 export class CountryPipe implements PipeTransform {
-
-  
-  constructor(private countriesService: CountriesServiceService)
-  {}
+  constructor(private countriesService: CountriesServiceService) {}
 
   transform(countryCode: string): string {
-    const country = this.countriesService.getCountries().find(c => c.key === countryCode);
-    return country ? country.value : ''; 
+    const country = this.countriesService.getCountries().find(c => c.name === countryCode);
+    return country ? country.name : '';
   }
-
 }
