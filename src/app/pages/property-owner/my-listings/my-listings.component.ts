@@ -1,10 +1,10 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort,Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { PropertiesListingsService } from 'src/app/services/properties-listings.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AddListingComponent } from '../add-listing/add-listing.component';
+import { PropertiesService } from 'src/app/services/property-owner/properties.service';
 
 @Component({
   selector: 'app-my-listings',
@@ -18,10 +18,11 @@ export class MyListingsComponent  {
 
   displayedColumns: string[] = [
     'image',
-    'Property',
-    'Reviews',
-    'Status',
-    'Price',
+    'streetAddress',
+    'place',
+    'placeType',
+    'country',
+    'price',
     
     'action',
   ];
@@ -43,31 +44,50 @@ export class MyListingsComponent  {
   }
 
   constructor(
-    private listingsService:PropertiesListingsService,
+    private listingsService:PropertiesService,
     private dialog:MatDialog,
     private elementRef: ElementRef
 
-  ){}
+  ){
+
+    this.getAllListings();
+  }
 
 
   
 
   ngOnInit() {
-    this.getAllListings();
+    
   }
 
 
-  getAllListings()
-  {
-    this.listingsService.getAllListings().subscribe((res:any)=>{
-      console.log("listings =>"+res);
-      
+  getAllListings() {
+    this.listingsService.getAllProperties().subscribe((res: any) => {
+      console.log("res =>", res);
       this.dataSource = new MatTableDataSource(res);
       this.length = res.length;
 
-      this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
-    })
+      this.dataSource.sort = this.sort;
+
+      this.applyDefaultSort();
+
+      console.log("properties =>", this.dataSource);
+    });
+  }
+
+  // Method to apply default sorting by 'id'
+  applyDefaultSort() {
+    if (this.sort && this.dataSource) {
+      const defaultSort: Sort = {
+        active: 'id', 
+        direction: 'desc' 
+      };
+      this.sort.active = defaultSort.active;
+      this.sort.direction = defaultSort.direction;
+      this.sort.sortChange.emit(defaultSort); 
+      this.dataSource.sort = this.sort;
+    }
   }
 
 
@@ -109,16 +129,18 @@ export class MyListingsComponent  {
 
 
 
-  addNewListing()
-  {
-    this.dialog.open(AddListingComponent,{
-
+  addNewListing() {
+    const dialogRef = this.dialog.open(AddListingComponent, {
       width: '100%',
       height: "100%",
       panelClass: 'add-listing-dialog',
-      disableClose:true
-    })
+      disableClose: true
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialog closed with result:', result);
+      this.getAllListings();
+    });
   }
 
 
