@@ -5,7 +5,7 @@
           <div class="sidebar-content text-cente ">
             <div class="owner text-center">
               <img id="profile-image-menu" src="/assets/images/avatar.png" alt="User Avatar" class="avatar">
-              <h3 class="text-dark font-weight-bold">Hello, {{ authService.getUser().username ? authService.getUser().username :"test"}}</h3>
+              <h3 class="text-dark font-weight-bold">Hello, {{ authService.getUserName() ? authService.getUserName() :"----"}}</h3>
             </div>
             <div class="user_dashboard_links ">
               <ul>
