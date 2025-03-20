@@ -16,7 +16,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { ServiceComponent } from './pages/service/service.component';
 import { BlogComponent } from './pages/blog/blog.component';
 import { MatIconModule } from '@angular/material/icon';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { ModalHostDirective } from './directives/modal-host.directive';
@@ -42,6 +42,7 @@ import { CountryPipe } from './shared/country/country.pipe';
 import { CountriesServiceService } from './services/countries/countries-service.service';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { LightgalleryModule} from 'lightgallery/angular';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 
 
@@ -91,6 +92,7 @@ import { LightgalleryModule} from 'lightgallery/angular';
   ],
   
   providers: [LoginComponent,CountriesServiceService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
     
   ],
   bootstrap: [AppComponent],

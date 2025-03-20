@@ -37,21 +37,21 @@ export class SignupComponent {
   });
 
   onSubmit(): void {
-    if (this.signupForm.valid) {
-      this.authService.login(this.signupForm.value)
-        .then((user) => {
-          console.log('Login successful:', user);
-          this.router.navigate(['/property-owner']); 
-          this.dialog.closeAll();
-        })
-        .catch((error) => {
-          console.log("failed login =>" +error);
-      this.error = "Invalid username or password"
+  //   if (this.signupForm.valid) {
+  //     this.authService.login(this.signupForm.value)
+  //       .then((user) => {
+  //         console.log('Login successful:', user);
+  //         this.router.navigate(['/property-owner']); 
+  //         this.dialog.closeAll();
+  //       })
+  //       .catch((error) => {
+  //         console.log("failed login =>" +error);
+  //     this.error = "Invalid username or password"
           
       
           
-        });
-    }
+  //       });
+  //   }
   }
 
   toggleHide(): void {

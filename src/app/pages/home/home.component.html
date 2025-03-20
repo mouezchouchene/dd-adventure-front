@@ -15,9 +15,9 @@
           <div class="d-flex align-items-start">
             <mat-icon class="me-2">location_on</mat-icon>
             <div>
-              <h6 class="mb-0">{{ destination.name }}</h6>
-              <!-- <small class="text-muted">{{ destination.address }}</small> -->
-              <small class="text-muted">{{ destination.country }}</small>
+              <h6 class="mb-0">{{ destination.streetAddress }}</h6>
+              <small class="text-muted">{{ destination.city }}</small> <br>
+              <small class="text-muted text-uppercase font-weight-bold">{{ destination.country }}</small>
             </div>
           </div>
         </a>
@@ -28,26 +28,38 @@
       </div>
     </div>
 
-    <!-- Start Date Input -->
-    <div class="col-sm-12 col-md-6 col-lg-2 p-md-0">
-      <mat-form-field appearance="fill" class="form-field white-bg-input w-100">
-        <mat-label>Start Date</mat-label>
-        <input matInput [matDatepicker]="startPicker" [matDatepickerFilter]="myDateFilter" [(ngModel)]="startDate"
-          required>
-        <mat-datepicker-toggle matPrefix [for]="startPicker"></mat-datepicker-toggle>
-        <mat-datepicker #startPicker></mat-datepicker>
-      </mat-form-field>
-    </div>
+<!-- Start Date Input -->
+<div class="col-sm-12 col-md-6 col-lg-2 p-md-0">
+  <mat-form-field appearance="fill" class="form-field white-bg-input w-100">
+    <mat-label>Start Date</mat-label>
+    <input
+      matInput
+      [matDatepicker]="startPicker"
+      [matDatepickerFilter]="myDateFilter"
+      [(ngModel)]="startDate"
+      (ngModelChange)="updateEndDate()"
+      required
+    >
+    <mat-datepicker-toggle matPrefix [for]="startPicker"></mat-datepicker-toggle>
+    <mat-datepicker #startPicker></mat-datepicker>
+  </mat-form-field>
+</div>
 
-    <!-- End Date Input -->
-    <div class="col-sm-12 col-md-6 col-lg-2 p-md-0">
-      <mat-form-field appearance="fill" class="form-field white-bg-input w-100">
-        <mat-label>End Date</mat-label>
-        <input matInput [matDatepicker]="endPicker" [matDatepickerFilter]="myDateFilter" [(ngModel)]="endDate" required>
-        <mat-datepicker-toggle matPrefix [for]="endPicker"></mat-datepicker-toggle>
-        <mat-datepicker #endPicker></mat-datepicker>
-      </mat-form-field>
-    </div>
+<!-- End Date Input -->
+<div class="col-sm-12 col-md-6 col-lg-2 p-md-0">
+  <mat-form-field appearance="fill" class="form-field white-bg-input w-100">
+    <mat-label>End Date</mat-label>
+    <input
+      matInput
+      [matDatepicker]="endPicker"
+      [matDatepickerFilter]="endDateFilter"
+      [(ngModel)]="endDate"
+      required
+    >
+    <mat-datepicker-toggle matPrefix [for]="endPicker"></mat-datepicker-toggle>
+    <mat-datepicker #endPicker></mat-datepicker>
+  </mat-form-field>
+</div>
 
     <!-- Guests Input -->
     <div class="col-xm-12 col-md-6 col-lg-4 p-md-0 mb-sm-2">
@@ -127,35 +139,35 @@
   <!-- Navigation Pills -->
   <div class="col-12 mb-4 mt-5">
     <nav class="nav nav-pills d-flex ">
-        <a class="nav-item nav-link" (click)="filterByPlaceType('Apartments')">
+        <a class="nav-item nav-link shadow-sm p-3 mb-5 bg-white rounded" (click)="filterByPlaceType('Apartments')">
             <mat-icon>home</mat-icon> Apartments
         </a>
-        <a class="nav-item nav-link"  (click)="filterByPlaceType('Bungalows')">
+        <a class="nav-item nav-link shadow-sm p-3 mb-5 bg-white rounded"  (click)="filterByPlaceType('Bungalows')">
             <mat-icon>beach_access</mat-icon> Bungalows
         </a>
-        <a class="nav-item nav-link"  (click)="filterByPlaceType('Cabins')">
+        <a class="nav-item nav-link shadow-sm p-3 mb-5 bg-white rounded"  (click)="filterByPlaceType('Cabins')">
             <mat-icon>cabin</mat-icon> Cabins
         </a>
-        <a class="nav-item nav-link"  (click)="filterByPlaceType('Condos')">
+        <a class="nav-item nav-link shadow-sm p-3 mb-5 bg-white rounded"  (click)="filterByPlaceType('Condos')">
             <mat-icon>domain</mat-icon> Condos
         </a>
-        <a class="nav-item nav-link"  (click)="filterByPlaceType('Villas')">
+        <a class="nav-item nav-link shadow-sm p-3 mb-5 bg-white rounded"  (click)="filterByPlaceType('Villas')">
             <mat-icon>villa</mat-icon> Villas
         </a>
-        <a class="nav-item nav-link"  (click)="filterByPlaceType('Loft Rooms')">
+        <a class="nav-item nav-link shadow-sm p-3 mb-5 bg-white rounded"  (click)="filterByPlaceType('Loft Rooms')">
             <mat-icon>other_houses</mat-icon> Loft Rooms
         </a>
-        <a class="nav-item nav-link"  (click)="filterByPlaceType('Entire Home')">
+        <a class="nav-item nav-link shadow-sm p-3 mb-5 bg-white rounded"  (click)="filterByPlaceType('Entire Home')">
             <mat-icon>house</mat-icon> Entire Home
         </a>
-        <a class="nav-item nav-link"  (click)="filterByPlaceType('Private Room')">
+        <a class="nav-item nav-link shadow-sm p-3 mb-5 bg-white rounded"  (click)="filterByPlaceType('Private Room')">
             <mat-icon>bed</mat-icon> Private Room
         </a>
-          <a class="nav-item nav-link" (click)="filterByPlaceType('Beachfront')">
+          <a class="nav-item nav-link shadow-sm p-3 mb-5 bg-white rounded" (click)="filterByPlaceType('Beachfront')">
         <mat-icon>beach_access</mat-icon>
         Beachfront
       </a>
-      <a class="nav-item nav-link" (click)="filterByPlaceType('With Pool')">
+      <a class="nav-item nav-link shadow-sm p-3 mb-5 bg-white rounded" (click)="filterByPlaceType('With Pool')">
         <mat-icon>pool</mat-icon> With Pool
       </a>
     </nav>
@@ -192,7 +204,7 @@
           </div>
           <h3 class="card-title">{{property.title ? property.title : "-------"}}</h3>
           <p class="card-text">{{property.place ? property.place : "-------"}} - {{property.placeType ? property.placeType : "-------"}}</p>
-          <p class="card-text">3 Guests · 4 Bedrooms · 3 Bathrooms</p>
+          <p class="card-text">{{property.guests ? property.guests : "0"}} Guests · {{property.bedrooms ? property.bedrooms : "0"}} bedrooms · {{property.bathrooms ? property.bathrooms : "0"}} bathrooms</p>
           <div class="d-flex justify-content-between align-items-center  prices-stars">
             <p class="mb-0">€ {{property.price ? property.price : 0}}/night</p>
             <div class="d-flex align-items-center ">
@@ -755,9 +767,3 @@
 
 
 
-
-<!-- <div class="row">
-    <div class="col">
-        <img src="/assets/images/hotel.jpg" alt="" srcset="">
-    </div>
-</div> -->
