@@ -61,7 +61,7 @@ const routes: Routes = [
     
   },
   {
-    path: 'listings/listing-details',
+    path: 'search',
     component: ListingsComponent,
     
   },
@@ -74,7 +74,7 @@ const routes: Routes = [
     path:'property-owner',
     loadChildren: () => import('./pages/property-owner/property-owner.module').then(m => m.PropertyOwnerModule),
     canActivate:[authGuardGuard],
-    data: { role: 'property-owner' }
+    data: { role: 'ROLE_PROPERTY_OWNER' }
     
     
   },
@@ -82,7 +82,7 @@ const routes: Routes = [
     path:'booking-property',
     loadChildren: () => import('./pages/booking-property/booking-property.module').then(m => m.BookingPropertyModule),
     canActivate:[authGuardGuard],
-    data: { role: 'booking-property' }  
+    data: { role: 'ROLE_CLIENT' }
 
     
     

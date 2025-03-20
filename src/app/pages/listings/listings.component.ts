@@ -1,101 +1,121 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { PropertiesListingsService } from 'src/app/services/properties-listings.service';
 
 @Component({
   selector: 'app-listings',
   templateUrl: './listings.component.html',
   styleUrls: ['./listings.component.scss']
 })
-export class ListingsComponent {
+export class ListingsComponent implements OnInit {
+  properties: any[] = [];
 
+  constructor(
+    private listingsService: PropertiesListingsService,
+    private route: ActivatedRoute
+  ) {}
 
+  ngOnInit() {
+    this.getAllProperties();
+  }
 
-  loginForm!: FormGroup;
+  getAllProperties() {
+    this.listingsService.getAllListings().subscribe(
+      (res: any) => {
+        this.properties = res;
+        console.log("Properties loaded:", this.properties);
 
-  hide = true; // for password visibility toggle
-  constructor(private fb: FormBuilder) {}
+        this.route.queryParams.subscribe(params => {
+          const streetAddress = params['streetAddress']?.toLowerCase();
+          const city = params['city']?.toLowerCase();
+          const country = params['country']?.toLowerCase();
+          const startDate = params['startDate'] ? new Date(params['startDate']) : null;
+          const endDate = params['endDate'] ? new Date(params['endDate']) : null;
+          const guests = parseInt(params['guests'], 10) || 0;
+          const rooms = parseInt(params['rooms'], 10) || 0;
+          const pets = params['pets'] === 'true';
 
-  ngOnInit()
-  {
-    this.loginForm = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(3)]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+          console.log('Query Params:', { streetAddress, city, country, startDate, endDate, guests, rooms, pets });
+
+          this.properties = this.filterProperties(
+            this.properties,
+            streetAddress,
+            city,
+            country,
+            startDate,
+            endDate,
+            guests,
+            rooms,
+            pets
+          );
+
+          console.log('Filtered Properties:', this.properties);
+        });
+      },
+      (error) => {
+        console.error("Error fetching properties:", error);
+      }
+    );
+  }
+
+  private filterProperties(
+    properties: any[],
+    streetAddress: string | undefined,
+    city: string | undefined,
+    country: string | undefined,
+    startDate: Date | null,
+    endDate: Date | null,
+    guests: number,
+    rooms: number,
+    pets: boolean
+  ): any[] {
+    return properties.filter(property => {
+      const matchesStreetAddress = streetAddress
+        ? (property.streetAddress || '').toLowerCase().includes(streetAddress)
+        : true;
+
+      const matchesCity = city
+        ? (property.city || '').toLowerCase().includes(city)
+        : true;
+
+      const matchesCountry = country
+        ? (property.country || '').toLowerCase().includes(country)
+        : true;
+
+      const matchesGuests = guests > 0
+        ? (property.guests || 0) >= guests
+        : true;
+
+      const matchesRooms = rooms > 0
+        ? (property.bedrooms || 0) >= rooms
+        : true;
+
+      const matchesPets = pets
+        ? property.petsAllowed === true 
+        : true;
+
+      const matchesDates = startDate && endDate
+        ? (new Date(property.availableFrom) <= startDate && new Date(property.availableTo) >= endDate)
+        : true;
+
+      // return (
+      //   matchesStreetAddress &&
+      //   matchesCity &&
+      //   matchesCountry &&
+      //   matchesGuests &&
+      //   matchesRooms &&
+      //   matchesPets &&
+      //   matchesDates
+      // );
+      return (
+        matchesStreetAddress ||
+        matchesCity ||
+        matchesCountry ||
+        matchesGuests ||
+        matchesRooms ||
+        matchesPets ||
+        matchesDates
+      );
     });
   }
-
-
-  get username() {
-    return this.loginForm.get('username');
-  }
-
-  get password() {
-    return this.loginForm.get('password');
-  }
-  
-  onSubmit() {
-    if (this.loginForm.valid) {
-      console.log('Form Submitted!', this.loginForm.value);
-    }
-  }
-
-
-
-  selectedSize="";
-  sizes = [
-    { value: 'all', label: 'All Sizes' },
-    { value: 'entire-home', label: 'Entire Home (11)' },
-    { value: 'private-room', label: 'Private Room (4)' },
-    { value: 'shared-room', label: 'Shared Room (5)' }
-  ];
-
-
-  selectedCategory="";
-
-  categories = [
-    { value: 'all', label: 'All Types' },
-    { value: 'apartment', label: 'Apartment (4)' },
-    { value: 'bungalow', label: 'Bungalow (3)' },
-    { value: 'cabin', label: 'Cabin (2)' },
-    { value: 'condos', label: 'Condos (4)' },
-    { value: 'house', label: 'House (2)' },
-    { value: 'loft', label: 'Loft (3)' },
-    { value: 'villa', label: 'Villa (2)' }
-  ];
-
-
-  selectedCity="";
-  cities = [
-    { value: 'all', label: 'All Cities' },
-    { value: 'paphos', label: 'Paphos (20)' }
-  ];
-
-
-  selectedArea="";
-
-  areas = [
-    { value: 'all', label: 'All Areas' },
-    { value: 'geroskipou', label: 'Geroskipou (3)' },
-    { value: 'kato-paphos', label: 'Kato Paphos (4)' },
-    { value: 'ktima', label: 'Ktima (1)' },
-    { value: 'paphos-town', label: 'Paphos Town (4)' },
-    { value: 'pegeia', label: 'Pegeia (4)' },
-    { value: 'polis-chrysochous', label: 'Polis Chrysochous (4)' }
-  ];
-
-  selectedOrder="";
-
-  sortOrders = [
-    { value: '1', label: 'Price High to Low' },
-    { value: '2', label: 'Price Low to High' },
-    { value: '3', label: 'Newest first' },
-    { value: '4', label: 'Oldest first' },
-    { value: '11', label: 'Newest Edited' },
-    { value: '12', label: 'Oldest Edited' },
-    { value: '5', label: 'Bedrooms High to Low' },
-    { value: '6', label: 'Bedrooms Low to High' },
-    { value: '7', label: 'Bathrooms High to Low' },
-    { value: '8', label: 'Bathrooms Low to High' },
-    { value: '0', label: 'Default' }
-  ];
-
 }

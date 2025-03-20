@@ -13,15 +13,16 @@ import { SignupComponent } from '../signup/signup.component';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   hide = true;
-  error = ""
+  error = "";
 
-
-  constructor(private fb: FormBuilder ,private authService: AuthenticationService,
-    private router: Router , private dialog : MatDialog) {
-
-
-    this.authService.logout();
-    }
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthenticationService,
+    private router: Router,
+    private dialog: MatDialog
+  ) {
+    this.authService.logout(); 
+  }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -35,15 +36,12 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.loginForm.value)
         .then((user) => {
           console.log('Login successful:', user);
-          this.router.navigate(['/property-owner']); 
           this.dialog.closeAll();
+          
         })
         .catch((error) => {
-          console.log("failed login =>" +error);
-      this.error = "Invalid username or password"
-          
-      
-          
+          console.log("Failed login =>", error);
+          this.error = error; 
         });
     }
   }
@@ -52,20 +50,14 @@ export class LoginComponent implements OnInit {
     this.hide = !this.hide;
   }
 
-  onSignUp(): void {
-    
+  openSingupDialog() {
+    this.dialog.closeAll();
+    this.dialog.open(SignupComponent, {
+      width: '600px',
+      height: "800px",
+      data: { title: 'Signup', Component: SignupComponent }
+    });
   }
 
   onForgotPassword(): void {}
-
-  openSingupDialog(){
-    this.dialog.closeAll();
-    this.dialog.open(SignupComponent,{
-
-      width: '600px',
-      height: "800px",
-      data: { title: 'Signup', Component:SignupComponent}
-    })
-  }
-    
 }
