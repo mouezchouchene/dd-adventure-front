@@ -77,6 +77,16 @@ export class AuthenticationService {
     return null;
   }
 
+  getUserId(): string | null {
+    const token = this.getToken();
+    if (token) {
+      const decoded = this.decodeToken(token);
+      console.log("Decoded token Username:", decoded?.userId);
+      return decoded?.userId || null; 
+    }
+    return null;
+  }
+
 
   private redirectUserBasedOnRole(role: string): void {
     // Map JWT roles to routing roles

@@ -136,22 +136,32 @@ export class AddListingComponent {
   sevenFormGroup = this.fB.group({
     country: ['', Validators.required],
     streetAddress: ['', Validators.required],
-    aptFloorBldg: [''],
+    aptFloorBldg: ['',Validators.required],
     city: ['', Validators.required],
-    provinceState: [''],
-    postalCode: ['']
+    provinceState: ['',Validators.required],
+    postalCode: ['',Validators.required]
   });
+
   eightFormGroup: FormGroup<{
-    guests: FormControl<number>;
-    bedrooms: FormControl<number>;
-    beds: FormControl<number>;
-    bathrooms: FormControl<number>;
-  }> = this.fB.group({
-    guests: new FormControl<number>(2, { nonNullable: true, validators: Validators.required }),
-    bedrooms: new FormControl<number>(1, { nonNullable: true, validators: Validators.required }),
-    beds: new FormControl<number>(1, { nonNullable: true, validators: Validators.required }),
-    bathrooms: new FormControl<number>(1, { nonNullable: true, validators: Validators.required })
-  });
+  guests: FormControl<number>;
+  bedrooms: FormControl<number>;
+  beds: FormControl<number>;
+  bathrooms: FormControl<number>;
+  adult: FormControl<number>;      
+  children: FormControl<number>;   
+  rooms: FormControl<number>;      
+  havePets: FormControl<boolean>;  
+}> = this.fB.group({
+  guests: new FormControl<number>(2, { nonNullable: true, validators: Validators.required }),
+  bedrooms: new FormControl<number>(1, { nonNullable: true, validators: Validators.required }),
+  beds: new FormControl<number>(1, { nonNullable: true, validators: Validators.required }),
+  bathrooms: new FormControl<number>(1, { nonNullable: true, validators: Validators.required }),
+  adult: new FormControl<number>(1, { nonNullable: true, validators: Validators.required }),      
+  children: new FormControl<number>(0, { nonNullable: true, validators: Validators.required }),   
+  rooms: new FormControl<number>(1, { nonNullable: true, validators: Validators.required }),      
+  havePets: new FormControl<boolean>(false, { nonNullable: true })                               
+});
+
   tenFormGroup = this.fB.group({
     wifi: [false], tv: [false], kitchen: [false], washer: [false], freeParking: [false], paidParking: [false],
     airConditioning: [false], Dedicatedworkspace: [false], pool: [false], hotTub: [false], patio: [false],
@@ -302,6 +312,8 @@ export class AddListingComponent {
       streetAddress: this.sevenFormGroup.get('streetAddress')?.value,
       aptFloorBldg: this.sevenFormGroup.get('aptFloorBldg')?.value || '',
       city: this.sevenFormGroup.get('city')?.value,
+      provinceState: this.sevenFormGroup.get('provinceState')?.value, 
+      postalCode: this.sevenFormGroup.get('postalCode')?.value,       
       title: this.twelveFormGroup.get('title')?.value,
       description: this.fourteenFormGroup.get('description')?.value,
       bookingOption: this.sixteenFormGroup.get('bookingOption')?.value,
@@ -352,7 +364,11 @@ export class AddListingComponent {
       guests: this.eightFormGroup.get('guests')?.value,
       bedrooms: this.eightFormGroup.get('bedrooms')?.value,
       beds: this.eightFormGroup.get('beds')?.value,
-      bathrooms: this.eightFormGroup.get('bathrooms')?.value
+      bathrooms: this.eightFormGroup.get('bathrooms')?.value,
+      adult: this.eightFormGroup.get('adult')?.value,         
+      children: this.eightFormGroup.get('children')?.value,   
+      rooms: this.eightFormGroup.get('rooms')?.value,         
+      havePets: this.eightFormGroup.get('havePets')?.value    
     };
 
     const images = this.images.map(image => this.dataURLtoFile(image.imageUrl, `image_${Date.now()}.png`));
