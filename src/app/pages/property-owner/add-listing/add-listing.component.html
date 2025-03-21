@@ -278,7 +278,7 @@
                       <div class="row justify-content-center my-5 w-100 step-body">
                         <div class="body-content justify-content-center w-100">
                           <h2 class="title-form-2">How many guests can stay?</h2>
-                          <p class="desc-form-2 mb-5">Set the capacity for your place.</p>
+                          <p class="desc-form-2 mb-5">Set the capacity and details for your place.</p>
                           <div class="form-conent w-50 justify-content-center d-flex flex-column">
                             <div class="item mb-2">
                               <span>Guests</span>
@@ -286,6 +286,30 @@
                                 <button type="button" (click)="decrement('guests', eightFormGroup)" [disabled]="eightFormGroup.get('guests')!.value <= 1">-</button>
                                 <span>{{ eightFormGroup.get('guests')?.value }}</span>
                                 <button type="button" (click)="increment('guests', eightFormGroup)">+</button>
+                              </div>
+                            </div>
+                            <div class="item mb-2">
+                              <span>Adults</span>
+                              <div class="btn-group">
+                                <button type="button" (click)="decrement('adult', eightFormGroup)" [disabled]="eightFormGroup.get('adult')!.value <= 1">-</button>
+                                <span>{{ eightFormGroup.get('adult')?.value }}</span>
+                                <button type="button" (click)="increment('adult', eightFormGroup)">+</button>
+                              </div>
+                            </div>
+                            <div class="item mb-2">
+                              <span>Children</span>
+                              <div class="btn-group">
+                                <button type="button" (click)="decrement('children', eightFormGroup)" [disabled]="eightFormGroup.get('children')!.value <= 0">-</button>
+                                <span>{{ eightFormGroup.get('children')?.value }}</span>
+                                <button type="button" (click)="increment('children', eightFormGroup)">+</button>
+                              </div>
+                            </div>
+                            <div class="item mb-2">
+                              <span>Rooms</span>
+                              <div class="btn-group">
+                                <button type="button" (click)="decrement('rooms', eightFormGroup)" [disabled]="eightFormGroup.get('rooms')!.value <= 1">-</button>
+                                <span>{{ eightFormGroup.get('rooms')?.value }}</span>
+                                <button type="button" (click)="increment('rooms', eightFormGroup)">+</button>
                               </div>
                             </div>
                             <div class="item mb-2">
@@ -311,6 +335,10 @@
                                 <span>{{ eightFormGroup.get('bathrooms')?.value }}</span>
                                 <button type="button" (click)="increment('bathrooms', eightFormGroup)">+</button>
                               </div>
+                            </div>
+                            <div class="item mb-2">
+                              <span>Pets</span>
+                              <mat-checkbox formControlName="havePets" color="primary"></mat-checkbox>
                             </div>
                           </div>
                         </div>

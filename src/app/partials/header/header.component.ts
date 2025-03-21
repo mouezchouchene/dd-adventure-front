@@ -62,30 +62,5 @@ export class HeaderComponent {
     this.isDropdownOpen = false;
   }
 
-  // getDropdownMenuItems() {
-  //   const role = this.authService.getUserRole();
-  //   if (role === 'property-owner') {
-  //     return [
-  //       { link: '/property-owner/dashboard', icon: 'fa-tachometer', label: 'Dashboard' },
-  //       { link: '/property-owner/my-profile', icon: 'fa-user', label: 'My Profile' },
-  //       { link: '/property-owner/my-listings', icon: 'fa-map-marker', label: 'My Listings' },
-  //       { link: '/property-owner/add-new-listing', icon: 'fa-calendar', label: 'Add New Listing' },
-  //       { link: '/property-owner/favorites', icon: 'fa-heart', label: 'Favorites' },
-  //       { link: '/property-owner/my-reservations', icon: 'fa-folder-open', label: 'Reservations' },
-  //       { link: '/property-owner/my-bookings', icon: 'fa-folder-open', label: 'Bookings' },
-  //       { link: '/property-owner/my-reviews', icon: 'fa-bar-chart', label: 'My Reviews' },
-  //       { link: '/logout', icon: 'fa-sign-out', label: 'Log Out' },
-  //     ];
-  //   } else if (role === 'booking-property') {
-  //     return [
-  //       { link: '/booking-property/my-profile', icon: 'fa-user', label: 'My Profile' },
-  //       { link: '/booking-property/favorites', icon: 'fa-heart', label: 'Favorites' },
-  //       { link: '/booking-property/my-reservations', icon: 'fa-folder-open', label: 'Reservations' },
-  //       { link: '/booking-property/my-inbox', icon: 'fa-bar-chart', label: 'My Inbox' },
-  //       { link: '/logout', icon: 'fa-sign-out', label: 'Log Out' },
-  //     ];
-  //   }
-  //   return [];
-  // }
-
+  
 }

@@ -55,7 +55,7 @@
             </span>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="user_menu_trigger" [class.show]="isDropdownOpen">
               <div class="row">
-                <ng-container *ngIf="authService.getUserRole() === 'property-owner'; else bookingPropertyMenu">
+                <ng-container *ngIf="authService.getUserRole() === 'ROLE_PROPERTY_OWNER'; else bookingPropertyMenu">
                   <a class="dropdown-item" routerLink="/property-owner/dashboard"><i class="fa fa-tachometer"></i> Dashboard</a>
                   <a class="dropdown-item" routerLink="/property-owner/my-profile"><i class="fa fa-user"></i>My Profile</a>
                   <a class="dropdown-item" routerLink="/property-owner/my-listings"><i class="fa fa-map-marker"></i>My Listings</a>
