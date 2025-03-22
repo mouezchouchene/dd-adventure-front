@@ -43,6 +43,9 @@ import { CountriesServiceService } from './services/countries/countries-service.
 import { NgxSpinnerModule } from "ngx-spinner";
 import { LightgalleryModule} from 'lightgallery/angular';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { SearchBarComponent } from './shared/components/search-bar/search-bar.component';
+import { RouterModule } from '@angular/router';
+import { DateService } from './services/date.service';
 
 
 
@@ -67,6 +70,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     PropertyDetailsComponent,
     ListingsComponent,
     CountryPipe,
+    SearchBarComponent,
     
   ],
   imports: [
@@ -83,7 +87,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     MatDatepickerModule,MatNativeDateModule,MatCardModule,MatDividerModule,
     NgxSpinnerModule,
     FormsModule,
-    LightgalleryModule
+    LightgalleryModule,
+    RouterModule.forRoot([])
 
   ],
   
@@ -92,7 +97,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
   ],
   
   providers: [LoginComponent,CountriesServiceService,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    DateService
     
   ],
   bootstrap: [AppComponent],

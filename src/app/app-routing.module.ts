@@ -50,11 +50,11 @@ const routes: Routes = [
     component: BlogComponent,
     
   },
-  {
-    path: 'properties',
-    component: PropertiesComponent,
+  // {
+  //   path: 'properties',
+  //   component: PropertiesComponent,
     
-  },
+  // },
   {
     path: 'properties/:id/property-details',
     component: PropertyDetailsComponent,

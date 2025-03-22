@@ -1,0 +1,116 @@
+
+
+<div class="row input-group d-sm-inline d-md-flex justify-content-sm-start justify-content-md-around py-sm-3 py-md-0">
+    <!-- Destination Input -->
+    <div class="col-sm-12 col-md-6 col-lg-3 p-md-0 position-relative">
+      <mat-form-field appearance="fill" class="form-field white-bg-input w-100">
+        <mat-label>Where are you going</mat-label>
+        <input matInput [formControl]="searchControl" required />
+        <mat-icon matPrefix>place</mat-icon>
+      </mat-form-field>
+      <div *ngIf="filteredDestinations.length > 0" class="list-group shadow" style="position: absolute; z-index: 1000; width: 100%;">
+        <a *ngFor="let destination of filteredDestinations" class="list-group-item list-group-item-action" (click)="selectDestination(destination)">
+          <div class="d-flex align-items-start">
+            <mat-icon class="me-2">location_on</mat-icon>
+            <div>
+              <h6 class="mb-0">{{ destination.streetAddress }}</h6>
+              <small class="text-muted">{{ destination.city }}</small> <br>
+              <small class="text-muted text-uppercase font-weight-bold">{{ destination.country }}</small>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div *ngIf="filteredDestinations.length === 0 && searchControl.value && !destinationSelected" class="list-group shadow" style="position: absolute; z-index: 1000; width: 100%;">
+        <div class="list-group-item text-muted">No Destinations</div>
+      </div>
+    </div>
+  
+    <!-- Start Date Input -->
+    <div class="col-sm-12 col-md-6 col-lg-2 p-md-0">
+      <mat-form-field appearance="fill" class="form-field white-bg-input w-100">
+        <mat-label>Start Date</mat-label>
+        <input matInput [matDatepicker]="startPicker" [matDatepickerFilter]="myDateFilter" [(ngModel)]="startDate" (ngModelChange)="updateEndDate()" required>
+        <mat-datepicker-toggle matPrefix [for]="startPicker"></mat-datepicker-toggle>
+        <mat-datepicker #startPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  
+    <!-- End Date Input -->
+    <div class="col-sm-12 col-md-6 col-lg-2 p-md-0">
+      <mat-form-field appearance="fill" class="form-field white-bg-input w-100">
+        <mat-label>End Date</mat-label>
+        <input matInput [matDatepicker]="endPicker" [matDatepickerFilter]="endDateFilter" [(ngModel)]="endDate" required>
+        <mat-datepicker-toggle matPrefix [for]="endPicker"></mat-datepicker-toggle>
+        <mat-datepicker #endPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  
+    <!-- Guests Input -->
+    <div class="col-xm-12 col-md-6 col-lg-4 p-md-0 mb-sm-2">
+      <mat-form-field appearance="fill" class="form-field white-bg-input w-100">
+        <mat-label>Add Guests</mat-label>
+        <input matInput type="text" [value]="adults + ' adults, ' + children + ' children, ' + rooms + ' rooms'" (focus)="toggleGuestsModal()" readonly required>
+        <mat-icon matPrefix>people</mat-icon>
+      </mat-form-field>
+  
+      <!-- Guests Modal -->
+      <div class="guests-modal" *ngIf="isGuestsModalOpen" style="
+        position: absolute;
+        top: 100%;
+        right: 0px;
+        z-index: 1000;
+        background-color: white;
+        padding: 10px;
+        border: 1px solid #ccc;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        width: 85%;
+      ">
+        <!-- Adults -->
+        <div class="d-flex align-items-center justify-content-between item-guest">
+          <span>Adults</span>
+          <div class="d-flex align-items-center">
+            <button class="btn btn-sm btn-outline-secondary" (click)="adults = adults > 1 ? adults - 1 : 1">-</button>
+            <span class="mx-2">{{ adults }}</span>
+            <button class="btn btn-sm btn-outline-secondary" (click)="adults = adults + 1">+</button>
+          </div>
+        </div>
+  
+        <!-- Children -->
+        <div class="d-flex align-items-center justify-content-between item-guest">
+          <span>Children</span>
+          <div class="d-flex align-items-center">
+            <button class="btn btn-sm btn-outline-secondary" (click)="children = children > 0 ? children - 1 : 0">-</button>
+            <span class="mx-2">{{ children }}</span>
+            <button class="btn btn-sm btn-outline-secondary" (click)="children = children + 1">+</button>
+          </div>
+        </div>
+  
+        <!-- Rooms -->
+        <div class="d-flex align-items-center justify-content-between item-guest">
+          <span>Rooms</span>
+          <div class="d-flex align-items-center">
+            <button class="btn btn-sm btn-outline-secondary" (click)="rooms = rooms > 1 ? rooms - 1 : 1">-</button>
+            <span class="mx-2">{{ rooms }}</span>
+            <button class="btn btn-sm btn-outline-secondary" (click)="rooms = rooms + 1">+</button>
+          </div>
+        </div>
+  
+        <!-- Pets -->
+        <div class="form-check mt-2">
+          <input type="checkbox" class="form-check-input" id="petsCheck" [(ngModel)]="pets">
+          <label class="form-check-label" for="petsCheck">Travelling with pets?</label>
+        </div>
+  
+        <div class="d-flex justify-content-end mt-2">
+          <button class="btn btn-primary done-geusts" (click)="updateGuests()">Done</button>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Search Button -->
+    <div class="p-md-0 block-search-button">
+      <button class="btn" (click)="onSearch()">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+  </div>

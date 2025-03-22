@@ -44,4 +44,22 @@ export class PropertiesListingsService {
     return this.httpClient.post<any>(BASE_URL + "listings", listingData);
   }
 
+  searchProperties(searchParams: any) {
+   
+
+    const body = {
+      streetAddress: searchParams.streetAddress || '',
+      adult: parseInt(searchParams.adults, 10) || 0,
+      children: parseInt(searchParams.children, 10) || 0,
+      rooms: parseInt(searchParams.rooms, 10) || 0,
+      havePets: searchParams.pets || "false",
+      checkInDate: searchParams.startDate || '',
+      checkOutDate: searchParams.endDate || ''
+    };
+
+    return this.httpClient.post<any[]>(`${BASE_URL}properties/search`, body);
+  }
+
+
+
 }
