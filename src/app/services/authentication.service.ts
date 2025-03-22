@@ -25,7 +25,7 @@ export class AuthenticationService {
             this.saveToken(token);
             const decodedToken = this.decodeToken(token);
             this.redirectUserBasedOnRole(decodedToken.role);
-            return decodedToken; // Return decoded token details
+            return decodedToken; 
           } else {
             throw new Error("No JWT received");
           }
@@ -48,9 +48,9 @@ export class AuthenticationService {
 
   private decodeToken(token: string): any {
     try {
-      const payload = token.split('.')[1]; // Get payload part of JWT
-      const decoded = atob(payload); // Decode base64
-      return JSON.parse(decoded); // Parse JSON
+      const payload = token.split('.')[1]; 
+      const decoded = atob(payload); 
+      return JSON.parse(decoded); 
     } catch (e) {
       console.error('Error decoding token:', e);
       return null;
@@ -61,8 +61,7 @@ export class AuthenticationService {
     const token = this.getToken();
     if (token) {
       const decoded = this.decodeToken(token);
-      console.log("Decoded token role:", decoded?.role);
-      return decoded?.role || null; // e.g., "ROLE_PROPERTY_OWNER"
+      return decoded?.role || null; 
     }
     return null;
   }
@@ -71,7 +70,6 @@ export class AuthenticationService {
     const token = this.getToken();
     if (token) {
       const decoded = this.decodeToken(token);
-      console.log("Decoded token Username:", decoded?.sub);
       return decoded?.sub || null; 
     }
     return null;
@@ -81,7 +79,6 @@ export class AuthenticationService {
     const token = this.getToken();
     if (token) {
       const decoded = this.decodeToken(token);
-      console.log("Decoded token Username:", decoded?.userId);
       return decoded?.userId || null; 
     }
     return null;

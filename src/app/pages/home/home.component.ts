@@ -60,6 +60,11 @@ export class HomeComponent {
     );
   }
 
+  onSearchPerformed(queryParams: any) {
+    console.log('Search performed with params:', queryParams);
+    // Optionally handle the search params here instead of relying solely on router navigation
+  }
+
   myDateFilter = (d: Date | null): boolean => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
