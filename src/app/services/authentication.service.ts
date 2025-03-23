@@ -2,8 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { map, catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { RegisterRequest } from '../models/register-request';
+import { RegisterResponse } from '../models/register-response';
 
 const BASE_URL = environment.apiUrl + "auth/";
 
@@ -37,6 +39,43 @@ export class AuthenticationService {
       )
       .toPromise();
   }
+
+
+
+  register(userData: RegisterRequest): Observable<RegisterResponse> {
+    const url = `${BASE_URL}register`;
+    
+    return this.http.post<RegisterResponse>(url, userData).pipe(
+      map(response => {
+        if (!response?.id || !response?.username) {
+          throw new Error('Invalid registration response');
+        }
+        return {
+          id: response.id,
+          username: response.username,
+          email: response.email,
+          phoneNumber: response.phoneNumber,
+          role: response.role
+        };
+      }),
+      catchError(error => {
+        let errorMessage = 'Registration failed';
+        if (error.status === 400) {
+          errorMessage = error.error?.message || 'Invalid registration data';
+        } else if (error.status === 409) {
+          errorMessage = 'Username or email already exists';
+        }
+        
+        console.error('Registration error:', error);
+        return throwError(() => new Error(errorMessage));
+      })
+    );
+  }
+
+
+
+
+
 
   private saveToken(token: string): void {
     localStorage.setItem(this.tokenKey, token);
