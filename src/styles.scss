@@ -39,37 +39,38 @@
 
 
 
-
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
 
 
 @font-face {
-    font-family: 'Lato Regular'; 
+    font-family: 'Lato Regular';
     src: url(assets/font/Lato/Lato-Regular.ttf) format('opentype');
   }
 
   @font-face {
-    font-family: 'montserrat'; 
+    font-family: 'montserrat';
     src: url(assets/font/montserrat/Montserrat-Medium.otf) format('opentype');
   }
 
   @font-face {
-    font-family: 'Karma Regular'; 
+    font-family: 'Karma Regular';
     src: url(assets/font/Karma/Karma-Regular.ttf) format('opentype');
   }
 
 
 
-  body { 
+  body {
 
     margin: 0;
     height: 100%;
-    height: 100%; 
+    height: 100%;
     font-family: 'Lato Regular', 'montserrat', 'Karma Regular', sans-serif;
 }
 
 :root {
     --primary-color: #B97F24 ;
-    --secondary-color: #BF9553; 
+    --secondary-color: #BF9553;
     --white-color : #cdc7d9;
 
     --dark-purple:#591558;

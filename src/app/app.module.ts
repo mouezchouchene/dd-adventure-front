@@ -46,6 +46,10 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { SearchBarComponent } from './shared/components/search-bar/search-bar.component';
 import { RouterModule } from '@angular/router';
 import { DateService } from './services/date.service';
+import { ConfirmationDialogComponent } from './shared/components/confirmation-dialog/confirmation-dialog.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { MatSliderModule } from '@angular/material/slider';
+import { SideBarFilterSearchComponent } from './shared/components/side-bar-filter-search/side-bar-filter-search.component';
 
 
 
@@ -71,7 +75,9 @@ import { DateService } from './services/date.service';
     ListingsComponent,
     CountryPipe,
     SearchBarComponent,
-    
+    ConfirmationDialogComponent,
+    SideBarFilterSearchComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -88,18 +94,21 @@ import { DateService } from './services/date.service';
     NgxSpinnerModule,
     FormsModule,
     LightgalleryModule,
+
+    CarouselModule,
+    MatSliderModule,
     RouterModule.forRoot([])
 
   ],
-  
+
   exports:[
     CountryPipe
   ],
-  
+
   providers: [LoginComponent,CountriesServiceService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     DateService
-    
+
   ],
   bootstrap: [AppComponent],
 

@@ -32,6 +32,7 @@
     "leaflet": "^1.9.4",
     "lightgallery": "^2.8.2",
     "ng2-charts": "^5.0.4",
+    "ngx-owl-carousel-o": "^16.0.0",
     "ngx-spinner": "^16.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

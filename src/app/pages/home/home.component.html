@@ -3,46 +3,26 @@
   <app-search-bar></app-search-bar>
 
 
-  <!-- Navigation Pills -->
+  <!-- Navigation propertyTypes -->
+
   <div class="col-12 mb-4 mt-5">
-    <nav class="nav nav-pills d-flex ">
-        <a class="nav-item nav-link shadow-sm p-3 mb-5 bg-white rounded" (click)="filterByPlaceType('Apartments')">
-            <mat-icon>home</mat-icon> Apartments
-        </a>
-        <a class="nav-item nav-link shadow-sm p-3 mb-5 bg-white rounded"  (click)="filterByPlaceType('Bungalows')">
-            <mat-icon>beach_access</mat-icon> Bungalows
-        </a>
-        <a class="nav-item nav-link shadow-sm p-3 mb-5 bg-white rounded"  (click)="filterByPlaceType('Cabins')">
-            <mat-icon>cabin</mat-icon> Cabins
-        </a>
-        <a class="nav-item nav-link shadow-sm p-3 mb-5 bg-white rounded"  (click)="filterByPlaceType('Condos')">
-            <mat-icon>domain</mat-icon> Condos
-        </a>
-        <a class="nav-item nav-link shadow-sm p-3 mb-5 bg-white rounded"  (click)="filterByPlaceType('Villas')">
-            <mat-icon>villa</mat-icon> Villas
-        </a>
-        <a class="nav-item nav-link shadow-sm p-3 mb-5 bg-white rounded"  (click)="filterByPlaceType('Loft Rooms')">
-            <mat-icon>other_houses</mat-icon> Loft Rooms
-        </a>
-        <a class="nav-item nav-link shadow-sm p-3 mb-5 bg-white rounded"  (click)="filterByPlaceType('Entire Home')">
-            <mat-icon>house</mat-icon> Entire Home
-        </a>
-        <a class="nav-item nav-link shadow-sm p-3 mb-5 bg-white rounded"  (click)="filterByPlaceType('Private Room')">
-            <mat-icon>bed</mat-icon> Private Room
-        </a>
-          <a class="nav-item nav-link shadow-sm p-3 mb-5 bg-white rounded" (click)="filterByPlaceType('Beachfront')">
-        <mat-icon>beach_access</mat-icon>
-        Beachfront
-      </a>
-      <a class="nav-item nav-link shadow-sm p-3 mb-5 bg-white rounded" (click)="filterByPlaceType('With Pool')">
-        <mat-icon>pool</mat-icon> With Pool
-      </a>
-    </nav>
+    <owl-carousel-o [options]="carouselOptions">
+      <ng-container *ngFor="let type of propertyTypes">
+        <ng-template carouselSlide>
+          <a class="btn shadow-sm carousel-item-link p-3 bg-white rounded d-flex flex-column  align-items-center justify-content-center"
+             (click)="filterByPlaceType(type.name)">
+            <mat-icon>{{type.icon}}</mat-icon>
+            <span class="carousel-item-text">{{type.name}}</span>
+          </a>
+        </ng-template>
+      </ng-container>
+    </owl-carousel-o>
   </div>
 
 
- 
-  
+
+
+
 </div>
 
 <div class="container-fluid mt-5 px-md-5 list-properties">
@@ -54,8 +34,8 @@
     <div class="col-sm-6 col-md-4 mb-4" *ngFor="let property of properties">
       <div class="card">
         <a [routerLink]="['/properties', property.id, 'property-details']">
-                        
-             <img [src]="property.images ? property.images[0].imageUrl: 'assets/images/Condos.png'" class="card-img-top" alt="Listing Image"> 
+
+             <img [src]="property.images ? property.images[0].imageUrl: 'assets/images/Condos.png'" class="card-img-top" alt="Listing Image">
 
         </a>
         <div class="card-body">
@@ -83,9 +63,9 @@
       </div>
     </div>
 
-    
 
- 
+
+
   </div>
 
 
