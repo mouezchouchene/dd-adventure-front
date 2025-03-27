@@ -12,20 +12,20 @@
   .listings {
 
     margin-top: 150px;
- 
 
-    
+
+
         div{
             nav{
                 ol{
-    
+
                     li:first-child{
                         a{
                             color: var(--primary-color) !important;
                         }
-                       
+
                     }
-    
+
                 }
             }
         }
@@ -37,7 +37,7 @@
             }
 
         }
-    
+
     }
 
 
@@ -47,7 +47,7 @@
           max-width: 50%;
       }
   }
-  
+
 
   .list-properties{
     .card-img-top {
@@ -55,7 +55,7 @@
         height: 300px;
         object-fit: cover;
       }
-      
+
       .badge-success {
         background-color: var(--primary-color) !important;
         color: white;
@@ -67,7 +67,7 @@
             }
         }
       }
-      
+
 }
 
 .favorites-features{
@@ -80,7 +80,7 @@
 .prices-stars{
   color:var(--primary-color) !important;
 
-  
+
 }
 .property-owner{
   position: absolute;
@@ -97,7 +97,7 @@
     -o-border-radius: 50%;
     border: 1px solid var(--primary-color) !important;
 }
-  
+
 }
 
 .card{
@@ -122,7 +122,7 @@
 .book-vacation
 {
   .vacation-title{
-    
+
     font-size: 27px;
     font-weight: 500;
     line-height: 1.25em;
@@ -165,7 +165,7 @@
     margin-left: 0;
     .col-sm-12 {
       flex: 0 0 100% !important;
-      
+
     }
 
     .block-search-button
@@ -185,37 +185,187 @@
         -moz-border-radius: 10px;
         -ms-border-radius: 10px;
         -o-border-radius: 10px;
-  
-  
+
+
         .mat-icon {
           font-size: 30px !important;
         }
   }
     }
 
-  
 
-    
-    
+
+
+
   }
 
 }
 
-/* Target the dropdown panel overlay */
 .cdk-overlay-pane {
-    min-width: 0; /* Prevents the minimum width constraint */
+    min-width: 0;
   }
-  
-  /* Ensure the dropdown has enough width to fit content */
+
   .mat-select-panel {
-    width: auto !important; /* Allows the width to fit the content */
-    max-width: 100vw; /* Ensures it doesn’t exceed viewport width */
+    width: auto !important;
+    max-width: 100vw;
   }
-  
-  /* Optional: Style for overflow handling */
+
+
   .mat-option {
-    white-space: nowrap; /* Prevents text from wrapping */
-    overflow: hidden; /* Hides overflow text */
-    text-overflow: ellipsis; /* Adds ellipsis for text overflow */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
-  
+
+
+
+
+
+  .properties-search-grid{
+
+    gap: 20px;
+
+
+  .property-search
+  {
+    padding: 0px !important
+  }
+  }
+
+  @media only screen and (min-width: 1024px){
+
+    .properties-search-grid{
+
+      gap: 20px;
+
+      .col-md-4 {
+        flex: 0 0 30.333333% !important;
+        max-width: 30.333333% !important;
+    }
+  }
+
+  }
+
+  @media only screen and (min-width: 768px) and (max-width: 1024px)  {
+
+
+    .properties-search-grid{
+
+
+
+      .col-md-4 {
+        flex: 0 0 45.333333% !important;
+        max-width: 48.333333% !important;
+    }
+  }
+
+
+
+}
+
+
+.dd-display-search{
+  background:#e9e9e9 !important;
+
+  gap: 5px;
+
+
+
+}
+
+
+.properties-search-list{
+  gap: 20px;
+  .card{
+    flex-direction: row;
+
+    a{
+      width: 35%;
+
+      img{
+
+        width: 100%;
+        object-fit: cover;
+    height: auto;
+
+      }
+    }
+    .card-body{
+      width: 65%;
+    }
+  }
+
+  .favorites-features{
+    position: absolute;
+    top: 10px;
+    width: 32%;
+    left: 20px;
+  }
+
+  .property-owner{
+    img{
+      width: 40px !important;
+      height: 40px !important;
+    }
+  }
+
+
+}
+
+
+.btn-viewMode {
+  &.active {
+    color: white;
+    border: 1px solid var(--primary-color) !important;
+
+    i {
+      color: var(--primary-color) !important;
+    }
+  }
+  &.focus{
+    box-shadow: 0 0 0 3px rgba(var(--primary-color), 0.4) !important;
+  }
+
+}
+
+
+@media only screen and (max-width: 767px){
+
+  .sidebar-filter{
+    display: none;
+  }
+}
+
+.sort-filter {
+  min-width: 250px;
+  margin-right: 15px;
+
+  ::ng-deep .mat-form-field-outline {
+    color: var(--primary-color);
+  }
+
+  ::ng-deep .mat-select-value,
+  ::ng-deep .mat-select-arrow {
+    color: var(--dark-color);
+  }
+
+  ::ng-deep .mat-form-field-label {
+    color: var(--dark-purple);
+    font-family: 'Lato Regular', sans-serif;
+  }
+
+  ::ng-deep .mat-select-panel {
+    background-color: var(--white-color);
+  }
+}
+
+.dd-display-search {
+  margin-left: 10px;
+}
+
+::ng-deep .mat-mdc-form-field-subscript-wrapper, .mat-mdc-form-field-bottom-align::before{
+  display: none !important;
+  height: 0px !important;
+}
+
+

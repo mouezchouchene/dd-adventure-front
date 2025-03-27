@@ -1,57 +1,151 @@
-<div class="container-fluid listings list-properties h-75" style="height: 70vh !important">
+<div class="container-fluid listings list-properties" style="min-height: 70vh !important">
   <div class="row mb-5">
     <div class="col-sm-12 col-md-12">
       <div class="row d-flex justify-content-center mb-5">
-        <!-- Search Bar Component with event binding -->
         <app-search-bar (searchPerformed)="onSearchPerformed($event)"></app-search-bar>
       </div>
 
-      <div class="row">
-        <div class="col-sm-12 col-md-3 bg-light">
-          <!-- Sidebar content if any -->
+      <div class="row search-container d-flex justify-content-around">
+        <!-- Sidebar Filter -->
+        <div class="col-sm-12 col-md-2">
+          <app-side-bar-filter-search
+            (filtersApplied)="applyFilters($event)"
+            (filtersCleared)="clearFilters()">
+          </app-side-bar-filter-search>
         </div>
-        <div class="col-sm-12 col-md-8">
+
+        <!-- Properties Display -->
+        <div class="col-sm-12 col-md-9">
           <div class="row">
-            <div class="card col-sm-12 col-md-8 col-lg-4 mb-3" *ngFor="let property of properties">
-              <a [routerLink]="['/properties', property.id, 'property-details']">
-                <img
-                  [src]="property.images ? property.images[0].imageUrl : './assets/images/Condos.png'"
-                  class="card-img-top"
-                  alt="Listing Image"
-                />
-              </a>
-              <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center mb-2 favorites-features">
-                  <span class="badge badge-success">Featured</span>
-                  <mat-icon>favorite</mat-icon>
-                </div>
-                <div class="property-owner">
-                  <a href="#">
-                    <img src="./assets/images/owner-man.jpg" alt="" width="50" />
+            <div class="sort-propoerties shadow-sm col-sm-12 col-md-12 d-flex justify-content-end p-3 mb-5 bg-white rounded mb-5">
+              <!-- Sort -->
+              <div class="sort-filter">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Sort by</mat-label>
+                  <mat-select [(ngModel)]="selectedSort" (selectionChange)="onSortChange()">
+                    <mat-option *ngFor="let option of sortOptions" [value]="option.value">
+                      {{ option.viewValue }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <!-- View Mode Toggle -->
+              <div class="d-flex justify-content-between rounded-pill p-2 dd-display-search">
+                <button class="btn btn-viewMode rounded-pill border border-dark bg-white text-dark"
+                  [class.active]="viewMode === 'list'" (click)="setViewMode('list')">
+                  <i class="fa fa-list" aria-hidden="true"></i>
+                </button>
+                <button class="btn btn-viewMode rounded-pill border border-dark bg-white text-dark"
+                  [class.active]="viewMode === 'grid'" (click)="setViewMode('grid')">
+                  <i class="bi bi-grid-3x3-gap"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grid View -->
+          <div *ngIf="viewMode === 'grid'">
+            <div class="row properties-search-grid">
+              <div class="shadow-sm col-sm-12 col-md-4 property-search" *ngFor="let property of filteredProperties">
+                <div class="card">
+                  <a [routerLink]="['/properties', property.id, 'property-details']">
+                    <img [src]="property.images ? property.images[0].imageUrl : './assets/images/Condos.png'"
+                      class="card-img-top" alt="Listing Image" />
                   </a>
-                </div>
-                <h3 class="card-title">{{ property.title ? property.title : '-------' }}</h3>
-                <p class="card-text">
-                  {{ property.place ? property.place : '-------' }} - {{ property.placeType ? property.placeType : '-------' }}
-                </p>
-                <p class="card-text">
-                  {{ property.guests ? property.guests : '0' }} Guests · {{ property.bedrooms ? property.bedrooms : '0' }} bedrooms · {{ property.bathrooms ? property.bathrooms : '0' }} bathrooms
-                </p>
-                <p class="card-text">
-                  <i class="fa fa-map-marker" aria-hidden="true"></i> {{ property.streetAddress ? property.streetAddress : '---' }} - {{ property.city ? property.city : '---' }} - {{ property.country ? property.country : '---' }}
-                </p>
-                <p class="card-text">
-                  <i class="fa fa-bed" aria-hidden="true"></i> X {{ property.bedrooms ? property.bedrooms : '0' }}
-                </p>
-                <div class="d-flex justify-content-between align-items-center prices-stars">
-                  <p class="mb-0">€ {{ property.price ? property.price : 0 }}/night</p>
-                  <div class="d-flex align-items-center">
-                    <mat-icon>star</mat-icon>
-                    <span>5.00</span>
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-2 favorites-features">
+                      <span class="badge badge-success">Featured</span>
+                      <mat-icon>favorite</mat-icon>
+                    </div>
+                    <div class="property-owner">
+                      <a href="#">
+                        <img src="./assets/images/owner-man.jpg" alt="" width="50" />
+                      </a>
+                    </div>
+                    <h3 class="card-title">{{ property.title ? property.title : '-------' }}</h3>
+                    <p class="card-text">
+                      {{ property.place ? property.place : '-------' }} - {{ property.placeType ? property.placeType : '-------' }}
+                    </p>
+                    <p class="card-text">
+                      {{ property.beds ? property.beds : '0' }} beds - {{ property.bedrooms ? property.bedrooms : '0' }}
+                      bedrooms - {{ property.bathrooms ? property.bathrooms : '0' }} bathrooms
+                    </p>
+                    <p class="card-text">
+                      <i class="fa fa-home" aria-hidden="true" title="rooms"></i> X {{ property.rooms ? property.rooms : '0' }}
+                      - <i class="fa fa-group" aria-hidden="true" title="children"></i> X {{ property.children ? property.children : '0' }}
+                      - <i class="fa fa-user" aria-hidden="true" title="adult"></i> X {{ property.adult ? property.adult : '0' }}
+                    </p>
+                    <p class="card-text">
+                      <i class="fa fa-map-marker" aria-hidden="true"></i> {{ property.streetAddress ? property.streetAddress : '---' }}
+                      - {{ property.city ? property.city : '---' }} - {{ property.country ? property.country : '---' }}
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center prices-stars">
+                      <p class="mb-0">€ {{ property.price ? property.price : 0 }}/night</p>
+                      <div class="d-flex align-items-center">
+                        <mat-icon>star</mat-icon>
+                        <span>{{ property.rating || '5.00' }}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+
+          <!-- List View -->
+          <div *ngIf="viewMode === 'list'">
+            <div class="row properties-search-list">
+              <div class="shadow-sm col-sm-12 property-search" *ngFor="let property of filteredProperties">
+                <div class="card">
+                  <a [routerLink]="['/properties', property.id, 'property-details']">
+                    <img [src]="property.images ? property.images[0].imageUrl : './assets/images/Condos.png'"
+                      class="card-img-top" alt="Listing Image" />
+                  </a>
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-2 favorites-features">
+                      <span class="badge badge-success">Featured</span>
+                      <mat-icon>favorite</mat-icon>
+                    </div>
+                    <div class="property-owner">
+                      <a href="#">
+                        <img src="./assets/images/owner-man.jpg" alt="" width="50" />
+                      </a>
+                    </div>
+                    <h3 class="card-title">{{ property.title ? property.title : '-------' }}</h3>
+                    <p class="card-text" style="font-weight: 500; font-size: 15px;">
+                      {{ property.description ? property.description : '-------' }}
+                    </p>
+                    <p class="card-text">
+                      {{ property.place ? property.place : '-------' }} - {{ property.placeType ? property.placeType : '-------' }}
+                    </p>
+                    <p class="card-text">
+                      {{ property.beds ? property.beds : '0' }} beds - {{ property.bedrooms ? property.bedrooms : '0' }}
+                      bedrooms - {{ property.bathrooms ? property.bathrooms : '0' }} bathrooms
+                    </p>
+                    <p class="card-text">
+                      <i class="fa fa-home" aria-hidden="true" title="rooms"></i> X {{ property.rooms ? property.rooms : '0' }}
+                      - <i class="fa fa-group" aria-hidden="true" title="children"></i> X {{ property.children ? property.children : '0' }}
+                      - <i class="fa fa-user" aria-hidden="true" title="adult"></i> X {{ property.adult ? property.adult : '0' }}
+                    </p>
+                    <p class="card-text">
+                      <i class="fa fa-map-marker" aria-hidden="true"></i> {{ property.streetAddress ? property.streetAddress : '---' }}
+                      - {{ property.city ? property.city : '---' }} - {{ property.country ? property.country : '---' }}
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center prices-stars">
+                      <p class="mb-0 txt-bl font-weight-bold">€ {{ property.price ? property.price : 0 }}/night</p>
+                      <div class="d-flex align-items-center">
+                        <mat-icon>star</mat-icon>
+                        <span>{{ property.rating || '5.00' }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="m-5">
+            <hr>
           </div>
         </div>
       </div>

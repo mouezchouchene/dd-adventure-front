@@ -20,11 +20,18 @@ export class HeaderComponent {
   @ViewChild('loginDialog', { static: false }) loginDialog!: ElementRef;
   @ViewChild('signupDialog', { static: false }) signupDialog!: ElementRef;
 
-  constructor(private elementRef: ElementRef , private dialog:MatDialog , 
+  constructor(private elementRef: ElementRef , private dialog:MatDialog ,
     private injector: Injector,
     public authService: AuthenticationService
-  
-  ) {}
+
+  ) {
+
+    this.authService.authState$.subscribe((loggedIn) => {
+      if (!loggedIn) {
+        this.closeDropdown();
+      }
+    });
+  }
 
 
 
@@ -35,10 +42,10 @@ export class HeaderComponent {
 
 
   openLoginDialog():void{
-    this.dialog.open(LoginComponent, {  
+    this.dialog.open(LoginComponent, {
       width: '600px',
       height: "800px",
-      data: { title: 'Login'} 
+      data: { title: 'Login'}
     })
   }
 
@@ -62,5 +69,10 @@ export class HeaderComponent {
     this.isDropdownOpen = false;
   }
 
-  
+  logout() {
+    this.authService.logout();
+    this.closeDropdown();
+  }
+
+
 }

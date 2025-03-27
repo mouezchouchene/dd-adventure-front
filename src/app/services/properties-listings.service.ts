@@ -25,6 +25,11 @@ export class PropertiesListingsService {
     return this.httpClient.get<any>(`${BASE_URL}properties/${id}`);
   }
 
+  deletePropertyById(id:string)
+  {
+    return this.httpClient.delete(`${BASE_URL}properties/${id}`);
+  }
+
 
   getFavoriteListings() {
     return this.httpClient.get<any[]>(BASE_URL + "listings").pipe(
@@ -45,7 +50,7 @@ export class PropertiesListingsService {
   }
 
   searchProperties(searchParams: any) {
-   
+
 
     const body = {
       streetAddress: searchParams.streetAddress || '',

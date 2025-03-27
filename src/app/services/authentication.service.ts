@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { map, catchError } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { RegisterRequest } from '../models/register-request';
 import { RegisterResponse } from '../models/register-response';
@@ -15,6 +15,9 @@ const BASE_URL = environment.apiUrl + "auth/";
 export class AuthenticationService {
   private tokenKey = 'jwtToken';
 
+  private authState = new BehaviorSubject<boolean>(this.isLoggedIn());
+  authState$ = this.authState.asObservable();
+
   constructor(private http: HttpClient, private router: Router) {}
 
   login(credentials: { username: string; password: string }): Promise<any> {
@@ -25,9 +28,10 @@ export class AuthenticationService {
           const token = response.jwt;
           if (token) {
             this.saveToken(token);
+            this.authState.next(true);
             const decodedToken = this.decodeToken(token);
             this.redirectUserBasedOnRole(decodedToken.role);
-            return decodedToken; 
+            return decodedToken;
           } else {
             throw new Error("No JWT received");
           }
@@ -44,7 +48,7 @@ export class AuthenticationService {
 
   register(userData: RegisterRequest): Observable<RegisterResponse> {
     const url = `${BASE_URL}register`;
-    
+
     return this.http.post<RegisterResponse>(url, userData).pipe(
       map(response => {
         if (!response?.id || !response?.username) {
@@ -65,7 +69,7 @@ export class AuthenticationService {
         } else if (error.status === 409) {
           errorMessage = 'Username or email already exists';
         }
-        
+
         console.error('Registration error:', error);
         return throwError(() => new Error(errorMessage));
       })
@@ -87,9 +91,9 @@ export class AuthenticationService {
 
   private decodeToken(token: string): any {
     try {
-      const payload = token.split('.')[1]; 
-      const decoded = atob(payload); 
-      return JSON.parse(decoded); 
+      const payload = token.split('.')[1];
+      const decoded = atob(payload);
+      return JSON.parse(decoded);
     } catch (e) {
       console.error('Error decoding token:', e);
       return null;
@@ -100,7 +104,7 @@ export class AuthenticationService {
     const token = this.getToken();
     if (token) {
       const decoded = this.decodeToken(token);
-      return decoded?.role || null; 
+      return decoded?.role || null;
     }
     return null;
   }
@@ -109,7 +113,7 @@ export class AuthenticationService {
     const token = this.getToken();
     if (token) {
       const decoded = this.decodeToken(token);
-      return decoded?.sub || null; 
+      return decoded?.sub || null;
     }
     return null;
   }
@@ -118,7 +122,7 @@ export class AuthenticationService {
     const token = this.getToken();
     if (token) {
       const decoded = this.decodeToken(token);
-      return decoded?.userId || null; 
+      return decoded?.userId || null;
     }
     return null;
   }
@@ -137,6 +141,7 @@ export class AuthenticationService {
 
   logout(): void {
     localStorage.removeItem(this.tokenKey);
+    this.authState.next(false);
     this.router.navigate(['/']);
   }
 

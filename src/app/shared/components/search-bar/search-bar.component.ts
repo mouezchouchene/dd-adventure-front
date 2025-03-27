@@ -69,27 +69,64 @@ export class SearchBarComponent implements OnInit {
   }
 
   private loadSearchValuesFromStorage() {
-    const storedSearch = localStorage.getItem('searchParams');
-    if (storedSearch) {
-      const params = JSON.parse(storedSearch);
-      this.destination = params.streetAddress || '';
-      this.selectedDestination = params.streetAddress
-        ? { streetAddress: params.streetAddress, city: params.city || '', country: params.country || '' }
-        : null;
-      this.startDate = params.startDate ? this.dateService.parseLocalDate(params.startDate) : null;
-      this.endDate = params.endDate ? this.dateService.parseLocalDate(params.endDate) : null;
-      this.guests = parseInt(params.guests, 10) || 0;
-      this.adults = parseInt(params.adults, 10) || 1;
-      this.children = parseInt(params.children, 10) || 0;
-      this.rooms = parseInt(params.rooms, 10) || 1;
-      this.pets = params.pets === 'true';
-      this.searchControl.setValue(this.destination);
+    // Get URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
 
-      if (this.destination) {
+    // Get stored search from localStorage
+    const storedSearch = localStorage.getItem('searchParams');
+    const localStorageParams = storedSearch ? JSON.parse(storedSearch) : {};
+
+    // Define default values
+    const defaults = {
+        streetAddress: '',
+        city: '',
+        country: '',
+        startDate: null as Date | null,
+        endDate: null as Date | null,
+        guests: 0,
+        adults: 1,
+        children: 0,
+        rooms: 1,
+        pets: false
+    };
+
+    // Get values from URL first, then localStorage, then defaults
+    this.destination = urlParams.get('streetAddress') || localStorageParams.streetAddress || defaults.streetAddress;
+
+    this.selectedDestination = this.destination
+        ? {
+            streetAddress: this.destination,
+            city: urlParams.get('city') || localStorageParams.city || defaults.city,
+            country: urlParams.get('country') || localStorageParams.country || defaults.country
+          }
+        : null;
+
+    this.startDate = urlParams.get('startDate')
+        ? this.dateService.parseLocalDate(urlParams.get('startDate')!)
+        : (localStorageParams.startDate
+            ? this.dateService.parseLocalDate(localStorageParams.startDate)
+            : defaults.startDate);
+
+    this.endDate = urlParams.get('endDate')
+        ? this.dateService.parseLocalDate(urlParams.get('endDate')!)
+        : (localStorageParams.endDate
+            ? this.dateService.parseLocalDate(localStorageParams.endDate)
+            : defaults.endDate);
+
+    this.guests = parseInt(urlParams.get('guests') || localStorageParams.guests || defaults.guests.toString(), 10);
+    this.adults = parseInt(urlParams.get('adults') || localStorageParams.adults || defaults.adults.toString(), 10);
+    this.children = parseInt(urlParams.get('children') || localStorageParams.children || defaults.children.toString(), 10);
+    this.rooms = parseInt(urlParams.get('rooms') || localStorageParams.rooms || defaults.rooms.toString(), 10);
+    this.pets = (urlParams.get('pets') || localStorageParams.pets || defaults.pets.toString()) === 'true';
+
+    // Update search control
+    this.searchControl.setValue(this.destination);
+
+    // Set destinationSelected flag
+    if (this.destination) {
         this.destinationSelected = true;
-      }
     }
-  }
+}
 
   getAllProperties() {
     this.listingsService.getAllListings().subscribe(

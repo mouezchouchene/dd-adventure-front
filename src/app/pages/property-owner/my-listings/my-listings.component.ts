@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AddListingComponent } from '../add-listing/add-listing.component';
 import { PropertiesService } from 'src/app/services/property-owner/properties.service';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-my-listings',
@@ -23,7 +24,7 @@ export class MyListingsComponent  {
     'placeType',
     'country',
     'price',
-    
+
     'action',
   ];
   dataSource!: MatTableDataSource<any>;
@@ -54,15 +55,15 @@ export class MyListingsComponent  {
   }
 
 
-  
+
 
   ngOnInit() {
-    
+
   }
 
 
   getAllListings() {
-    this.listingsService.getAllProperties().subscribe((res: any) => {
+    this.listingsService.getAllPropertiesByUser().subscribe((res: any) => {
       console.log("res =>", res);
       this.dataSource = new MatTableDataSource(res);
       this.length = res.length;
@@ -76,36 +77,53 @@ export class MyListingsComponent  {
     });
   }
 
+
+
+
   // Method to apply default sorting by 'id'
   applyDefaultSort() {
     if (this.sort && this.dataSource) {
       const defaultSort: Sort = {
-        active: 'id', 
-        direction: 'desc' 
+        active: 'id',
+        direction: 'desc'
       };
       this.sort.active = defaultSort.active;
       this.sort.direction = defaultSort.direction;
-      this.sort.sortChange.emit(defaultSort); 
+      this.sort.sortChange.emit(defaultSort);
       this.dataSource.sort = this.sort;
     }
   }
 
 
-  deleteListing(row: any) {
-   
+  deleteListing(id: any) {
 
-    console.log("listing deleted !!!")
+
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '300px',
+      data: { message: 'Are you sure you want to remove this property ?' },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.listingsService.deletePropertyById(id).subscribe((res) => {
+          console.warn('delete property => ', res);
+          this.dataSource.data = this.dataSource.data.filter((property) => property.id !== id);
+        });
+      } else {
+        console.log('Deletion canceled');
+      }
+    });
   }
 
   showDetail(row: any) {
-   
+
 
     console.log("listing deleted !!!")
   }
-  
+
 
   editListing(row: any) {
-   
+
 
     console.log("listing edited !!!")
   }
