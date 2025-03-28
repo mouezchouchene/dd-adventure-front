@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
@@ -49,20 +50,20 @@ export class PropertiesListingsService {
     return this.httpClient.post<any>(BASE_URL + "listings", listingData);
   }
 
-  searchProperties(searchParams: any) {
-
-
+  searchProperties(searchParams: any): Observable<any[]> {
     const body = {
       streetAddress: searchParams.streetAddress || '',
-      adult: parseInt(searchParams.adults, 10) || 0,
+      adult: parseInt(searchParams.adults, 10) || 0, 
       children: parseInt(searchParams.children, 10) || 0,
       rooms: parseInt(searchParams.rooms, 10) || 0,
-      havePets: searchParams.pets || "false",
+      havePets: searchParams.pets === 'true' || searchParams.pets === true,
       checkInDate: searchParams.startDate || '',
       checkOutDate: searchParams.endDate || ''
     };
 
-    return this.httpClient.post<any[]>(`${BASE_URL}properties/search`, body);
+    return this.httpClient.post<any[]>(`${BASE_URL}properties/search`, body, {
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
 
 

@@ -36,7 +36,7 @@ export class SearchBarComponent implements OnInit {
   constructor(
     private listingsService: PropertiesListingsService,
     private router: Router,
-    private dateService: DateService // Inject DateService
+    private dateService: DateService
   ) {}
 
   ngOnInit() {
@@ -56,7 +56,7 @@ export class SearchBarComponent implements OnInit {
       this.startDate = today;
     }
     if (!this.endDate) {
-      this.endDate = today; // No automatic +1
+      this.endDate = today;
     }
     this.guests = this.adults + this.children;
   }
@@ -69,49 +69,44 @@ export class SearchBarComponent implements OnInit {
   }
 
   private loadSearchValuesFromStorage() {
-    // Get URL parameters
     const urlParams = new URLSearchParams(window.location.search);
-
-    // Get stored search from localStorage
     const storedSearch = localStorage.getItem('searchParams');
     const localStorageParams = storedSearch ? JSON.parse(storedSearch) : {};
 
-    // Define default values
     const defaults = {
-        streetAddress: '',
-        city: '',
-        country: '',
-        startDate: null as Date | null,
-        endDate: null as Date | null,
-        guests: 0,
-        adults: 1,
-        children: 0,
-        rooms: 1,
-        pets: false
+      streetAddress: '',
+      city: '',
+      country: '',
+      startDate: null as Date | null,
+      endDate: null as Date | null,
+      guests: 0,
+      adults: 1,
+      children: 0,
+      rooms: 1,
+      pets: false
     };
 
-    // Get values from URL first, then localStorage, then defaults
     this.destination = urlParams.get('streetAddress') || localStorageParams.streetAddress || defaults.streetAddress;
 
     this.selectedDestination = this.destination
-        ? {
-            streetAddress: this.destination,
-            city: urlParams.get('city') || localStorageParams.city || defaults.city,
-            country: urlParams.get('country') || localStorageParams.country || defaults.country
-          }
-        : null;
+      ? {
+          streetAddress: this.destination,
+          city: urlParams.get('city') || localStorageParams.city || defaults.city,
+          country: urlParams.get('country') || localStorageParams.country || defaults.country
+        }
+      : null;
 
     this.startDate = urlParams.get('startDate')
-        ? this.dateService.parseLocalDate(urlParams.get('startDate')!)
-        : (localStorageParams.startDate
-            ? this.dateService.parseLocalDate(localStorageParams.startDate)
-            : defaults.startDate);
+      ? this.dateService.parseLocalDate(urlParams.get('startDate')!)
+      : localStorageParams.startDate
+      ? this.dateService.parseLocalDate(localStorageParams.startDate)
+      : defaults.startDate;
 
     this.endDate = urlParams.get('endDate')
-        ? this.dateService.parseLocalDate(urlParams.get('endDate')!)
-        : (localStorageParams.endDate
-            ? this.dateService.parseLocalDate(localStorageParams.endDate)
-            : defaults.endDate);
+      ? this.dateService.parseLocalDate(urlParams.get('endDate')!)
+      : localStorageParams.endDate
+      ? this.dateService.parseLocalDate(localStorageParams.endDate)
+      : defaults.endDate;
 
     this.guests = parseInt(urlParams.get('guests') || localStorageParams.guests || defaults.guests.toString(), 10);
     this.adults = parseInt(urlParams.get('adults') || localStorageParams.adults || defaults.adults.toString(), 10);
@@ -119,23 +114,20 @@ export class SearchBarComponent implements OnInit {
     this.rooms = parseInt(urlParams.get('rooms') || localStorageParams.rooms || defaults.rooms.toString(), 10);
     this.pets = (urlParams.get('pets') || localStorageParams.pets || defaults.pets.toString()) === 'true';
 
-    // Update search control
     this.searchControl.setValue(this.destination);
-
-    // Set destinationSelected flag
     if (this.destination) {
-        this.destinationSelected = true;
+      this.destinationSelected = true;
     }
-}
+  }
 
   getAllProperties() {
     this.listingsService.getAllListings().subscribe(
       (res: any) => {
         this.properties = res;
-        console.log("Properties loaded:", this.properties);
+        console.log('Properties loaded:', this.properties);
       },
       (error) => {
-        console.error("Error fetching properties:", error);
+        console.error('Error fetching properties:', error);
       }
     );
   }
@@ -149,14 +141,14 @@ export class SearchBarComponent implements OnInit {
     if (!d || !this.startDate) return false;
     const start = this.dateService.normalizeDate(this.startDate);
     const selected = this.dateService.normalizeDate(d);
-    return selected > start; // Ensure endDate is after startDate
+    return selected > start;
   };
 
   updateEndDate() {
     if (this.startDate) {
       this.startDate = this.dateService.normalizeDate(this.startDate);
       if (!this.endDate || this.endDate <= this.startDate) {
-        this.endDate = this.startDate; // Default to same day
+        this.endDate = this.startDate;
       }
     }
   }
@@ -204,11 +196,6 @@ export class SearchBarComponent implements OnInit {
   updateGuests() {
     this.guests = this.adults + this.children;
     this.toggleGuestsModal();
-    console.log('Guests:', this.guests);
-    console.log('Adults:', this.adults);
-    console.log('Children:', this.children);
-    console.log('Rooms:', this.rooms);
-    console.log('Pets:', this.pets);
   }
 
   onSearch(): void {
@@ -229,7 +216,6 @@ export class SearchBarComponent implements OnInit {
     };
 
     localStorage.setItem('searchParams', JSON.stringify(queryParams));
-
     this.filteredDestinations = [];
     if (this.destination) {
       this.destinationSelected = true;
