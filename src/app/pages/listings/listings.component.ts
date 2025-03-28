@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { PropertiesListingsService } from 'src/app/services/properties-listings.service';
+import { ActivatedRoute } from '@angular/router';
+import { SideBarFilterSearchComponent } from 'src/app/shared/components/side-bar-filter-search/side-bar-filter-search.component';
 
 @Component({
   selector: 'app-listings',
@@ -7,102 +9,90 @@ import { PropertiesListingsService } from 'src/app/services/properties-listings.
   styleUrls: ['./listings.component.scss']
 })
 export class ListingsComponent implements OnInit {
-  properties: any[] = []; // Original properties list
-  filteredProperties: any[] = []; // Filtered properties list
-  viewMode: 'grid' | 'list' = 'grid'; // Default view mode
-  selectedSort: string = 'price-asc'; // Default sort option
+  @ViewChild(SideBarFilterSearchComponent) filterComponent!: SideBarFilterSearchComponent;
+
+  properties: any[] = [];
+  filteredProperties: any[] = [];
+  viewMode: 'grid' | 'list' = 'grid';
+  selectedSort: string = 'price-asc';
   sortOptions = [
     { value: 'price-asc', viewValue: 'Price: Low to High' },
     { value: 'price-desc', viewValue: 'Price: High to Low' },
     { value: 'rating-desc', viewValue: 'Rating: High to Low' }
   ];
 
-  constructor(private listingsService: PropertiesListingsService) {}
+  constructor(
+    private listingsService: PropertiesListingsService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.getAllProperties();
+    this.onSearchPerformed({});
+    this.route.queryParams.subscribe(params => {
+      if (Object.keys(params).length > 0) {
+        this.onSearchPerformed(params);
+      }
+    });
   }
 
-  getAllProperties() {
-    this.listingsService.getAllListings().subscribe(
+  onSearchPerformed(searchParams: any) {
+    const params = searchParams || {};
+    
+    this.listingsService.searchProperties(params).subscribe(
       (res: any) => {
         this.properties = res;
-        this.filteredProperties = [...this.properties]; // Initialize filtered list
-        console.log('Properties loaded:', this.properties);
+        this.filteredProperties = [...this.properties];
+        // Update maxPrice in filter component without applying filters
+        if (this.filterComponent) {
+          this.filterComponent.setMaxPriceFromProperties(this.filteredProperties);
+        }
+        this.applySort();
+        console.log('Properties loaded from search:', this.filteredProperties);
       },
       (error) => {
-        console.error('Error fetching properties:', error);
+        console.error('Error searching properties:', error);
+        this.filteredProperties = [];
+        this.properties = [];
+        if (this.filterComponent) {
+          this.filterComponent.setMaxPriceFromProperties([]); // Reset to default on error
+        }
       }
     );
   }
 
-  // Handle search event from SearchBarComponent
-  onSearchPerformed(searchParams: any) {
-    this.filteredProperties = this.properties.filter(property => {
-      const matchesDestination = !searchParams.streetAddress ||
-        property.streetAddress?.toLowerCase().includes(searchParams.streetAddress.toLowerCase()) ||
-        property.city?.toLowerCase().includes(searchParams.streetAddress.toLowerCase()) ||
-        property.country?.toLowerCase().includes(searchParams.streetAddress.toLowerCase());
-
-      const matchesDates = (!searchParams.startDate ||
-        new Date(property.availableFrom) <= new Date(searchParams.startDate)) &&
-        (!searchParams.endDate ||
-        new Date(property.availableTo) >= new Date(searchParams.endDate));
-
-      const matchesGuests = property.maxGuests >= parseInt(searchParams.guests) || !searchParams.guests;
-
-      return matchesDestination && matchesDates && matchesGuests;
-    });
-    this.applySort(); // Apply sorting after filtering
-  }
-
-  // Handle filter event from SideBarFilterSearchComponent
   applyFilters(filterData: any) {
     this.filteredProperties = this.properties.filter(property => {
-      // Price filter
-      const priceInRange = property.price >= filterData.priceRange.min &&
-                          property.price <= filterData.priceRange.max;
+      const priceInRange = property.price >= filterData.priceRange.min && property.price <= filterData.priceRange.max;
+      const hasPool = !filterData.facilities.pool || property.pool;
+      const hasWifi = !filterData.facilities.wifi || property.wifi;
+      const hasParking = !filterData.facilities.parking || property.freeParking;
+      const hasAC = !filterData.facilities.airConditioning || property.airConditioning;
+      const typeMatch =
+        !Object.values(filterData.propertyType).some((v) => v) ||
+        (filterData.propertyType.apartment && property.placeType === 'Apartments') ||
+        (filterData.propertyType.hotel && property.placeType === 'Hotel') ||
+        (filterData.propertyType.villa && property.placeType === 'Villa') ||
+        (filterData.propertyType.hostel && property.placeType === 'Hostel');
+      const ratingMatch = filterData.guestRating === 'any' || (property.rating >= parseInt(filterData.guestRating));
 
-      // Facilities filter
-      const hasPool = !filterData.facilities.pool || property.facilities?.pool;
-      const hasWifi = !filterData.facilities.wifi || property.facilities?.wifi;
-      const hasParking = !filterData.facilities.parking || property.facilities?.parking;
-      const hasAC = !filterData.facilities.airConditioning || property.facilities?.airConditioning;
-
-      // Property type filter
-      const typeMatch = !Object.values(filterData.propertyType).some(v => v) || // If no type selected, match all
-                       (filterData.propertyType.apartment && property.type === 'apartment') ||
-                       (filterData.propertyType.hotel && property.type === 'hotel') ||
-                       (filterData.propertyType.villa && property.type === 'villa') ||
-                       (filterData.propertyType.hostel && property.type === 'hostel');
-
-      // Guest rating filter
-      const ratingMatch = filterData.guestRating === 'any' ||
-                         (property.rating >= parseInt(filterData.guestRating));
-
-      return priceInRange && hasPool && hasWifi && hasParking && hasAC &&
-             typeMatch && ratingMatch;
+      return priceInRange && hasPool && hasWifi && hasParking && hasAC && typeMatch && ratingMatch;
     });
-    this.applySort(); // Apply sorting after filtering
+    this.applySort();
   }
 
-  // Reset filters
   clearFilters() {
     this.filteredProperties = [...this.properties];
-    this.applySort(); // Apply sorting after clearing filters
+    this.applySort();
   }
 
-  // Set view mode (grid or list)
   setViewMode(mode: 'grid' | 'list') {
     this.viewMode = mode;
   }
 
-  // Handle sort change
   onSortChange() {
     this.applySort();
   }
 
-  // Apply sorting based on selectedSort
   applySort() {
     this.filteredProperties = [...this.filteredProperties].sort((a, b) => {
       switch (this.selectedSort) {

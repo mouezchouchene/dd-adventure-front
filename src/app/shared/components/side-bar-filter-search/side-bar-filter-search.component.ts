@@ -1,4 +1,3 @@
-// side-bar-filter-search.component.ts
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
@@ -11,7 +10,7 @@ export class SideBarFilterSearchComponent {
   @Output() filtersCleared = new EventEmitter<void>();
 
   minPrice: number = 0;
-  maxPrice: number = 1000;
+  maxPrice: number = 1000; 
   sliderMin: number = 0;
   sliderMax: number = 1000;
 
@@ -30,6 +29,17 @@ export class SideBarFilterSearchComponent {
     },
     guestRating: 'any'
   };
+
+  // Method to update maxPrice based on properties
+  setMaxPriceFromProperties(properties: any[]) {
+    if (properties && properties.length > 0) {
+      this.maxPrice = Math.max(...properties.map(p => p.price || 0));
+      this.sliderMax = this.maxPrice;
+    } else {
+      this.maxPrice = 1000; 
+      this.sliderMax = 1000;
+    }
+  }
 
   // Method 1: Collects filter data and emits it
   applyFilters() {
