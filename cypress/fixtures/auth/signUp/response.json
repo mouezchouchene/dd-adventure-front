@@ -1,0 +1,10 @@
+{
+    "saved": {
+      "success": 200,
+      "message": "User registered successfully"
+    },
+    "duplicate_error": {
+      "status": 400,
+      "body": "Username already exists"
+    }
+  }
