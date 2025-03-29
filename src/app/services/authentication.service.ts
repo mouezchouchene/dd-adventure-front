@@ -51,15 +51,9 @@ export class AuthenticationService {
 
     return this.http.post<RegisterResponse>(url, userData).pipe(
       map(response => {
-        if (!response?.id || !response?.username) {
-          throw new Error('Invalid registration response');
-        }
         return {
-          id: response.id,
-          username: response.username,
-          email: response.email,
-          phoneNumber: response.phoneNumber,
-          role: response.role
+          success: response.success,
+          message: response.message || ''
         };
       }),
       catchError(error => {
