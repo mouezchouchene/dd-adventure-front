@@ -1,0 +1,16 @@
+{
+    "valid": {
+      "username": "testuser",
+      "password": "Password123!",
+      "email": "test@example.com",
+      "phoneNumber": "1234567890",
+      "roleId": 3
+    },
+    "duplicate_user": {
+      "username": "existinguser",
+      "password": "Password123!",
+      "email": "existing@example.com",
+      "phoneNumber": "1234567890",
+      "roleId": 3
+    }
+  }
