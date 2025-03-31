@@ -565,87 +565,31 @@
 
             <div class="row my-4 p-md-3 availability-block">
                 <div class="col-sm-12">
-                    <div class="row">
-                        <h3 class="panel-title col-sm-12" id="listing_calendar">Availability</h3>
-
-                        <div class="card w-100">
-                            <div class="card-body">
-
-                                <div class="card-body">
-
-
-                                    <div class="calendar-container">
-                                        <!-- Left Calendar -->
-                                        <mat-card class="calendar-card">
-                                            <div class="calendar-header">
-                                                <button mat-icon-button (click)="onLeftCalendarMonthChange(-1)">
-                                                    <mat-icon>chevron_left</mat-icon>
-                                                </button>
-                                                <span>{{ getMonthYearString(leftCalendarDate) }}</span>
-                                                <button mat-icon-button (click)="onLeftCalendarMonthChange(1)">
-                                                    <mat-icon>chevron_right</mat-icon>
-                                                </button>
-                                            </div>
-                                            <mat-divider></mat-divider>
-                                            <mat-calendar [startAt]="leftCalendarDate"
-                                                [dateClass]="dateClass"></mat-calendar>
-                                        </mat-card>
-
-                                        <!-- Right Calendar -->
-                                        <mat-card class="calendar-card">
-                                            <div class="calendar-header">
-                                                <button mat-icon-button (click)="onRightCalendarMonthChange(-1)">
-                                                    <mat-icon>chevron_left</mat-icon>
-                                                </button>
-                                                <span>{{ getMonthYearString(rightCalendarDate) }}</span>
-                                                <button mat-icon-button (click)="onRightCalendarMonthChange(1)">
-                                                    <mat-icon>chevron_right</mat-icon>
-                                                </button>
-                                            </div>
-                                            <mat-divider></mat-divider>
-                                            <mat-calendar [startAt]="rightCalendarDate"
-                                                [dateClass]="dateClass"></mat-calendar>
-                                        </mat-card>
-                                    </div>
-
-                                    <div class="legend">
-                                        <div class="legend-item">
-                                            <div class="past"></div> <span>Past</span>
-                                        </div>
-                                        <div class="legend-item">
-                                            <div class="today"></div> <span>Today</span>
-                                        </div>
-                                        <div class="legend-item">
-                                            <div class="booked"></div> <span>Booked</span>
-                                        </div>
-                                    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                </div>
-                            </div>
-
+                  <div class="row">
+                    <h3 class="panel-title col-sm-12" id="listing_calendar">Availability</h3>
+                    <div class="card w-100">
+                      <div class="card-body">
+                        <full-calendar [options]="calendarOptions"></full-calendar>
+              
+                        <div class="legend">
+                          <div class="legend-item">
+                            <div class="past"></div> 
+                            <span>Past (Disabled)</span>
+                          </div>
+                          <div class="legend-item">
+                            <div class="today"></div> 
+                            <span>Today</span>
+                          </div>
+                          <div class="legend-item">
+                            <div class="booked"></div> 
+                            <span>Booked</span>
+                          </div>
                         </div>
-
+                      </div>
                     </div>
-
-
+                  </div>
                 </div>
-
-            </div>
+              </div>
 
 
             <div class="row my-4 p-md-3 review-block">
@@ -773,79 +717,78 @@
         <div class="col-sm-12 col-md-4">
 
             <mat-card>
-                <form [formGroup]="bookingForm">
+                <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
                     <mat-card-header class="mb-4">
-                        <mat-card-title>Book Now</mat-card-title>
+                      <mat-card-title>Book Now</mat-card-title>
                     </mat-card-header>
                     <mat-card-content>
-
-
-
-                        <div class="row">
-                            <mat-form-field appearance="fill" class="col-sm-12">
-                                <mat-label>Check-in</mat-label>
-                                <input matInput [matDatepicker]="picker" readonly formControlName="checkIn">
-                                <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker>
-                            </mat-form-field>
-                            <br>
-                            <mat-form-field appearance="fill" class="col-sm-12">
-                                <mat-label>Check-Out</mat-label>
-                                <input matInput [matDatepicker]="picker1" readonly formControlName="checkOut">
-                                <mat-datepicker-toggle matPrefix [for]="picker1"></mat-datepicker-toggle>
-                                <mat-datepicker #picker1></mat-datepicker>
-                            </mat-form-field>
-                            <br>
-                            <mat-form-field appearance="fill" class="col-sm-12">
-                                <mat-label>Guests</mat-label>
-                                <input matInput placeholder="Number of Guests" formControlName="guests" required>
-                                <mat-icon matPrefix>people</mat-icon>
-
-                            </mat-form-field>
-                            <br>
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <mat-checkbox formControlName="crib" color="accent"
-                                                closs="booking-checkbox">Crib</mat-checkbox>
-                                        </td>
-                                        <td>Single Fee</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <mat-checkbox formControlName="pickUp" color="accent"
-                                                closs="booking-checkbox">Pick-up</mat-checkbox>
-                                        </td>
-                                        <td>€ 35<br>Single Fee</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <mat-checkbox formControlName="dropOff"
-                                                closs="booking-checkbox">Drop-off</mat-checkbox>
-                                        </td>
-                                        <td>€ 35<br>Single Fee</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <mat-checkbox formControlName="concert"
-                                                closs="booking-checkbox">Concert</mat-checkbox>
-                                        </td>
-                                        <td>€ 10<br>Per night per Guest</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                        </div>
-
-
-
+                      <div class="row">
+                        <mat-form-field appearance="fill" class="col-sm-12">
+                          <mat-label>Check-in</mat-label>
+                          <input
+                            matInput
+                            [matDatepicker]="picker"
+                            [min]="today"
+                            readonly
+                            formControlName="checkIn"
+                          >
+                          <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
+                          <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field appearance="fill" class="col-sm-12">
+                          <mat-label>Check-Out</mat-label>
+                          <input
+                            matInput
+                            [matDatepicker]="picker1"
+                            [min]="minCheckOutDate"
+                            readonly
+                            formControlName="checkOut"
+                          >
+                          <mat-datepicker-toggle matPrefix [for]="picker1"></mat-datepicker-toggle>
+                          <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field appearance="fill" class="col-sm-12">
+                          <mat-label>Guests</mat-label>
+                          <input matInput placeholder="Number of Guests" formControlName="guests" required>
+                          <mat-icon matPrefix>people</mat-icon>
+                        </mat-form-field>
+                        <br>
+                        <table class="table">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <mat-checkbox formControlName="crib" color="accent" class="booking-checkbox">Crib</mat-checkbox>
+                              </td>
+                              <td>Single Fee</td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <mat-checkbox formControlName="pickUp" color="accent" class="booking-checkbox">Pick-up</mat-checkbox>
+                              </td>
+                              <td>€ 35<br>Single Fee</td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <mat-checkbox formControlName="dropOff" class="booking-checkbox">Drop-off</mat-checkbox>
+                              </td>
+                              <td>€ 35<br>Single Fee</td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <mat-checkbox formControlName="concert" class="booking-checkbox">Concert</mat-checkbox>
+                              </td>
+                              <td>€ 10<br>Per night per Guest</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                     </mat-card-content>
                     <mat-card-actions>
-                        <button class="btn w-100 d-bg-primary text-white " [disabled]="!bookingForm.valid">Book
-                            Now</button>
+                      <button type="submit" class="btn w-100 d-bg-primary text-white" [disabled]="!bookingForm.valid">Book Now</button>
                     </mat-card-actions>
-                </form>
+                  </form>
 
                 <hr class="my-2">
 

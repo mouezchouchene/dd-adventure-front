@@ -67,5 +67,15 @@ export class PropertiesListingsService {
   }
 
 
+  getReservationsByPropertyId(propertyId: string): Observable<any[]> {
+    return this.httpClient.get<any[]>(`${BASE_URL}reservations/property/${propertyId}`);
+  }
+
+  createReservation(reservationData: any): Observable<any> {
+   
+
+    return this.httpClient.post<any>(`${BASE_URL}reservations`, reservationData);
+  }
+
 
 }

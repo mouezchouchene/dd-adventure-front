@@ -33,11 +33,14 @@ export class SideBarFilterSearchComponent {
   // Method to update maxPrice based on properties
   setMaxPriceFromProperties(properties: any[]) {
     if (properties && properties.length > 0) {
+      this.minPrice = Math.min(...properties.map(p => p.price || 0));
+      this.sliderMin = this.minPrice;
+
       this.maxPrice = Math.max(...properties.map(p => p.price || 0));
       this.sliderMax = this.maxPrice;
     } else {
-      this.maxPrice = 1000; 
-      this.sliderMax = 1000;
+      this.maxPrice = 0; 
+      this.sliderMax = 0;
     }
   }
 
