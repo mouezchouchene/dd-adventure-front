@@ -478,3 +478,93 @@
 //     max-width: 100%;
 //   }
 // }
+
+
+.availability-block {
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  h3:hover {
+    color: var(--primary-color);
+  }
+
+  .fc { 
+
+
+    max-width: 100%;
+    margin-bottom: 20px;
+
+    ::ng-deep .fc-col-header-cell-cushion {
+      color: #333333 !important; 
+      font-weight: 500;
+    }
+
+    
+
+    ::ng-deep .fc-daygrid-day {
+      &.fc-day-disabled {
+        background-color: #f1f1f1; 
+      }
+      &.fc-day-today {
+        background-color: #B97F24 !important; 
+        
+        .fc-daygrid-day-top{
+          a{
+            color: #ffffff !important;
+          }
+        }
+        
+      }
+    }
+
+    .fc-event {
+      background-color: #8a2b89; 
+      border: none;
+      padding: 2px 5px;
+      font-size: 12px;
+
+      .fc-daygrid-day-top{
+          a{
+            color: #ffffff !important;
+          }
+        }
+    }
+
+    ::ng-deep .fc-daygrid-day-top{
+      a{
+        color: #333333;
+      }
+    }
+  }
+
+  .legend {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 20px;
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      div {
+        width: 20px;
+        height: 20px;
+        margin-right: 8px;
+      }
+
+      .past {
+        background-color: #f1f1f1;
+      }
+
+      .today {
+        background-color: #B97F24;
+      }
+
+      .booked {
+        background-color: #8a2b89;
+      }
+    }
+  }
+}
+
+

@@ -3,6 +3,8 @@ import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PropertiesListingsService } from 'src/app/services/properties-listings.service';
 import { DateService } from 'src/app/services/date.service';
+import { SnackbarService } from 'src/app/services/snackbar.service';
+
 
 interface Destination {
   streetAddress: string;
@@ -36,7 +38,9 @@ export class SearchBarComponent implements OnInit {
   constructor(
     private listingsService: PropertiesListingsService,
     private router: Router,
-    private dateService: DateService
+    private dateService: DateService,
+    private snackbarService: SnackbarService,
+
   ) {}
 
   ngOnInit() {
@@ -199,6 +203,14 @@ export class SearchBarComponent implements OnInit {
   }
 
   onSearch(): void {
+
+
+    if (!this.destination || !this.selectedDestination) {
+      console.log('Destination is required.');
+      this.snackbarService.open('Destination is required !', '', 5000);
+      return;
+    }
+
     if (this.startDate) this.startDate = this.dateService.normalizeDate(this.startDate);
     if (this.endDate) this.endDate = this.dateService.normalizeDate(this.endDate);
 

@@ -50,6 +50,7 @@ import { ConfirmationDialogComponent } from './shared/components/confirmation-di
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { MatSliderModule } from '@angular/material/slider';
 import { SideBarFilterSearchComponent } from './shared/components/side-bar-filter-search/side-bar-filter-search.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 
 
@@ -97,6 +98,7 @@ import { SideBarFilterSearchComponent } from './shared/components/side-bar-filte
 
     CarouselModule,
     MatSliderModule,
+    FullCalendarModule,
     RouterModule.forRoot([])
 
   ],
