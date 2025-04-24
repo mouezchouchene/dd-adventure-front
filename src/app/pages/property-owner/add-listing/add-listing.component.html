@@ -12,8 +12,8 @@
                   <div class="h-100 step-container">
                     <div class="step-header row justify-content-between align-items-center">
                       <div class="logo">
-                        <a class="navbar-brand" routerLink="">
-                          <img src="/assets/images/LOGO.png" width="50" alt="Logo">
+                        <a class="navbar-brand" >
+                          <img src="/assets/images/LOGO.png" width="30" alt="Logo">
                         </a>
                       </div>
                       <div class="exit-button">
@@ -23,7 +23,7 @@
                       </div>
                     </div>
                     <div class="row step-body">
-                      <div class="col-lg-6 d-flex align-items-center">
+                      <div class="col-sm-12 col-md-6 d-flex align-items-center">
                         <div>
                           <h1 class="title-form">It's easy to get started on DD Adventure</h1>
                         </div>
@@ -69,15 +69,15 @@
                       </div>
                     </div>
                   </div>
-                </mat-step>
+                </mat-step> 
 
                 <!-- Step 2 -->
                 <mat-step [stepControl]="secondFormGroup" class="h-100 d-flex justify-content-center align-content-center">
                   <div class="h-100 step-container">
                     <div class="step-header row justify-content-between align-items-center">
                       <div class="logo">
-                        <a class="navbar-brand" routerLink="">
-                          <img src="/assets/images/LOGO.png" width="50" alt="Logo">
+                        <a class="navbar-brand" >
+                          <img src="/assets/images/LOGO.png" width="30" alt="Logo">
                         </a>
                       </div>
                       <div class="exit-button">
@@ -107,7 +107,7 @@
                       </div>
                     </div>
                   </div>
-                </mat-step>
+                </mat-step> 
 
                 <!-- Step 3 -->
                 <mat-step [stepControl]="thirdFormGroup" label="Images">
@@ -115,25 +115,51 @@
                     <div class="h-100 step-container">
                       <div class="step-header row justify-content-between align-items-center">
                         <div class="logo">
-                          <a class="navbar-brand" routerLink="">
-                            <img src="/assets/images/LOGO.png" width="50" alt="Logo">
+                          <a class="navbar-brand">
+                            <img src="/assets/images/LOGO.png" width="30" alt="Logo">
                           </a>
                         </div>
                         <div class="exit-button">
-                          <div class="elements-buttons">
-                            <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
-                          </div>
+                          <div class="elements-buttons"></div>
                         </div>
                       </div>
                       <div class="row step-body">
-                        <div class="col-6 col-md-4" *ngFor="let option of placeOptions">
-                          <div class="card mb-3" [ngClass]="{ 'border-selected': option.isSelected }" (click)="selectPlace(option.name, option)">
-                            <div class="card-body text-center">
-                              <input type="radio" formControlName="place" [value]="option.name" id="{{option.name}}" class="form-check-input" (change)="selectPlace(option.name, option)" />
-                              <label class="form-check-label" for="{{option.name}}">
-                                <i [ngClass]="[option.icon, 'fa-2x']"></i>
-                                <p>{{ option.name }}</p>
-                              </label>
+                        <div class="col-12">
+                          <h2 class="title-form-2 mb-4">Select Your Place</h2>
+                          <div *ngFor="let category of categories" class="category-section mb-5">
+                            <div class="category-title-container">
+                              <h3 class="category-title">{{ category.name }}</h3>
+                              <div class="category-divider"></div>
+                            </div>
+                            <div *ngFor="let subcategory of category.subcategories" class="subcategory-section mb-4">
+                              <div class="subcategory-title-container">
+                                <h4 class="subcategory-title">{{ subcategory.name }}</h4>
+                                <span class="subcategory-marker"></span>
+                              </div>
+                              <div class="row justify-content-start g-3">
+                                <div class="col-6 col-sm-4 col-md-3 col-lg-2" *ngFor="let specificType of subcategory.specificTypes">
+                                  <div class="specific-type-card card mb-3" 
+                                       [ngClass]="{'border-selected': specificType.isSelected}" 
+                                       (click)="selectPlace(specificType)" 
+                                       tabindex="0" 
+                                       (keydown.enter)="selectPlace(specificType)">
+                                    <div class="card-body text-center">
+                                      <input type="radio" 
+                                             formControlName="place" 
+                                             [value]="specificType.name" 
+                                             [id]="'specificType-' + specificType.id" 
+                                             class="form-check-input visually-hidden" 
+                                             (change)="selectPlace(specificType)" />
+                                      <label class="form-check-label" [for]="'specificType-' + specificType.id">
+                                        <div class="icon-container">
+                                          <i [ngClass]="[specificType.icon, 'fa-2x']"></i>
+                                        </div>
+                                        <p class="specific-type-name">{{ specificType.name }}</p>
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -154,13 +180,13 @@
                     <div class="h-100 step-container">
                       <div class="step-header row justify-content-between align-items-center">
                         <div class="logo">
-                          <a class="navbar-brand" routerLink="">
-                            <img src="/assets/images/LOGO.png" width="50" alt="Logo">
+                          <a class="navbar-brand" >
+                            <img src="/assets/images/LOGO.png" width="30" alt="Logo">
                           </a>
                         </div>
                         <div class="exit-button">
                           <div class="elements-buttons">
-                            <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                            
                           </div>
                         </div>
                       </div>
@@ -203,13 +229,13 @@
                     <div class="h-100 step-container h-100">
                       <div class="step-header row justify-content-between">
                         <div class="logo">
-                          <a class="navbar-brand" routerLink="">
-                            <img src="/assets/images/LOGO.png" width="50" alt="Logo">
+                          <a class="navbar-brand" >
+                            <img src="/assets/images/LOGO.png" width="30" alt="Logo">
                           </a>
                         </div>
                         <div class="exit-button">
                           <div class="elements-buttons">
-                            <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                            
                           </div>
                         </div>
                       </div>
@@ -265,13 +291,13 @@
                     <div class="h-100 step-container h-100">
                       <div class="step-header row justify-content-between">
                         <div class="logo">
-                          <a class="navbar-brand" routerLink="">
-                            <img src="/assets/images/LOGO.png" width="50" alt="Logo">
+                          <a class="navbar-brand" >
+                            <img src="/assets/images/LOGO.png" width="30" alt="Logo">
                           </a>
                         </div>
                         <div class="exit-button">
                           <div class="elements-buttons">
-                            <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                            
                           </div>
                         </div>
                       </div>
@@ -358,13 +384,13 @@
                   <div class="h-100 step-container">
                     <div class="step-header row justify-content-between align-items-center">
                       <div class="logo">
-                        <a class="navbar-brand" routerLink="">
-                          <img src="/assets/images/LOGO.png" width="50" alt="Logo">
+                        <a class="navbar-brand" >
+                          <img src="/assets/images/LOGO.png" width="30" alt="Logo">
                         </a>
                       </div>
                       <div class="exit-button">
                         <div class="elements-buttons">
-                          <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                          
                         </div>
                       </div>
                     </div>
@@ -397,13 +423,13 @@
                     <div class="h-100 step-container h-100">
                       <div class="step-header row justify-content-between">
                         <div class="logo">
-                          <a class="navbar-brand" routerLink="">
-                            <img src="/assets/images/LOGO.png" width="50" alt="Logo">
+                          <a class="navbar-brand" >
+                            <img src="/assets/images/LOGO.png" width="30" alt="Logo">
                           </a>
                         </div>
                         <div class="exit-button">
                           <div class="elements-buttons">
-                            <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                            
                           </div>
                         </div>
                       </div>
@@ -480,13 +506,13 @@
                     <div class="h-100 step-container h-100">
                       <div class="step-header row justify-content-between">
                         <div class="logo">
-                          <a class="navbar-brand" routerLink="">
-                            <img src="/assets/images/LOGO.png" width="50" alt="Logo">
+                          <a class="navbar-brand" >
+                            <img src="/assets/images/LOGO.png" width="30" alt="Logo">
                           </a>
                         </div>
                         <div class="exit-button">
                           <div class="elements-buttons">
-                            <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                            
                           </div>
                         </div>
                       </div>
@@ -524,13 +550,13 @@
                     <div class="h-100 step-container h-100">
                       <div class="step-header row justify-content-between">
                         <div class="logo">
-                          <a class="navbar-brand" routerLink="">
-                            <img src="/assets/images/LOGO.png" width="50" alt="Logo">
+                          <a class="navbar-brand" >
+                            <img src="/assets/images/LOGO.png" width="30" alt="Logo">
                           </a>
                         </div>
                         <div class="exit-button">
                           <div class="elements-buttons">
-                            <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                            
                           </div>
                         </div>
                       </div>
@@ -561,13 +587,13 @@
                     <div class="h-100 step-container h-100">
                       <div class="step-header row justify-content-between">
                         <div class="logo">
-                          <a class="navbar-brand" routerLink="">
-                            <img src="/assets/images/LOGO.png" width="50" alt="Logo">
+                          <a class="navbar-brand" >
+                            <img src="/assets/images/LOGO.png" width="30" alt="Logo">
                           </a>
                         </div>
                         <div class="exit-button">
                           <div class="elements-buttons">
-                            <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                            
                           </div>
                         </div>
                       </div>
@@ -608,13 +634,13 @@
                     <div class="h-100 step-container h-100">
                       <div class="step-header row justify-content-between">
                         <div class="logo">
-                          <a class="navbar-brand" routerLink="">
-                            <img src="/assets/images/LOGO.png" width="50" alt="Logo">
+                          <a class="navbar-brand" >
+                            <img src="/assets/images/LOGO.png" width="30" alt="Logo">
                           </a>
                         </div>
                         <div class="exit-button">
                           <div class="elements-buttons">
-                            <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                            
                           </div>
                         </div>
                       </div>
@@ -644,13 +670,13 @@
                   <div class="h-100 step-container">
                     <div class="step-header row justify-content-between align-items-center">
                       <div class="logo">
-                        <a class="navbar-brand" routerLink="">
-                          <img src="/assets/images/LOGO.png" width="50" alt="Logo">
+                        <a class="navbar-brand" >
+                          <img src="/assets/images/LOGO.png" width="30" alt="Logo">
                         </a>
                       </div>
                       <div class="exit-button">
                         <div class="elements-buttons">
-                          <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                          
                         </div>
                       </div>
                     </div>
@@ -683,13 +709,13 @@
                     <div class="h-100 step-container h-100">
                       <div class="step-header row justify-content-between">
                         <div class="logo">
-                          <a class="navbar-brand" routerLink="">
-                            <img src="/assets/images/LOGO.png" width="50" alt="Logo">
+                          <a class="navbar-brand" >
+                            <img src="/assets/images/LOGO.png" width="30" alt="Logo">
                           </a>
                         </div>
                         <div class="exit-button">
                           <div class="elements-buttons">
-                            <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                            
                           </div>
                         </div>
                       </div>
@@ -729,13 +755,13 @@
                     <div class="h-100 step-container h-100">
                       <div class="step-header row justify-content-between">
                         <div class="logo">
-                          <a class="navbar-brand" routerLink="">
-                            <img src="/assets/images/LOGO.png" width="50" alt="Logo">
+                          <a class="navbar-brand" >
+                            <img src="/assets/images/LOGO.png" width="30" alt="Logo">
                           </a>
                         </div>
                         <div class="exit-button">
                           <div class="elements-buttons">
-                            <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                            
                           </div>
                         </div>
                       </div>
@@ -774,13 +800,13 @@
                     <div class="h-100 step-container h-100">
                       <div class="step-header row justify-content-between">
                         <div class="logo">
-                          <a class="navbar-brand" routerLink="">
-                            <img src="/assets/images/LOGO.png" width="50" alt="Logo">
+                          <a class="navbar-brand" >
+                            <img src="/assets/images/LOGO.png" width="30" alt="Logo">
                           </a>
                         </div>
                         <div class="exit-button">
                           <div class="elements-buttons">
-                            <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                            
                           </div>
                         </div>
                       </div>
@@ -840,13 +866,13 @@
                     <div class="h-100 step-container h-100">
                       <div class="step-header row justify-content-between">
                         <div class="logo">
-                          <a class="navbar-brand" routerLink="">
-                            <img src="/assets/images/LOGO.png" width="50" alt="Logo">
+                          <a class="navbar-brand" >
+                            <img src="/assets/images/LOGO.png" width="30" alt="Logo">
                           </a>
                         </div>
                         <div class="exit-button">
                           <div class="elements-buttons">
-                            <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                            
                           </div>
                         </div>
                       </div>
@@ -906,13 +932,13 @@
                     <div class="h-100 step-container h-100">
                       <div class="step-header row justify-content-between">
                         <div class="logo">
-                          <a class="navbar-brand" routerLink="">
-                            <img src="/assets/images/LOGO.png" width="50" alt="Logo">
+                          <a class="navbar-brand" >
+                            <img src="/assets/images/LOGO.png" width="30" alt="Logo">
                           </a>
                         </div>
                         <div class="exit-button">
                           <div class="elements-buttons">
-                            <button class="exit-button btn btn-outline-secondary" (click)="onSubmit()">Save and Exit</button>
+                            
                           </div>
                         </div>
                       </div>

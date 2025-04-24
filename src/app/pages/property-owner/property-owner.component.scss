@@ -119,3 +119,15 @@
   height: max-content;
   padding-bottom: 10px;
 }
+
+@media (max-width: 1024px) {
+  #user_tab_menu_container {
+   display: none;
+  }
+
+  .property-owner-content{
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+  }
+}

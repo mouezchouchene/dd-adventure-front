@@ -1,8 +1,8 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
 
-import { CalendarOptions } from '@fullcalendar/core'; 
+import { CalendarOptions, DatePointApi, DayCellContentArg } from '@fullcalendar/core'; 
 import dayGridPlugin from '@fullcalendar/daygrid'; 
 
 
@@ -50,7 +50,8 @@ export class PropertyDetailsComponent implements AfterViewInit {
     private route: ActivatedRoute,
     private propertiesService: PropertiesListingsService,
     private authService: AuthenticationService,
-    private snackbarService: SnackbarService
+    private snackbarService: SnackbarService,
+    private cdr: ChangeDetectorRef
 
   ) {
     this.route.params.subscribe(params => {
@@ -81,6 +82,9 @@ export class PropertyDetailsComponent implements AfterViewInit {
         (reservations: any[]) => {
           this.reservations = reservations;
           this.updateCalendarEvents(); 
+
+          console.log('reservations details =>', this.reservations);
+
         },
         error => {
           console.error('Error fetching reservations:', error);
@@ -89,18 +93,65 @@ export class PropertyDetailsComponent implements AfterViewInit {
     }
   }
 
-  private updateCalendarEvents() {
-    const events = this.reservations.map(reservation => ({
-      title: 'Booked',
-      start: reservation.checkInDate,
-      end: reservation.checkOutDate,
-      allDay: true
-    }));
 
+  
+
+  private updateCalendarEvents() {
+    const events:any = [];
+    const bookedDates = new Set<string>();
+  
+    // First collect all booked dates
+    this.reservations.forEach(reservation => {
+      const checkIn = new Date(reservation.checkInDate);
+      const checkOut = new Date(reservation.checkOutDate);
+      
+      // Add all dates from check-in to check-out (inclusive)
+      let currentDate = new Date(checkIn);
+      while (currentDate <= checkOut) {
+        bookedDates.add(currentDate.toISOString().split('T')[0]);
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
+    });
+  
+    this.reservations.forEach(reservation => {
+      const checkInDate = reservation.checkInDate;
+      const checkOutDate = new Date(reservation.checkOutDate);
+  
+      // Main booked period
+      const mainEventEnd = new Date(checkOutDate);
+      mainEventEnd.setDate(mainEventEnd.getDate() + 1);
+  
+      events.push({
+        title: 'Booked',
+        start: checkInDate,
+        end: mainEventEnd.toISOString().split('T')[0],
+        allDay: true,
+        color: '#8a2b89',
+        textColor: '#ffffff'
+      });
+  
+      // Calculate potential half-day date
+      const halfDayDate = new Date(checkOutDate);
+      halfDayDate.setDate(halfDayDate.getDate() + 1);
+      const halfDayStr = halfDayDate.toISOString().split('T')[0];
+  
+      // Only add half-day if not already booked
+      if (!bookedDates.has(halfDayStr)) {
+        events.push({
+          start: halfDayStr,
+          allDay: true,
+          className: 'half-day',
+          textColor: '#000000'
+        });
+      }
+    });
+  
     this.calendarOptions = {
       ...this.calendarOptions,
       events: events
     };
+  
+    this.cdr.detectChanges();
   }
 
   private initLightGallery(): void {
@@ -121,28 +172,51 @@ export class PropertyDetailsComponent implements AfterViewInit {
     this.bookingForm = new FormGroup({
       checkIn: new FormControl('', Validators.required),
       checkOut: new FormControl('', Validators.required),
-      guests: new FormControl('',  Validators.min(1)),
+      guests: new FormControl('', Validators.min(1)),
       crib: new FormControl(false),
       pickUp: new FormControl(false),
       dropOff: new FormControl(false),
       concert: new FormControl(false)
     });
 
+    // Get search parameters from localStorage
+    const searchParams = JSON.parse(localStorage.getItem('searchParams') || '{}');
+
+    // Set check-in date
+    const startDate = searchParams.startDate ? new Date(searchParams.startDate) : null;
+    this.bookingForm.get('checkIn')?.setValue(startDate);
+
+    // Set check-out date and minCheckOutDate
+    if (startDate) {
+      this.minCheckOutDate = new Date(startDate);
+      const endDate = searchParams.endDate ? new Date(searchParams.endDate) : null;
+      this.bookingForm.get('checkOut')?.setValue(endDate || this.getDefaultCheckOutDate(startDate));
+    }
 
     // Listen for changes in checkIn date
     this.bookingForm.get('checkIn')?.valueChanges.subscribe(checkInDate => {
       if (checkInDate) {
         this.minCheckOutDate = new Date(checkInDate);
-
-        const nextDay = new Date(checkInDate);
-        nextDay.setDate(nextDay.getDate() + 1);
-        this.bookingForm.get('checkOut')?.setValue(nextDay);
+        const nextDay = this.getDefaultCheckOutDate(checkInDate);
+        
+        // Only update checkOut if it's not already set from localStorage or is invalid
+        const currentCheckOut = this.bookingForm.get('checkOut')?.value;
+        if (!currentCheckOut || currentCheckOut < checkInDate) {
+          this.bookingForm.get('checkOut')?.setValue(nextDay);
+        }
       } else {
         this.minCheckOutDate = null;
         this.bookingForm.get('checkOut')?.setValue(null);
       }
     });
-  }
+}
+
+// Helper method to get default checkout date (next day)
+private getDefaultCheckOutDate(checkInDate: Date): Date {
+  const nextDay = new Date(checkInDate);
+  nextDay.setDate(nextDay.getDate() + 1);
+  return nextDay;
+}
 
   onSubmit() {
     if (this.bookingForm.valid) {
@@ -156,12 +230,15 @@ export class PropertyDetailsComponent implements AfterViewInit {
       const formValue = this.bookingForm.value;
 
       const checkInDate = this.formatDate(formValue.checkIn);
-      const checkOutDate = this.formatDate(formValue.checkOut);
+      const checkOutDate = new Date(formValue.checkOut);
+    checkOutDate.setDate(checkOutDate.getDate() - 1);
+    const formattedCheckOutDate = this.formatDate(checkOutDate);
+
 
       const reservationData = {
         propertyId: this.propertyID,
         checkInDate: checkInDate,
-        checkOutDate: checkOutDate,
+        checkOutDate: formattedCheckOutDate,
         guests: formValue.guests,
         crib: formValue.crib,
         pickUp: formValue.pickUp,
@@ -192,5 +269,14 @@ export class PropertyDetailsComponent implements AfterViewInit {
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
+  }
+
+
+  scrollToSection(event: Event): void {
+    event.preventDefault(); 
+    const element = document.getElementById('availability');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 }

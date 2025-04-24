@@ -568,3 +568,14 @@
 }
 
 
+::ng-deep .half-day {
+  background: linear-gradient(90deg, rgba(138, 43, 137, 1) 0%, rgba(255, 255, 255, 1) 50%) !important;
+  border-color: transparent !important;
+  
+  .fc-event-main {
+    color: white !important;
+  }
+}
+
+
+

@@ -21,6 +21,10 @@ export class PropertiesListingsService {
     return this.httpClient.get<any[]>(BASE_URL + "properties");
   }
 
+  getCategories() {
+    return this.httpClient.get<any[]>(BASE_URL + "categories");
+  }
+
   getPropertyById(id:string)
   {
     return this.httpClient.get<any>(`${BASE_URL}properties/${id}`);

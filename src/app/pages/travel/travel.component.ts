@@ -9,14 +9,12 @@ interface PropertyType {
   name: string;
   icon: string;
 }
-
 @Component({
-  selector: 'app-service',
-  templateUrl: './service.component.html',
-  styleUrls: ['./service.component.scss']
+  selector: 'app-travel',
+  templateUrl: './travel.component.html',
+  styleUrls: ['./travel.component.scss']
 })
-export class ServiceComponent {
-
+export class TravelComponent {
   properties: any[] = [];
 
   isMobile: boolean = false;

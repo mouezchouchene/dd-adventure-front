@@ -38,6 +38,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BookingsComponent } from './bookings/bookings.component';
 import { NgChartsModule } from 'ng2-charts';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet'; 
+import { MatTreeModule } from "@angular/material/tree";
+import { ServicesComponent } from './services/services.component';
+import { TripOrganizationComponent } from './trip-organization/trip-organization.component';
 
 
 @NgModule({
@@ -51,6 +54,8 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
         MyReservationsComponent,
         MyReviewsComponent,
         BookingsComponent,
+        ServicesComponent,
+        TripOrganizationComponent,
         
       
     ],
@@ -71,7 +76,8 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
       MatRadioModule,MatDatepickerModule,MatCardModule,MatNativeDateModule,
       MatSnackBarModule,
       NgChartsModule,
-      LeafletModule
+      LeafletModule,
+      MatTreeModule
     ]
   })
   export class PropertyOwnerModule { }

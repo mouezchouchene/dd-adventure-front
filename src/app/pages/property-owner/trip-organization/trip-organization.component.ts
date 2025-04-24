@@ -7,12 +7,15 @@ import { AddListingComponent } from '../add-listing/add-listing.component';
 import { PropertiesService } from 'src/app/services/property-owner/properties.service';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 
+
+
 @Component({
-  selector: 'app-my-listings',
-  templateUrl: './my-listings.component.html',
-  styleUrls: ['./my-listings.component.scss']
+  selector: 'app-trip-organization',
+  templateUrl: './trip-organization.component.html',
+  styleUrls: ['./trip-organization.component.scss']
 })
-export class MyListingsComponent  {
+export class TripOrganizationComponent {
+
 
   isFocused = false;
 

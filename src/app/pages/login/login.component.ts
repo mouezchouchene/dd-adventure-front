@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { SignupComponent } from '../signup/signup.component';
@@ -19,7 +19,8 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthenticationService,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.authService.logout(); 
   }
@@ -37,6 +38,10 @@ export class LoginComponent implements OnInit {
         .then((user) => {
           console.log('Login successful:', user);
           this.dialog.closeAll();
+
+          if (this.data?.returnUrl && this.data.returnUrl !== '/home' && this.data.returnUrl !== '/') {
+            this.router.navigateByUrl(this.data.returnUrl);
+          }
           
         })
         .catch((error) => {
