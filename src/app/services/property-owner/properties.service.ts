@@ -35,7 +35,7 @@ export class PropertiesService {
     return this.httpClient.get<any>(`${BASE_URL}properties/${id}`);
   }
 
-  saveProperty(listingData: any, images: File[]) {
+  saveProperty(listingData: any, files: File[]) {
     const formData = new FormData();
 
     // Append all properties to the FormData object
@@ -45,10 +45,10 @@ export class PropertiesService {
       }
     }
 
-    // Append images to the FormData object
-    if (images && images.length > 0) {
-      images.forEach((image, index) => {
-        formData.append('images', image, image.name);
+    // Append files to the FormData object
+    if (files && files.length > 0) {
+      files.forEach((image, index) => {
+        formData.append('files', image, image.name);
       });
     }
 

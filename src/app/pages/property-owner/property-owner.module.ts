@@ -41,6 +41,7 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { MatTreeModule } from "@angular/material/tree";
 import { ServicesComponent } from './services/services.component';
 import { TripOrganizationComponent } from './trip-organization/trip-organization.component';
+import { AddTripComponent } from './trip-organization/add-trip/add-trip.component';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { TripOrganizationComponent } from './trip-organization/trip-organization
         BookingsComponent,
         ServicesComponent,
         TripOrganizationComponent,
+        AddTripComponent,
         
       
     ],

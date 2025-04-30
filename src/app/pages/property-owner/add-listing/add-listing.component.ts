@@ -26,7 +26,7 @@ interface Category {
   id: number;
   name: string;
   icon: string;
-  subcategories: Subcategory[];
+  subCategories: Subcategory[];
 }
 
 
@@ -40,7 +40,7 @@ export class AddListingComponent {
   @ViewChild('map') mapContainer!: ElementRef;
   listingSelected: any = {};
   selected: any;
-  images: { imageUrl: string }[] = [];
+  files: { imageUrl: string }[] = [];
 
   categories: any[] = [];
 
@@ -63,25 +63,27 @@ export class AddListingComponent {
 
 
   getcategories() {
-    this.ListingsService.getCategories().subscribe(
-      (res: Category[]) => {
+    this.ListingsService.getCategories().subscribe({
+      next: (res: Category[]) => {
+        // Map API response to ensure consistent property names and add isSelected
         this.categories = res.map(category => ({
           ...category,
-          subcategories: category.subcategories.map(subcategory => ({
+          subCategories: category.subCategories.map(subcategory => ({
             ...subcategory,
             specificTypes: subcategory.specificTypes.map(specificType => ({
               ...specificType,
               icon: this.getIconForSpecificType(specificType.name),
-              isSelected: false
-            }))
-          }))
+              isSelected: false,
+            })),
+          })),
         }));
         console.log('categories loaded:', this.categories);
       },
-      (error) => {
+      error: (error) => {
         console.error('Error fetching categories:', error);
-      }
-    );
+        this.snackbarService.open('Failed to load categories.', 'Close', 5000);
+      },
+    });
   }
 
   private getIconForSpecificType(name: string): string {
@@ -495,16 +497,20 @@ export class AddListingComponent {
   });
 
   selectPlace(specificType: SpecificType) {
+    // Update form control
     this.thirdFormGroup.patchValue({ place: specificType.name });
-    this.listingSelected.place = specificType.name;
+
     // Update isSelected for UI
     this.categories.forEach(category => {
-      category.subcategories.forEach((subcategory:any) => {
+      category.subCategories.forEach((subcategory:any) => {
         subcategory.specificTypes.forEach((type:any) => {
-          type.isSelected = (type.id === specificType.id); // Compare by id for uniqueness
+          type.isSelected = type.id === specificType.id;
         });
       });
     });
+
+    // Optionally update listingSelected if needed elsewhere
+    this.listingSelected.place = specificType.name;
   }
 
   selectPlaceType(value: string) {
@@ -536,14 +542,14 @@ export class AddListingComponent {
       const file = files[i];
       if (file.type.startsWith('image/')) {
         const reader = new FileReader();
-        reader.onload = (e) => this.images.push({ imageUrl: e.target?.result as string });
+        reader.onload = (e) => this.files.push({ imageUrl: e.target?.result as string });
         reader.readAsDataURL(file);
       }
     }
   }
 
   removeImage(image: { imageUrl: string }) {
-    this.images = this.images.filter(img => img !== image);
+    this.files = this.files.filter(img => img !== image);
   }
 
   maxSelectedError: boolean = false;
@@ -686,12 +692,12 @@ export class AddListingComponent {
       havePets: this.eightFormGroup.get('havePets')?.value    
     };
 
-    const images = this.images.map(image => this.dataURLtoFile(image.imageUrl, `image_${Date.now()}.png`));
+    const files = this.files.map(image => this.dataURLtoFile(image.imageUrl, `image_${Date.now()}.png`));
 
     console.log("Submitting Form Data:", JSON.stringify(listingData, null, 2));
-    console.log("Images:", images);
+    console.log("Images:", files);
 
-    this.propertiesListingsService.saveProperty(listingData, images)
+    this.propertiesListingsService.saveProperty(listingData, files)
       .subscribe({
         next: (response) => {
           console.log("Listing successfully saved:", response);

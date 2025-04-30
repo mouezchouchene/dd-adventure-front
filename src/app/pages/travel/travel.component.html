@@ -27,19 +27,22 @@
   <div class="container-fluid mt-5 px-md-5 list-properties">
   
   
-    <!-- start properties loop  -->
+    <!-- start trips loop  -->
   
     <div class="row">
-      <div class="col-sm-6 col-md-4 mb-4" *ngFor="let property of properties">
+      <div class="col-sm-6 col-md-4 mb-4" *ngFor="let trip of trips">
         <div class="card">
-          <a [routerLink]="['/properties', property.id, 'property-details']">
+          <a [routerLink]="['/properties', trip.id, 'property-details']">
   
-               <img [src]="property.images ? property.images[0].imageUrl: 'assets/images/Condos.png'" class="card-img-top" alt="Listing Image">
+               <img [src]="trip.files ? trip.files[0].fileUrl : 'assets/images/Condos.png'" class="card-img-top" alt="Listing Image"> 
+
+                <!-- <img src="assets/images/travels/travel-2.jpg" class="card-img-top" alt="Listing Image">  -->
+
   
           </a>
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-2 favorites-features">
-              <span class="badge badge-success">Featured</span>
+              <!-- <span class="badge badge-success">Featured</span> -->
               <mat-icon>favorite</mat-icon>
             </div>
             <div class="property-owner ">
@@ -48,14 +51,21 @@
   
               </a>
             </div>
-            <h3 class="card-title">{{property.title ? property.title : "-------"}}</h3>
-            <p class="card-text">{{property.place ? property.place : "-------"}} - {{property.placeType ? property.placeType : "-------"}}</p>
-            <p class="card-text">{{property.guests ? property.guests : "0"}} Guests · {{property.bedrooms ? property.bedrooms : "0"}} bedrooms · {{property.bathrooms ? property.bathrooms : "0"}} bathrooms</p>
+            <h3 class="card-title">{{trip.title ? trip.title : "-------"}}</h3>
+
+
+            <div class="d-flex justify-content-between align-items-center  ">
+              <p class="card-text">{{trip.type ? trip.type : "-------"}} </p>
+              <p class="card-text">{{ trip.durationDays > 1 ? trip.durationDays + ' Days' : trip.durationDays + ' Day' }}</p>
+
+            </div>
+
+
             <div class="d-flex justify-content-between align-items-center  prices-stars">
-              <p class="mb-0">€ {{property.price ? property.price : 0}}/night</p>
+              <p class="mb-0"> {{trip.packagePrice ? trip.packagePrice : 0}}/package Price</p>
               <div class="d-flex align-items-center ">
-                <mat-icon>star</mat-icon>
-                <span>5.00</span>
+                <!-- <mat-icon>star</mat-icon> -->
+                <span>{{trip.currency ? trip.currency : "-------"}}</span>
               </div>
             </div>
           </div>
@@ -66,5 +76,8 @@
   
   
     </div>
+
+        <!-- end trips loop  -->
+
 
 </div>

@@ -1,0 +1,193 @@
+<!-- add-trip.component.html -->
+<div class="container py-4">
+    <mat-card class="p-4">
+      <h2 class="mb-4">Add New Trip</h2>
+      <form [formGroup]="tripForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <!-- Title -->
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Title</mat-label>
+              <input matInput formControlName="title">
+              <mat-error *ngIf="tripForm.get('title')?.hasError('required')">Title is required</mat-error>
+            </mat-form-field>
+          </div>
+  
+          <!-- Type -->
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Type</mat-label>
+              <mat-select formControlName="type">
+                <mat-option *ngFor="let type of tripTypes" [value]="type">{{type}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="tripForm.get('type')?.hasError('required')">Type is required</mat-error>
+            </mat-form-field>
+          </div>
+  
+          <!-- Description -->
+          <div class="col-12 mb-3">
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Description</mat-label>
+              <textarea matInput formControlName="description"></textarea>
+              <mat-error *ngIf="tripForm.get('description')?.hasError('required')">Description is required</mat-error>
+            </mat-form-field>
+          </div>
+  
+          <!-- Destinations -->
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Destinations</mat-label>
+              <input matInput formControlName="destinations">
+              <mat-error *ngIf="tripForm.get('destinations')?.hasError('required')">Destinations is required</mat-error>
+            </mat-form-field>
+          </div>
+  
+          <!-- Duration -->
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Duration (Days)</mat-label>
+              <input matInput type="number" formControlName="durationDays">
+              <mat-error *ngIf="tripForm.get('durationDays')?.hasError('required')">Duration is required</mat-error>
+            </mat-form-field>
+          </div>
+  
+          <!-- Group Size -->
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Minimum Group Size</mat-label>
+              <input matInput type="number" formControlName="minGroupSize">
+              <mat-error *ngIf="tripForm.get('minGroupSize')?.hasError('required')">Min Group Size is required</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Maximum Group Size</mat-label>
+              <input matInput type="number" formControlName="maxGroupSize">
+              <mat-error *ngIf="tripForm.get('maxGroupSize')?.hasError('required')">Max Group Size is required</mat-error>
+            </mat-form-field>
+          </div>
+  
+          <!-- Price and Currency -->
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Package Price</mat-label>
+              <input matInput type="number" formControlName="packagePrice">
+              <mat-error *ngIf="tripForm.get('packagePrice')?.hasError('required')">Price is required</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Currency</mat-label>
+              <mat-select formControlName="currency">
+                <mat-option *ngFor="let currency of currencies" [value]="currency">{{currency}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="tripForm.get('currency')?.hasError('required')">Currency is required</mat-error>
+            </mat-form-field>
+          </div>
+  
+          <!-- Availability -->
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Available From</mat-label>
+              <input matInput [matDatepicker]="fromPicker" formControlName="availableFrom">
+              <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+              <mat-datepicker #fromPicker></mat-datepicker>
+              <mat-error *ngIf="tripForm.get('availableFrom')?.hasError('required')">Start date is required</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Available To</mat-label>
+              <input matInput [matDatepicker]="toPicker" formControlName="availableTo">
+              <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+              <mat-datepicker #toPicker></mat-datepicker>
+              <mat-error *ngIf="tripForm.get('availableTo')?.hasError('required')">End date is required</mat-error>
+            </mat-form-field>
+          </div>
+  
+          <!-- Language -->
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Preferred Language</mat-label>
+              <mat-select formControlName="preferredLanguages">
+                <mat-option *ngFor="let lang of languages" [value]="lang">{{lang}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="tripForm.get('preferredLanguages')?.hasError('required')">Language is required</mat-error>
+            </mat-form-field>
+          </div>
+  
+          <!-- Included Services -->
+          <div class="col-12 mb-3">
+            <h5>Included Services</h5>
+            <div class="d-flex flex-wrap">
+              <mat-checkbox *ngFor="let service of includedServices" 
+                           class="me-3 mb-2"
+                           [checked]="selectedServices.includes(service)"
+                           (change)="onServiceChange($event, service)">
+                {{service}}
+              </mat-checkbox>
+            </div>
+            <mat-error *ngIf="tripForm.get('includedServices')?.hasError('required') && tripForm.get('includedServices')?.touched">
+              At least one service must be selected
+            </mat-error>
+          </div>
+  
+          <!-- File Upload -->
+        <div class="col-12 mb-3">
+            <div class="drop-zone"
+                 [class.drag-over]="isDragOver"
+                 (dragover)="onDragOver($event)"
+                 (dragenter)="onDragEnter($event)"
+                 (dragleave)="onDragLeave($event)"
+                 (drop)="onDrop($event)">
+              <p class="text-center mb-0">Drag & Drop files here or click to browse</p>
+              <input type="file"
+                     multiple
+                     accept=".jpg,.png,.pdf"
+                     (change)="onFileChange($event)"
+                     hidden
+                     #fileInput>
+              <button mat-button
+                      color="primary"
+                      class="mt-2"
+                      (click)="fileInput.click()">
+                Browse Files
+              </button>
+            </div>
+            <small class="text-muted">Select up to 3 files (JPG, PNG, PDF)</small>
+            <div *ngIf="selectedFiles.length > 3" class="text-danger">
+              Maximum 3 files allowed
+            </div>
+            <div *ngIf="selectedFiles.length > 0" class="mt-2">
+              <p>Selected files:</p>
+              <ul>
+                <li *ngFor="let file of selectedFiles">{{ file.name }}</li>
+              </ul>
+            </div>
+          </div>
+  
+          <!-- Terms and Approval -->
+          <div class="col-12 mb-3">
+            <mat-checkbox formControlName="termsAccepted">Terms Accepted</mat-checkbox>
+            <mat-checkbox formControlName="approved">Approved</mat-checkbox>
+          </div>
+  
+          <!-- Submit -->
+          <div class="col-12">
+            <button mat-raised-button 
+                    color="primary" 
+
+                   (click)="closeModal()">
+                   Exit</button>
+
+            <button mat-raised-button 
+                    color="primary" 
+                    type="submit" 
+                    [disabled]="!tripForm.valid || selectedFiles.length > 3">
+              Save Trip
+            </button>
+          </div>
+        </div>
+      </form>
+    </mat-card>
+  </div>

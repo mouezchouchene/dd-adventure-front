@@ -18,7 +18,7 @@ export class MyListingsComponent  {
 
 
   displayedColumns: string[] = [
-    'image',
+    'file',
     'streetAddress',
     'place',
     'placeType',
