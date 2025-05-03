@@ -7,18 +7,21 @@ import { AddListingComponent } from '../add-listing/add-listing.component';
 import { PropertiesService } from 'src/app/services/property-owner/properties.service';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 
+
 @Component({
-  selector: 'app-my-listings',
-  templateUrl: './my-listings.component.html',
-  styleUrls: ['./my-listings.component.scss']
+  selector: 'app-services',
+  templateUrl: './services.component.html',
+  styleUrls: ['./services.component.scss']
 })
-export class MyListingsComponent  {
+export class ServicesComponent {
+
+
 
   isFocused = false;
 
 
   displayedColumns: string[] = [
-    'file',
+    'image',
     'streetAddress',
     'place',
     'placeType',
@@ -164,5 +167,6 @@ export class MyListingsComponent  {
 
 
 
-}
 
+
+}

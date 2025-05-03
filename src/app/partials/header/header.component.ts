@@ -1,5 +1,6 @@
 import { Component, HostListener ,ViewChild, ElementRef, AfterViewInit, Injector } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { LoginComponent } from 'src/app/pages/login/login.component';
 import { SignupComponent } from 'src/app/pages/signup/signup.component';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -22,7 +23,8 @@ export class HeaderComponent {
 
   constructor(private elementRef: ElementRef , private dialog:MatDialog ,
     private injector: Injector,
-    public authService: AuthenticationService
+    public authService: AuthenticationService,
+    private router:Router
 
   ) {
 
@@ -42,20 +44,30 @@ export class HeaderComponent {
 
 
   openLoginDialog():void{
+    const currentUrl=this.router.url;
     this.dialog.open(LoginComponent, {
       width: '600px',
       height: "800px",
-      data: { title: 'Login'}
+      data: { 
+        title: 'Login',
+        returnUrl:currentUrl
+      }
     })
   }
 
 
   openSingupDialog(){
+    const currentUrl=this.router.url;
+
     this.dialog.open(SignupComponent,{
 
       width: '600px',
       height: "800px",
-      data: { title: 'Signup', Component:SignupComponent}
+      data: { title: 'Signup', 
+        Component:SignupComponent,
+        
+        returnUrl:currentUrl
+      }
     })
   }
 

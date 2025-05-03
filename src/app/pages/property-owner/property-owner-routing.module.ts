@@ -9,6 +9,9 @@ import { FavoritesComponent } from './favorites/favorites.component';
 import { MyReservationsComponent } from './my-reservations/my-reservations.component';
 import { MyReviewsComponent } from './my-reviews/my-reviews.component';
 import { BookingsComponent } from './bookings/bookings.component';
+import { ServicesComponent } from './services/services.component';
+import { TripOrganizationComponent } from './trip-organization/trip-organization.component';
+
 
 const routes: Routes = [
   {
@@ -19,6 +22,9 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'my-profile', component: MyProfileComponent },
       { path: 'my-listings', component: MyListingsComponent },
+      { path: 'my-services', component: ServicesComponent },
+      { path: 'my-trip-organization', component: TripOrganizationComponent },
+
       { path: 'add-new-listing', component: AddListingComponent },
       { path: 'favorites', component: FavoritesComponent },
       { path: 'my-reservations', component: MyReservationsComponent },

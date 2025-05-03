@@ -51,6 +51,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { MatSliderModule } from '@angular/material/slider';
 import { SideBarFilterSearchComponent } from './shared/components/side-bar-filter-search/side-bar-filter-search.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { TravelComponent } from './pages/travel/travel.component';
 
 
 
@@ -78,6 +79,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     SearchBarComponent,
     ConfirmationDialogComponent,
     SideBarFilterSearchComponent,
+    TravelComponent,
 
   ],
   imports: [

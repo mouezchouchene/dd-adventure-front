@@ -4,27 +4,31 @@ import { MatSort,Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AddListingComponent } from '../add-listing/add-listing.component';
-import { PropertiesService } from 'src/app/services/property-owner/properties.service';
+import { TripService } from 'src/app/services/trips/trip.service';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
+import { AddTripComponent } from './add-trip/add-trip.component';
+
+
 
 @Component({
-  selector: 'app-my-listings',
-  templateUrl: './my-listings.component.html',
-  styleUrls: ['./my-listings.component.scss']
+  selector: 'app-trip-organization',
+  templateUrl: './trip-organization.component.html',
+  styleUrls: ['./trip-organization.component.scss']
 })
-export class MyListingsComponent  {
+export class TripOrganizationComponent {
+
 
   isFocused = false;
 
 
   displayedColumns: string[] = [
-    'file',
-    'streetAddress',
-    'place',
-    'placeType',
-    'country',
-    'price',
-
+    'image',
+    'title',
+    'type',
+    'packagePrice',
+    'durationDays',
+    'availableFrom',
+    'availableTo',
     'action',
   ];
   dataSource!: MatTableDataSource<any>;
@@ -45,13 +49,13 @@ export class MyListingsComponent  {
   }
 
   constructor(
-    private listingsService:PropertiesService,
+    private tripService:TripService,
     private dialog:MatDialog,
     private elementRef: ElementRef
 
   ){
 
-    this.getAllListings();
+    this.getAllTrips();
   }
 
 
@@ -62,8 +66,8 @@ export class MyListingsComponent  {
   }
 
 
-  getAllListings() {
-    this.listingsService.getAllPropertiesByUser().subscribe((res: any) => {
+  getAllTrips() {
+    this.tripService.getAllTrips().subscribe((res: any) => {
       console.log("res =>", res);
       this.dataSource = new MatTableDataSource(res);
       this.length = res.length;
@@ -73,7 +77,7 @@ export class MyListingsComponent  {
 
       this.applyDefaultSort();
 
-      console.log("properties =>", this.dataSource);
+      console.log("trips =>", this.dataSource);
     });
   }
 
@@ -98,22 +102,22 @@ export class MyListingsComponent  {
   deleteListing(id: any) {
 
 
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      width: '300px',
-      data: { message: 'Are you sure you want to remove this property ?' },
-    });
+  //   const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+  //     width: '300px',
+  //     data: { message: 'Are you sure you want to remove this property ?' },
+  //   });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.listingsService.deletePropertyById(id).subscribe((res) => {
-          console.warn('delete property => ', res);
-          this.dataSource.data = this.dataSource.data.filter((property) => property.id !== id);
-        });
-      } else {
-        console.log('Deletion canceled');
-      }
-    });
-  }
+  //   dialogRef.afterClosed().subscribe((result) => {
+  //     if (result) {
+  //       this.tripService.deletePropertyById(id).subscribe((res) => {
+  //         console.warn('delete property => ', res);
+  //         this.dataSource.data = this.dataSource.data.filter((property) => property.id !== id);
+  //       });
+  //     } else {
+  //       console.log('Deletion canceled');
+  //     }
+  //   });
+   }
 
   showDetail(row: any) {
 
@@ -147,18 +151,18 @@ export class MyListingsComponent  {
 
 
 
-  addNewListing() {
-    const dialogRef = this.dialog.open(AddListingComponent, {
-      width: '100%',
+  addNewTrip() {
+    const dialogRef = this.dialog.open(AddTripComponent, {
+      width: '70%',
       height: "100%",
        maxWidth: '100vw',
       panelClass: 'add-listing-dialog',
-      disableClose: true
+      disableClose: false
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('Dialog closed with result:', result);
-      this.getAllListings();
+      this.getAllTrips();
     });
   }
 

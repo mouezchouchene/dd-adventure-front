@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { LoginComponent } from '../login/login.component';
@@ -23,6 +23,7 @@ export class SignupComponent {
     private router: Router,
     private dialog: MatDialog,
     private snackbarService: SnackbarService,
+    @Inject(MAT_DIALOG_DATA) public data: any
 
   ) {
     this.authService.logout();

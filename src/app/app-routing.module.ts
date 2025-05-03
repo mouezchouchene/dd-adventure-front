@@ -12,6 +12,7 @@ import { LogoutComponent } from './pages/logout/logout.component';
 import { PropertiesComponent } from './pages/properties/properties.component';
 import { PropertyDetailsComponent } from './pages/properties/property-details/property-details.component';
 import { ListingsComponent } from './pages/listings/listings.component';
+import { TravelComponent } from './pages/travel/travel.component';
 
 const routes: Routes = [
 
@@ -33,6 +34,11 @@ const routes: Routes = [
   {
     path: 'service',
     component: ServiceComponent,
+    
+  },
+  {
+    path: 'travel',
+    component: TravelComponent,
     
   },
   {

@@ -4,6 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root' // Available globally
 })
 export class DateService {
+
+  constructor() {}
+
   // Get current date normalized to midnight in user's local timezone
   getLocalDate(): Date {
     const date = new Date();

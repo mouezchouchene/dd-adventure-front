@@ -9,6 +9,27 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { CountriesServiceService } from 'src/app/services/countries/countries-service.service';
 import { PropertiesService } from 'src/app/services/property-owner/properties.service';
 
+interface SpecificType {
+  id: number;
+  name: string;
+  icon: string;
+  isSelected?: boolean;
+}
+
+interface Subcategory {
+  id: number;
+  name: string;
+  specificTypes: SpecificType[];
+}
+
+interface Category {
+  id: number;
+  name: string;
+  icon: string;
+  subCategories: Subcategory[];
+}
+
+
 @Component({
   selector: 'app-add-listing',
   templateUrl: './add-listing.component.html',
@@ -19,7 +40,9 @@ export class AddListingComponent {
   @ViewChild('map') mapContainer!: ElementRef;
   listingSelected: any = {};
   selected: any;
-  images: { imageUrl: string }[] = [];
+  files: { imageUrl: string }[] = [];
+
+  categories: any[] = [];
 
   constructor(
     private fB: FormBuilder,
@@ -27,11 +50,298 @@ export class AddListingComponent {
     public dialogRef: MatDialogRef<AddListingComponent>,
     public countriesService: CountriesServiceService,
     private router: Router,
-    private propertiesListingsService: PropertiesService
-  ) {}
+    private propertiesListingsService: PropertiesService,
+    private ListingsService: PropertiesListingsService
+  ) {
+
+    this.getcategories()
+  }
 
   ngOnInit(): void {
     console.log('Initial listingSelected:', this.listingSelected);
+  }
+
+
+  getcategories() {
+    this.ListingsService.getCategories().subscribe({
+      next: (res: Category[]) => {
+        // Map API response to ensure consistent property names and add isSelected
+        this.categories = res.map(category => ({
+          ...category,
+          subCategories: category.subCategories.map(subcategory => ({
+            ...subcategory,
+            specificTypes: subcategory.specificTypes.map(specificType => ({
+              ...specificType,
+              icon: this.getIconForSpecificType(specificType.name),
+              isSelected: false,
+            })),
+          })),
+        }));
+        console.log('categories loaded:', this.categories);
+      },
+      error: (error) => {
+        console.error('Error fetching categories:', error);
+        this.snackbarService.open('Failed to load categories.', 'Close', 5000);
+      },
+    });
+  }
+
+  private getIconForSpecificType(name: string): string {
+    const iconMap: { [key: string]: string } = {
+      // Travel Types - Medical Travel
+      'Health check-ups': 'fa fa-stethoscope',
+      'Rehabilitation programs': 'fa fa-hospital',
+      'Wellness retreats': 'fa fa-spa',
+      'Spa treatments': 'fa fa-spa',
+      'Medical tourism': 'fa fa-briefcase-medical',
+  
+      // Travel Types - Volunteer Travel
+      'Volunteer vacations': 'fa fa-hands-helping',
+      'Teaching abroad': 'fa fa-chalkboard-teacher',
+      'Eco-tourism': 'fa fa-leaf',
+      'Wildlife conservation': 'fa fa-paw',
+      'Community service trips': 'fa fa-users',
+  
+      // Travel Types - Exploring Travel
+      'Solo travel': 'fa fa-user',
+      'Cultural exploration': 'fa fa-landmark',
+      'Group travel': 'fa fa-users',
+      'Road trips': 'fa fa-car',
+      'Backpacking trips': 'fa fa-backpack',
+      'Adventure travel': 'fa fa-compass',
+  
+      // Travel Types - Romantic Travel
+      'Romantic getaways': 'fa fa-heart',
+      'Couples retreats': 'fa fa-heart',
+      'Private dinners': 'fa fa-utensils',
+      'Honeymoon packages': 'fa fa-ring',
+      'Sunset cruises': 'fa fa-ship',
+  
+      // Travel Types - Religious Travel
+      'Mosque visits': 'fa fa-mosque',
+      'Pilgrimages': 'fa fa-pray',
+      'Temple visits': 'fa fa-temple',
+      'Church tours': 'fa fa-church',
+      'Spiritual retreats': 'fa fa-pray',
+  
+      // Travel Types - Local Travel
+      'Weekend getaways': 'fa fa-suitcase',
+      'Day trips': 'fa fa-map',
+      'Local tours': 'fa fa-map-signs',
+      'Hidden gem discoveries': 'fa fa-gem',
+      'Staycations': 'fa fa-home',
+  
+      // Travel Types - Educational Travel
+      'School trips': 'fa fa-school',
+      'Historical tours': 'fa fa-monument',
+      'Study abroad programs': 'fa fa-graduation-cap',
+      'Language immersion trips': 'fa fa-language',
+      'Cultural exchanges': 'fa fa-globe',
+  
+      // Travel Types - Customizable Travel
+      'Tailored experiences': 'fa fa-cog',
+      'Personalized itineraries': 'fa fa-list',
+      'On-demand services': 'fa fa-concierge-bell',
+      'Event-based trips': 'fa fa-calendar',
+  
+      // Travel Types - Seasonal Travel
+      'Spring break trips': 'fa fa-flower',
+      'Holiday travel': 'fa fa-gift',
+      'Winter getaways': 'fa fa-snowflake',
+      'Seasonal festivals': 'fa fa-star',
+      'Summer vacations': 'fa fa-sun',
+  
+      // Travel Types - Luxury Travel
+      'High-end resorts': 'fa fa-hotel',
+      'Luxury cruises': 'fa fa-ship',
+      'VIP services': 'fa fa-crown',
+      'Exclusive experiences': 'fa fa-star',
+      'Private villas': 'fa fa-home',
+  
+      // Travel Types - Family Reunion Travel
+      'Family-oriented activities': 'fa fa-users',
+      'Multi-generational trips': 'fa fa-users',
+      'Vacation rentals': 'fa fa-home',
+      'Group tours': 'fa fa-bus',
+      'Family-friendly resorts': 'fa fa-hotel',
+  
+      // Travel Types - Business Travel
+      'Workation': 'fa fa-laptop',
+      'Corporate retreats': 'fa fa-briefcase',
+      'Trade show attendance': 'fa fa-handshake',
+      'Conference travel': 'fa fa-chalkboard',
+      'Networking events': 'fa fa-users',
+  
+      // Tourist Activities - Relaxation & Wellness Activities
+      'Hot spring visits': 'fa fa-hot-tub',
+      'Detox programs': 'fa fa-leaf',
+      'Yoga retreats': 'fa fa-yin-yang',
+      'Thermal baths': 'fa fa-hot-tub',
+      'Sauna sessions': 'fa fa-hot-tub',
+      'Meditation sessions': 'fa fa-pray',
+      'Beachside massages': 'fa fa-spa',
+      'Ayurvedic treatments': 'fa fa-spa',
+  
+      // Tourist Activities - Religious & Spiritual Activities
+      'Religious festivals': 'fa fa-star',
+      'Spiritual healing sessions': 'fa fa-pray',
+  
+      // Tourist Activities - Nightlife & Entertainment
+      'Casino nights': 'fa fa-dice',
+      'Night markets': 'fa fa-shopping-basket',
+      'Live music events': 'fa fa-music',
+      'Firework displays': 'fa fa-fire',
+      'Pub crawls': 'fa fa-beer',
+      'Theater shows': 'fa fa-theater-masks',
+      'Nightclub entry': 'fa fa-drum',
+      'Karaoke nights': 'fa fa-microphone',
+      'Rooftop bars': 'fa fa-cocktail',
+      'Comedy clubs': 'fa fa-laugh',
+  
+      // Tourist Activities - Transportation Services
+      'Motorcycle rentals': 'fa fa-motorcycle',
+      'Car rentals': 'fa fa-car',
+      'Airport transfers': 'fa fa-plane',
+      'Scooter rentals': 'fa fa-motorcycle',
+      'Helicopter tours': 'fa fa-helicopter',
+      'Limousine services': 'fa fa-car',
+      'Boat rentals': 'fa fa-ship',
+      'Bike rentals': 'fa fa-bicycle',
+      'Private jet charters': 'fa fa-plane',
+      'RV rentals': 'fa fa-caravan',
+  
+      // Tourist Activities - Water-Based Activities
+      'Deep-sea fishing': 'fa fa-fish',
+      'Submarine tours': 'fa fa-anchor',
+      'Waterfall tours': 'fa fa-water',
+      'Whale watching': 'fa fa-fish',
+      'Dolphin watching': 'fa fa-fish',
+      'Sailing': 'fa fa-sailboat',
+      'Canoeing': 'fa fa-water',
+      'Paddleboarding': 'fa fa-water',
+      'Kayaking': 'fa fa-water',
+      'Yachting': 'fa fa-ship',
+  
+      // Tourist Activities - Cultural & Educational Activities
+      'Brewery tours': 'fa fa-beer',
+      'Cultural festivals': 'fa fa-star',
+      'Cooking classes': 'fa fa-utensils',
+      'Local market tours': 'fa fa-shopping-basket',
+      'Photography tours': 'fa fa-camera',
+      'Guided city tours': 'fa fa-map',
+      'Pottery classes': 'fa fa-clay',
+      'Traditional dance performances': 'fa fa-users',
+      'Art gallery tours': 'fa fa-paint-brush',
+      'Museum visits': 'fa fa-landmark',
+      'Wine tasting tours': 'fa fa-wine-glass',
+      'Craft workshops': 'fa fa-tools',
+      'Language classes': 'fa fa-language',
+  
+      // Tourist Activities - Family-Friendly Activities
+      'Storytelling sessions': 'fa fa-book',
+      'Picnic tours': 'fa fa-picnic',
+      'Zoo visits': 'fa fa-paw',
+      'Aquarium tours': 'fa fa-fish',
+      "Children's workshops": 'fa fa-paint-brush',
+      'Family-friendly cruises': 'fa fa-ship',
+      'Interactive museum tours': 'fa fa-landmark',
+      'Amusement park visits': 'fa fa-rollercoaster',
+      'Theme park tickets': 'fa fa-ticket',
+  
+      // Tourist Activities - Adventure & Outdoor Activities
+      'Surfing lessons': 'fa fa-water',
+      'Canyoning': 'fa fa-mountain',
+      'Birdwatching tours': 'fa fa-binoculars',
+      'Bungee jumping': 'fa fa-parachute',
+      'White-water rafting': 'fa fa-water',
+      'Jet skiing': 'fa fa-water',
+      'Hot air balloon rides': 'fa fa-balloon',
+      'Snowboarding': 'fa fa-snowboard',
+      'Skiing': 'fa fa-skiing',
+      'Paragliding': 'fa fa-parachute',
+      'Fishing trips': 'fa fa-fish',
+      'Snowshoeing': 'fa fa-snowflake',
+      'Trekking expeditions': 'fa fa-hiking',
+      'Hiking tours': 'fa fa-hiking',
+      'Snorkeling': 'fa fa-water',
+      'Wildlife safaris': 'fa fa-paw',
+      'Zip-lining': 'fa fa-parachute',
+      'Skydiving': 'fa fa-parachute',
+      'Parasailing': 'fa fa-parachute',
+      'Scuba diving': 'fa fa-water',
+      'Hunting expeditions': 'fa fa-crosshairs',
+      'Ice climbing': 'fa fa-mountain',
+      'Camping trips': 'fa fa-tent',
+      'Rock climbing': 'fa fa-mountain',
+      'Dog sledding': 'fa fa-dog',
+  
+      // Unique Stays - Urban & Modern Stays
+      'Industrial-style lofts': 'fa fa-building',
+      'Heritage townhouses': 'fa fa-home',
+      'Rooftop terraces': 'fa fa-building',
+      'Boutique hotels': 'fa fa-hotel',
+      'Micro-apartments': 'fa fa-building',
+      'Artist studios': 'fa fa-paint-brush',
+      'Converted warehouses': 'fa fa-building',
+      'Skyscraper suites': 'fa fa-building',
+  
+      // Unique Stays - Nature-Inspired Stays
+      'Mountain lodges': 'fa fa-mountain',
+      'Safari tents': 'fa fa-tent',
+      'Cliffside cottages': 'fa fa-mountain',
+      'Floating cabins': 'fa fa-water',
+      'Farm stays': 'fa fa-tractor',
+      'Desert camps': 'fa fa-tent',
+      'Vineyard cottages': 'fa fa-wine-glass',
+  
+      // Unique Stays - Waterfront Stays
+      'Coastal cottages': 'fa fa-water',
+      'Floating villas': 'fa fa-water',
+      'Lakeside cottages': 'fa fa-water',
+      'Overwater bungalows': 'fa fa-water',
+      'Beachfront villas': 'fa fa-umbrella-beach',
+      'Island retreats': 'fa fa-island',
+      'Riverfront cabins': 'fa fa-water',
+  
+      // Unique Stays - Adventure & Offbeat Stays
+      'Tree pods': 'fa fa-tree',
+      'Hobbit houses': 'fa fa-home',
+      'Ice hotels': 'fa fa-snowflake',
+      'Railway carriages': 'fa fa-train',
+      'Geodesic domes': 'fa fa-circle',
+      'Volcano cabins': 'fa fa-mountain',
+      'Safari lodges': 'fa fa-paw',
+      'Airstream trailers': 'fa fa-caravan',
+      'Igloos': 'fa fa-snowflake',
+      'Converted planes': 'fa fa-plane',
+      'Underwater hotels': 'fa fa-water',
+      'Wildlife reserves': 'fa fa-paw',
+      'Jungle lodges': 'fa fa-tree',
+  
+      // Unique Stays - Historical & Cultural Stays
+      'Havelis': 'fa fa-landmark',
+      'Lighthouses': 'fa fa-lighthouse',
+      'Windmills': 'fa fa-windmill',
+      'Tuscan farmhouses': 'fa fa-home',
+      'Greek island villas': 'fa fa-home',
+      'Colonial villas': 'fa fa-home',
+      'Heritage homes': 'fa fa-home',
+      'Monasteries': 'fa fa-church',
+      'Spanish haciendas': 'fa fa-home',
+  
+      // Unique Stays - Luxury & Exclusive Stays
+      'Private islands': 'fa fa-island',
+      'Celebrity-owned properties': 'fa fa-star',
+      'Exclusive resorts': 'fa fa-hotel',
+      'High-end penthouses': 'fa fa-building',
+      'Mansions': 'fa fa-home',
+      'Designer homes': 'fa fa-home',
+      'Chateaus': 'fa fa-castle',
+  
+      // Default icon for unmapped types
+      default: 'fa fa-home'
+    };
+    return iconMap[name] || iconMap['default'];
   }
 
   placeOptions = [
@@ -186,10 +496,21 @@ export class AddListingComponent {
     hostingType: ['private', Validators.required], exteriorCamera: [false], noiseMonitor: [false], weaponsPresent: [false]
   });
 
-  selectPlace(value: string, option: { name: string; icon: string; isSelected: boolean }) {
-    this.thirdFormGroup.patchValue({ place: value });
-    this.listingSelected.place = value;
-    this.placeOptions.forEach(opt => opt.isSelected = (opt === option));
+  selectPlace(specificType: SpecificType) {
+    // Update form control
+    this.thirdFormGroup.patchValue({ place: specificType.name });
+
+    // Update isSelected for UI
+    this.categories.forEach(category => {
+      category.subCategories.forEach((subcategory:any) => {
+        subcategory.specificTypes.forEach((type:any) => {
+          type.isSelected = type.id === specificType.id;
+        });
+      });
+    });
+
+    // Optionally update listingSelected if needed elsewhere
+    this.listingSelected.place = specificType.name;
   }
 
   selectPlaceType(value: string) {
@@ -221,14 +542,14 @@ export class AddListingComponent {
       const file = files[i];
       if (file.type.startsWith('image/')) {
         const reader = new FileReader();
-        reader.onload = (e) => this.images.push({ imageUrl: e.target?.result as string });
+        reader.onload = (e) => this.files.push({ imageUrl: e.target?.result as string });
         reader.readAsDataURL(file);
       }
     }
   }
 
   removeImage(image: { imageUrl: string }) {
-    this.images = this.images.filter(img => img !== image);
+    this.files = this.files.filter(img => img !== image);
   }
 
   maxSelectedError: boolean = false;
@@ -371,12 +692,12 @@ export class AddListingComponent {
       havePets: this.eightFormGroup.get('havePets')?.value    
     };
 
-    const images = this.images.map(image => this.dataURLtoFile(image.imageUrl, `image_${Date.now()}.png`));
+    const files = this.files.map(image => this.dataURLtoFile(image.imageUrl, `image_${Date.now()}.png`));
 
     console.log("Submitting Form Data:", JSON.stringify(listingData, null, 2));
-    console.log("Images:", images);
+    console.log("Images:", files);
 
-    this.propertiesListingsService.saveProperty(listingData, images)
+    this.propertiesListingsService.saveProperty(listingData, files)
       .subscribe({
         next: (response) => {
           console.log("Listing successfully saved:", response);

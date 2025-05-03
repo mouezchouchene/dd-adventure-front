@@ -98,9 +98,7 @@
 
                 </div>
                 <div class="col-sm-12 col-md-4">
-                    <a class="nav-link btn rounded-pill cta-btn " href="#">Check Availability</a>
-
-                </div>
+                    <a  (click)="scrollToSection($event)" class="nav-link btn rounded-pill cta-btn">Check Availability</a>                </div>
             </div>
 
             <div class="row my-4">
@@ -563,7 +561,7 @@
 
             </div>
 
-            <div class="row my-4 p-md-3 availability-block">
+            <div class="row my-4 p-md-3 availability-block" id="availability">
                 <div class="col-sm-12">
                   <div class="row">
                     <h3 class="panel-title col-sm-12" id="listing_calendar">Availability</h3>

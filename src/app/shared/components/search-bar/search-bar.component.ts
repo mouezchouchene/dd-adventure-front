@@ -56,12 +56,8 @@ export class SearchBarComponent implements OnInit {
 
   private initializeDefaults() {
     const today = this.dateService.getLocalDate();
-    if (!this.startDate) {
-      this.startDate = today;
-    }
-    if (!this.endDate) {
-      this.endDate = today;
-    }
+    this.startDate = this.startDate || today;
+    this.endDate = this.endDate || this.dateService.addDays(this.startDate, 1);
     this.guests = this.adults + this.children;
   }
 
@@ -151,9 +147,7 @@ export class SearchBarComponent implements OnInit {
   updateEndDate() {
     if (this.startDate) {
       this.startDate = this.dateService.normalizeDate(this.startDate);
-      if (!this.endDate || this.endDate <= this.startDate) {
-        this.endDate = this.startDate;
-      }
+      this.endDate = this.dateService.addDays(this.startDate, 1);
     }
   }
 

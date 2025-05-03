@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PropertiesListingsService } from 'src/app/services/properties-listings.service';
+import { TripService } from 'src/app/services/trips/trip.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
 
@@ -9,15 +9,13 @@ interface PropertyType {
   name: string;
   icon: string;
 }
-
 @Component({
-  selector: 'app-service',
-  templateUrl: './service.component.html',
-  styleUrls: ['./service.component.scss']
+  selector: 'app-travel',
+  templateUrl: './travel.component.html',
+  styleUrls: ['./travel.component.scss']
 })
-export class ServiceComponent {
-
-  properties: any[] = [];
+export class TravelComponent {
+  trips: any[] = [];
 
   isMobile: boolean = false;
 
@@ -74,20 +72,20 @@ export class ServiceComponent {
     margin: 10
   };
 
-  constructor(private listingsService: PropertiesListingsService , private router:Router) {
+  constructor(private tripService: TripService , private router:Router) {
 
   
-    this.getAllProperties();
+    this.getAllTrips();
   }
 
-  getAllProperties() {
-    this.listingsService.getAllListings().subscribe(
+  getAllTrips() {
+    this.tripService.getAllTrips().subscribe(
       (res: any) => {
-        this.properties = res;
-        console.log("Properties loaded:", this.properties);
+        this.trips = res;
+        console.log("tripS loaded:", this.trips);
       },
       (error) => {
-        console.error("Error fetching properties:", error);
+        console.error("Error fetching tripS:", error);
       }
     );
   }
@@ -108,16 +106,16 @@ export class ServiceComponent {
 
   filterByPlaceType(place: string) {
     if (!place) {
-      this.getAllProperties();
+      this.getAllTrips();
       return;
     }
-    this.listingsService.getAllListings().subscribe(
+    this.tripService.getAllTrips().subscribe(
       (res: any) => {
         const filteredData = res.filter((property: any) =>
           (property.place || '').toLowerCase() === place.toLowerCase()
         );
-        this.properties = filteredData;
-        console.log(`Filtered by ${place}:`, this.properties);
+        this.trips = filteredData;
+        console.log(`Filtered by ${place}:`, this.trips);
       },
       (error) => {
         console.error(`Error filtering by ${place}:`, error);
